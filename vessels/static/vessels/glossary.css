@@ -1,0 +1,261 @@
+h1 {
+    font-size: 3rem;
+    color: #3ab2e9;
+    margin: auto;
+    width: 50%; 
+}
+
+h2 {
+    font-size: 2rem;
+    color: #3ab2e9;
+    text-align: left;
+    font-weight: normal;
+    margin: 2rem 2rem 1rem 2rem;
+}
+
+
+.linked {
+    margin-left: 3rem;
+}
+p {
+    color: #f1eeee;
+    font-size: 1.5rem;
+}
+figcaption {
+    font-size: 0.8rem;
+    color: #f8e64f;
+    
+    font-style: italic;
+}
+a {
+    /* color: #2e7fd4; */
+    color: #318cd9;
+}
+a:hover,
+a:active {
+  color: pink;
+  }
+
+figcaption a {
+    color: #1310a7;
+    text-decoration: none;
+}
+
+figcaption a:hover,
+figcaption a:active {
+    color: pink;
+}
+
+
+ul {
+    float: left;
+    list-style: none;
+    margin: 0rem 2rem;
+    width: 10%;
+    max-width: 50rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.26);
+    padding: 1rem;
+    border-radius: 16px;
+    background-color: #f1eeee; 
+}
+
+
+li{
+    margin: 1rem 0;
+    text-align: left;
+    font-size: 0.8rem;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: .5rem;
+
+}
+
+li a {
+    text-decoration: none;
+    color: #1310a7;
+}
+
+li a:hover,
+li a:active {
+    color: pink;
+}
+
+ol {
+    float: none;
+    list-style: none;
+    margin: 0rem 2rem 0rem 0rem;
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.26);
+    padding: 1rem;
+    border-radius: 16px;
+    background-color: #f1eeee; 
+}
+
+mark {
+    background-color: transparent;
+    color: #ccc;
+    font-style: italic;
+}
+#map { 
+    width: 1000px;
+    height: 400px;
+    margin: 2rem 2rem 1rem 1rem;
+    float: left;
+  }
+.after-map {
+    clear: left;
+}
+
+  
+.industrytable {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin: 2rem 1rem 1rem 1rem;
+  }
+  
+  .industrytable td, .industrytable th {
+    padding: 8px;
+  }
+  
+  .industrytable tr {
+    border-bottom: 2px solid black;
+  } 
+  
+  .industrytable td {
+  color: white;
+  }
+  .industrytable th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #acaead;
+    color: rgb(73, 72, 72);
+    border: 1px solid #ddd;
+  }
+  
+  .industrytable [data-tag="False"] {
+
+    text-align: center;
+    background-color:  #2d2d2d; ;
+    color: white;
+  }
+  .industrytable [data-tag="True"] {
+
+    text-align: center;
+    background-color: #3ab2e9;
+    color: black;
+  }
+  .industrytable [data-tag="S"] {
+ 
+    text-align: center;
+    background-color: red;
+    color: rgb(63, 62, 62);
+  }
+  .industrytable [data-tag="SB"] {
+
+    text-align: center;
+    background-color: pink;
+    color: rgb(63, 62, 62);
+  }
+  .industrytable [data-tag="SRB"] {
+
+    text-align: center;
+    background-color: violet;
+    color: rgb(63, 62, 62);
+  }
+  .industrytable [data-tag="PR"] {
+
+    text-align: center;
+    background-color: rgb(239, 124, 9);
+    color: rgb(63, 62, 62);
+  }
+  .industrytable [data-tag="SR"] {
+
+    text-align: center;
+    background-color: rgb(238, 206, 130);
+    color: rgb(63, 62, 62);
+  }
+  .industrytable [data-tag="SBU"] {
+
+    text-align: center;
+    background-color: purple;
+    color: rgb(119, 116, 116);
+  }
+  .industrytable [data-tag="LBU"] {
+
+    text-align: center;
+    background-color: plum;
+    color: rgb(63, 62, 62);
+  }
+  .industrytable [data-tag="PA"] {
+
+      text-align: center;
+      background-color: blue;
+      color: rgb(119, 116, 116);
+    }
+    .industrytable [data-tag="PO"] {
+
+      text-align: center;
+      background-color: lightskyblue;
+      color: rgb(63, 62, 62);
+    }
+    .industrytable [data-tag="PC"] {
+
+      text-align: center;
+      background-color: navy;
+      color: rgb(119, 116, 116);
+    }
+    .industrytable [data-tag="RG"] {
+
+      text-align: center;
+      background-color: orange;
+      color: rgb(63, 62, 62);
+    }
+    .industrytable [data-tag="O"] {
+
+      text-align: center;
+      background-color: yellow;
+      color: rgb(63, 62, 62);
+    }
+    .industrytable [data-tag="F"] {
+
+      text-align: center;
+      background-color: red;
+      color: white;
+    }
+    .industrytable [data-tag="M"] {
+
+      text-align: center;
+      background-color:yellow;
+      color:  rgb(63, 62, 62);
+    }
+    .industrytable [data-tag="B"] {
+
+      text-align: center;
+      background-color: plum;
+      color: white;
+    }
+    .industrytable [data-tag="W"] {
+
+      text-align: center;
+      background-color: brown;
+      color: white;
+    }
+    .industrytable [data-tag="N"] {
+
+      text-align: center;
+      background-color: red;
+      color:  white;
+    }
+    .industrytable [data-tag="R"] {
+
+      text-align: center;
+      background-color: orange;
+      color: black;
+    }
+    .industrytable [data-tag="P"] {
+
+      text-align: center;
+      background-color: yellow;
+      color: black;
+    }

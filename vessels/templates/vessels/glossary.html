@@ -1,0 +1,149 @@
+{% extends "base.html" %} 
+{% load static %} 
+{% block css_files %}
+ <link rel="stylesheet" href="{% static "vessels/glossary.css" %}">
+<link rel="stylesheet" href="{% static "vessels/header.css" %}"> 
+{% endblock %} 
+{% block page_title %} 
+Glossary 
+{% endblock %} 
+{% block content %} 
+{% include "vessels/includes/header.html" %}
+<h1>Glossary</h1>
+<div id="wordlist">
+<ul>
+  <li><a href="#amp">Amphiboles</a></li>
+  <li><a href="#amh">Amphibolite</a></li>
+  <li><a href="#and">Andesitic</a></li>
+  <li><a href="#arc">Andesitic Arc</a></li>
+  <li><a href="#aph">Aphanitic</a></li>
+  <li><a href="#arg">Argillitic</a></li>
+  <li><a href="#pos">Back-arc</a></li>
+  <li><a href="#bas">Basaltic</a></li>
+  <li><a href="#mia">Biotite</a></li>
+  <li><a href="#bir">Birefringence</a></li>
+  <li><a href="#cal">Calcareous</a></li>
+  <li><a href="#che">Chert</a></li>
+  <li><a href="#dac">Dacitic</a></li>
+  <li><a href="#dis">Dissected Orogen</a></li>
+  <li><a href="#epi">Epidote</a></li>
+  <li><a href="#eut">Eutaxitic</a></li>
+  <li><a href="#ext">Extinction angle</a></li>
+  <li><a href="#fel">Feldspar</a></li>
+  <li><a href="#fec">Felsic</a></li>
+  <li><a href="#fes">Felsitic</a></li>
+  <li><a href="#gar">Garnet</a></li>
+  <li><a href="#gro">Grog</a></li>
+  <li><a href="#hya">Hyalopilitic</a></li>
+  <li><a href="#hyb">Hypabassal</a></li>
+  <li><a href="#hig">Highland Tectonic</a></li>
+  <li><a href="#idd">Iddingsite</a></li>
+  <li><a href="#irf">Igneous Rock Fragments</a></li>
+  <li><a href="#int">Interference Colour</a></li>
+  <li><a href="#lat">Lathwork</a></li>
+  <li><a href="#lim">Limeclast</a></li>
+  <li><a href="#maf">Mafic</a></li>
+  <li><a href="#sed">Metasedimentary</a></li>
+  <li><a href="#met">Metavolcanic</a></li>
+  <li><a href="#mia">Mica</a></li>
+  <li><a href="#mid">Microdioritic</a></li>
+  <li><a href="#mic">Microlitic</a></li>
+  <li><a href="#mph">Microphaneritic</a></li>
+  <li><a href="#mia">Muscovite</a></li>
+  <li><a href="#oce">Oceanic Basalt</a></li>
+  <li><a href="#oli">Olivine</a></li>
+  <li><a href="#opa">Opaque iron oxides</a></li>
+  <li><a href="#oph">Ophiolitic</a></li>
+  <li><a href="#pha">Phaneritic</a></li>
+  <li><a href="#pil">Pilotaxitic</a></li>
+  <li><a href="#pla">Placer</a></li>
+  <li><a href="#ple">Pleochroism</a></li>
+  <li><a href="#plu">Plutonic</a></li>
+  <li><a href="#pos">Post-arc</a></li>
+  <li><a href="#ppl">PPL</a></li>
+  <li><a href="#pum">Pumiceous</a></li>
+  <li><a href="#pyr">Pyroxene</a></li>
+  <li><a href="#qua">Quartz</a></li>
+  <li><a href="#qze">Quartzite</a></li>
+  <li><a href="#dac">Rhyolitic</a></li>
+  <li><a href="#sed">Sedimentary</a></li>
+  <li><a href="#ser">Sericite</a></li>
+  <li><a href="#sep">Serpentinite</a></li>
+  <li><a href="#sil">Siltstone</a></li>
+  <li><a href="#gar">Spinel</a></li>
+  <li><a href="#tec">Tectonic</a></li>
+  <li><a href="#twi">Twinning</a></li>
+  <li><a href="#vit">Vitric</a></li>
+  <li><a href="#vip">Vitrophyric</a></li>
+  <li><a href="#ppl">XPL</a></li>
+
+</ul>
+</div>
+<p>This glossary is intended as a common language, accessible resource for beginners and/or students interested to learn about petrographic anlaysis of archaeological pottery in Oceania. For more formal academic definitions
+  see <a href="https://pubs.geoscienceworld.org/gsa/books/book/553/Temper-Sands-in-Prehistoric-Oceanian-Pottery">Dickinson's Temper Sands in Prehistoric Oceanian Pottery</a>,
+  <a href="https://www.alexstrekeisen.it/english/index.php"> Alex Strekeisen's site</a> or the other references linked <a href="#ref">below.</a>
+</p>
+
+<p>The glossary covers:</p>
+    <h3><a href="#ppl">* Polarised light</a></h3>
+    <h3><a href="#fab">* The components of Pacific pottery fabrics</a></h3>
+    <h3><a href="#roc">* Rock types</a></h3>
+    <h3><a href="#pac">* The Pacific fabric types</a></h3>
+
+  
+<h2 id="ppl">Plane Polarised Light (PPL) and Cross Polarised Light (XPL)</h2>
+<p>Microscopes used for petrography have a polariser positioned between the light source and the slide, and an analyser (a second polarising filter, perpendicular to the first), between the slide and eye-piece.
+The polariser restricts the light rays entering the sample to only those oscillating in a single plane or direction. Minerals in the sample can split the plane light into 2 rays of different speeds. The analyser resolves the two rays.</p>
+<p>Only one polarisig filter is used in plane polarised light (PPL) conditions. The effects of the polariser alone, are some decreased light intensity and some change of colour (<mark id="ple">pleochroism</mark>) for some minerals, when the sample is rotated.</p>
+<p>Under cross polarised light (XPL) conditions, both the analyser and the polariser are in use. The difference (<mark id="bir">birefringence</mark>) in how the two rays were refracted by the sample is visible in the <mark id="int">interference colour</mark> of the crystals. How the rays are refracted depends on both crystal characteristics, the orientation of the crystal and the thickness of the section.
+As the crystal orientation is changed with rotation of the slide, at a particular angle the 2 rays will be refracted at the same speed. This refraction will cause the rays to destructively interfere with each other as they recombine in the analyser. This results in the crystal appearing black. The angle at which 
+this occurs (relative to the crystal direction) is known as the <mark id='ext'>'extinction' angle</mark>. The maximum extinction angle is a distinguishing characteristic of a mineral.</p>
+<p>See <a href="https://geo.libretexts.org/Bookshelves/Geology/Mineralogy_(Perkins_et_al.)/05%3A_Optical_Mineralogy">Perkins (2022) section 5</a>, <a href="http://www.labotka.net/310/Atlas/Plates/Extinction-Angle.html">Labotka (2014)</a> or <a href="https://www2.tulane.edu/~sanelson/eens211/interference_of_light.htm">Nelson (2017)</a>.
+</p>
+{% comment %} <figure><img src="{% static "fabrics2/images/int_colours.jpg" %}" alt="Interference colours." ></figure>
+<figcaption> Interference colours from the Michel-Levy chart. Modified by K. Hardy from full chart, see <a href="https://en.m.wikipedia.org/wiki/File:Michel-Lévy_interference_colour_chart_(21257606712).jpg">ZEISS Microscopy Michel-Levy chart</a>.
+ </figcaption> {% endcomment %}
+
+<h2 id="fab">The components of Pacific pottery fabrics </h2>
+<h2 id="cal">Calcareous</h2>
+<p>Calcareous (calcium carbonate in calcite or aragonite grains) fabric grains include those oringinating from reef debris or from <mark id="lim">limeclasts</mark> (fragments of limestone terraces).</p>
+{% comment %} <p>While limestones are <a href="#sed">sedimentary rocks</a>, they were generally, included in 'calcareous' by Dickinson, and so have been here. Beach sand, recognisable by the presence of bioclasts (i.e. 'skeletons' of minute reef organisms, such as foraminifera), was a commonly used temper in Oceania. For many Pacific atoll communities it was the only one available. Most Pacific sites feature at least one calcareous or hybrid calcareous-terrigeneous fabric. Unfortunately this makes reef debris calcareous fabrics hard to source to location. However their presence at an inland site is evidence of pottery (or at least temper) importation.
+In contrast, fabrics including limeclasts derive from eroded limestones and thus can potentially be more diagnostic. Limeclasts can be distinguished from bioclasts by their unordered internal structure, although the possibility of degraded bioclasts is a confounding factor. Places with limeclast fabrics include Timor (<a href="{% url "fabric-type" "tpr200" %}">tpr200</a>), the Marianas (<a href="{% url "fabric-type" "tpr4" %}">tpr4</a>), Vanuatu (<a href="{% url "fabric-type" "tpr249" %}">tpr249</a>) and Fiji (<a href="{% url "fabric-type" "tpr373" %}">e.g. tpr373</a>).</p> {% endcomment %}
+
+<p>Calcareous inclusions are light grey in <a href="#ppl">PPL and XPL</a> (where they show pale higher order colours).</p>
+  <p>See <a href="https://pubs.geoscienceworld.org/gsa/books/book/553/Temper-Sands-in-Prehistoric-Oceanian-Pottery">Dickinson (2006) pg. 3, 20, 23</a>, Strekeisen (2006-2020) <a href="https://www.alexstrekeisen.it/english/meta/calcite.php">calcite</a>, <a href="http://www.alexstrekeisen.it/english/sedi/carbonatic.php">carbonate rocks</a>, or <a href="https://geo.libretexts.org/Bookshelves/Geology/Mineralogy_(Perkins_et_al.)/07%3A_Sedimentary_Minerals_and_Sedimentary_Rocks/7.04%3A_Sedimentary_Minerals/7.4.03%3A_Carbonate_Minerals">Perkins, (2022) section 7.4.3</a>.</p>
+{% comment %} {% include "fabrics2/includes/captionF.html" with sherd="VA_A1_23" site="Vasino, Timor" sample="VasinoVA_A1_23" slide="WD_86_12" num="1771" numf="264" extra="Features foraminifera reef debris."%} 
+{% include "fabrics2/includes/captionF.html" with sherd="TTP2_4" site="Telepunu, Timor" sample="TelepunuTTP2_4" slide="WD_86_6" num="1583" numf="249" extra="Features limeclasts." %}  {% endcomment %}
+{% comment %} 
+<h2 id="qua">Quartz</h2>
+<p>To the contrary of continental settings where quartz is often the most abundant mineral in pottery fabrics, quartz (silicon dioxide) is not universally presesnt in the geological formations of the Pacific region and so is an important distinguishing mineral in Pacific fabrics. It is a dominant mineral in <a href="#dis">dissected orogen</a> and quartzose variant <a href="#hig">tectonic highland</a> fabrics from up-lifted geology, and also occurs (generally in lower proportions) in the <a href="#dac">dacitic</a> andesitic arc fabrics. Regions with quartzose fabrics include New Caledonia (<a href="{% url "fabric-type" "tpr296" %}">e.g. tpr296</a>), Maluku (<a href="{% url "fabric-type" "tpr80" %}">e.g. tpr80</a>), PNG (<a href="{% url "fabric-type" "tpr270" %}">e.g. tpr270</a>), Carolines (<a href="{% url "fabric-type" "tpr42" %}">e.g. tpr42</a>), Fiji (<a href="{% url "fabric-type" "tpr388" %}">e.g. tpr388</a>), Australia (<a href="{% url "fabric-type" "tpr204" %}">e.g. tpr204</a>), Tonga (<a href="{% url "fabric-type" "tpr437" %}">e.g. tpr437</a>) and the Marianas (<a href="{% url "fabric-type" "tpr10" %}">e.g. tpr10</a>). 
+  In the Marianas they are indicative of Saipan, the main island with dacitic rocks.</p> 
+  <p>Polycrystalline aggregates of quartz, derived from quartz veins, and monocrystalline quartz are both identified as 'quartz' in the database. Sedimentary <a href="#che">chert</a> or metamorphic <a href="#qze">quartzite</a> are identified as <a href="#sed">sedimentary/metasedimentary</a> rock fragments. </p>
+<p>Quartz minerals are white in <a href="#ppl">PPL</a> and white, grey or extinct (black) in <a href="#ppl">XPL</a> (i.e. first order colours). Quartz from <a href="#plu">plutonic</a> igneous rocks, often have undulose (wavy) extinction, where the extinction travels across the crystal as the polarisation angle changes. In contrast quartz derived from volcanic rocks typically displays sharp extinction. Quartz crystals resistance to alteration or degradation (compared to feldspars) can also be a diagnostic feature. </p>
+ <p> See <a href="https://pubs.geoscienceworld.org/gsa/books/book/553/Temper-Sands-in-Prehistoric-Oceanian-Pottery">Dickinson (2006) pg. 23, 27</a>, <a href="https://www.alexstrekeisen.it/english/pluto/quartz.php">Strekeisen (2006-2020)</a>, or Perkins, (2022) sections <a href="https://geo.libretexts.org/Bookshelves/Geology/Mineralogy_(Perkins_et_al.)/06%3A_Igneous_Rocks_and_Silicate_Minerals/6.04%3A_Silicate_Minerals/6.4.02%3A_SiO2_Polymorphs">6.4.2</a>, <a href="https://geo.libretexts.org/Bookshelves/Geology/Mineralogy_(Perkins_et_al.)/14%3A_Mineral_Descriptions/14.01%3A_Silicate_Class/14.1.01%3A_Silicate_Class_-_Framework_Silicates">14.1.1.1</a>.</p>
+ {% endcomment %}
+{% comment %} {% include "fabrics2/includes/captionF.html" with sherd="On8" site="Ondor, Maluku" sample="OndorOn8" slide="WD_18_10" num="1296" numf="330" extra="Origin Gorom. Features quartz and also contains quartzite and tectonite." %} 
+ {% endcomment %}
+
+
+
+<h2 id="ref">References</h2>
+
+<ol class="refer">
+  
+  <li><a href="https://media.australian.museum/media/Uploads/Journals/17860/1285_complete.pdf"> Dickinson, W.R., 1998, Petrographic temper provinces of prehistoric pottery in Oceania. Records of the Australian Museum 50(3): 263–276. </a></li>
+  <li><a href="https://www.jstor.org/stable/25801160?seq=16"> Dickinson, W.R. & Shutler, R., 2000, Implications of Petrographic Temper Analysis for Oceanian Prehistory. Journal of World Prehistory 14(3): pp. 203-266. </a></li>
+  <li><a href="https://pubs.geoscienceworld.org/gsa/books/book/553/Temper-Sands-in-Prehistoric-Oceanian-Pottery"> Dickinson, W.R., 2006, Temper Sands in Prehistoric Oceanian Pottery: Geotectonics, Sedimentology, Petrography, Provenance. Geological Society of America
+    Geological Society of America, Volume 406 </a></li>
+  <li><a href="https://viva.pressbooks.pub/petrology">Johnson, E.A. & Liu, J.C., Introduction to Petrology.
+  <li><a href="https://www.cambridge.org/au/universitypress/subjects/earth-and-environmental-science/mineralogy-petrology-and-volcanology/earth-materials-introduction-mineralogy-and-petrology-2nd-edition?format=AR&isbn=9781316608852"> Klein, C. & Philpotts, A., 2017, Earth Materials: Introduction to Mineralogy and Petrology. 2nd Ed. Cambridge Press. Cambridge </a></li>
+  <li><a href="http://www.labotka.net/310/Atlas/table-of-contents.html"> Labotka, T.C., 2014, Geology 310 </a></li>
+  <li><a href="https://www.taylorfrancis.com/books/mono/10.1201/9781315116365/rocks-minerals-thin-section-brodie-mackenzie-adams"> MacKenzie, W.S., Adams, A.E. & Brodie, K.H., 2017, Rocks and Minerals in Thin Section. CRC Press, London</a></li>
+  <li><a href="https://www2.tulane.edu/~sanelson/eens211/index.html"> Nelson, S.A., 2017, Earth & Environmental Sciences 2110 Mineralogy </a></li> 
+  <li><a href="https://geo.libretexts.org/Bookshelves/Geology/Mineralogy_(Perkins_et_al.)">Perkins, D. 2022, Mineralogy</a></li>
+  <li><a href="http://www.ucl.ac.uk/~ucfbrxs/PLM/PLMhome.html">Siddall, R., 2014, Minerals Menu: a catalogue of minerals & textures in thin section.</a></li>
+  <li><a href="https://www.science.smith.edu/geosciences/petrology/petrography/mineral_list.html">Smith College Students, Petrographic Data Files.</a></li>
+  <li><a href="https://www.alexstrekeisen.it/english/index.php">Strekeisen, A., 2006-2020</a></li>
+</ol>
+{% include "vessels/includes/footer.html" %}
+{% endblock %}

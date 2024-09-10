@@ -1,0 +1,141 @@
+
+#map { 
+  width: 1000px;
+  height: 400px;
+  margin: 2rem 2rem 1rem 1rem;
+  float: left;
+}
+.after-map {
+  clear: left;
+}
+
+#des {
+  color: #f1eeee;
+}
+
+#targetSite a {
+    color: #f8e64f;
+}
+
+#targetSite a:hover,
+#targetSite a:active {
+color: #e35d30;
+}
+h1 {
+    font-size: 3rem;
+}
+
+h2 {
+    font-size: 2rem;
+    text-align: left;
+    font-weight: normal;
+    margin: 2rem 2rem 1rem 2rem;
+}
+
+
+.fallback {
+    text-align: center;
+    color: white
+}
+figcaption {
+    font-size: 0.8rem;
+    color: #f8e64f;
+    font-style: italic;
+}
+
+
+figcaption a {
+    color:  #db7f3d;
+    text-decoration: none;
+}
+
+figcaption a:hover,
+figcaption a:active {
+    color: #8e0101;
+}
+
+
+.slidetable {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin: 2rem 1rem 1rem 1rem;
+  }
+  
+  .slidetable td, .fabrictable th {
+    padding: 8px;
+  }
+  
+  .slidetable tr {
+    border-bottom: 2px solid black;
+  } 
+  
+  .slidetable td {
+  color: white;
+  }
+  .slidetable th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #acaead;
+    color: rgb(73, 72, 72);
+    border: 1px solid #ddd;
+  }
+  
+  .slidetable [data-tag="6"] {
+
+    text-align: center;
+    background-color: #8e0101;
+    color: white;
+  }
+  .slidetable [data-tag="5"] {
+
+    text-align: center;
+    background-color: #e93e3a;
+    color: white;
+  }
+  .slidetable [data-tag="4"] {
+ 
+    text-align: center;
+    background-color: #e35d30;
+    color: white;
+  }
+  .slidetable [data-tag="3"] {
+
+    text-align: center;
+    background-color: #db7f3d;
+    color: rgb(63, 62, 62);
+  }
+  .slidetable [data-tag="2"] {
+
+    text-align: center;
+    background-color: #dbae3d;
+    color: rgb(63, 62, 62);
+  }
+  .slidetable [data-tag="1"] {
+
+    text-align: center;
+    background-color: #f8e64f;
+    color: rgb(119, 116, 116);
+  }
+  .slidetable [data-tag="0"] {
+
+    text-align: center;
+    background-color: white;
+    color: rgb(119, 116, 116);
+  }
+
+
+  ul {
+    /* list-style: none; */
+    margin: 2rem 0rem 1rem 2rem;
+    
+  }
+  
+  li{
+    margin: 1rem 1rem;
+    text-align: left;
+    font-size: 1.rem;
+  
+  }
+  

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css_files %}
+  <link rel="stylesheet" href="{% static "vessels/glossary.css" %}">
+  <link rel="stylesheet" href="{% static "vessels/header.css" %}"> 
+  {% endblock %}
+
+{% block page_title %}
+  Pottery Home
+{% endblock %}
+
+{% block content %}
+{% include "vessels/includes/header.html" %}
+  <h1>Pottery of the Pacific</h1>
+  <p>Pacific pottery.</p>
+  <p>Pacific pottery.</p>
+  <h2>How to use this website.</h2>
+  <p>The search form instructions.</p>
+  <h2>Timelines.</h2>
+  <p>Add contracted table.</p>
+  <p>Add expanded table.</p>
+  <h2>Contacts.</h2>
+  <p>Add contracted table.</p>
+  <h2 id="ref">References</h2>
+
+  <ol class="refer">
+    
+    <li><a href="https://media.australian.museum/media/Uploads/Journals/17860/1285_complete.pdf"> Dickinson, W.R., 1998, Petrographic temper provinces of prehistoric pottery in Oceania. Records of the Australian Museum 50(3): 263–276. </a></li>
+    <li><a href="https://www.jstor.org/stable/25801160?seq=16"> Dickinson, W.R. & Shutler, R., 2000, Implications of Petrographic Temper Analysis for Oceanian Prehistory. Journal of World Prehistory 14(3): pp. 203-266. </a></li>
+    <li><a href="https://pubs.geoscienceworld.org/gsa/books/book/553/Temper-Sands-in-Prehistoric-Oceanian-Pottery"> Dickinson, W.R., 2006, Temper Sands in Prehistoric Oceanian Pottery: Geotectonics, Sedimentology, Petrography, Provenance. Geological Society of America
+      Geological Society of America, Volume 406 </a></li>
+    <li><a href="https://viva.pressbooks.pub/petrology">Johnson, E.A. & Liu, J.C., Introduction to Petrology.
+    <li><a href="https://www.cambridge.org/au/universitypress/subjects/earth-and-environmental-science/mineralogy-petrology-and-volcanology/earth-materials-introduction-mineralogy-and-petrology-2nd-edition?format=AR&isbn=9781316608852"> Klein, C. & Philpotts, A., 2017, Earth Materials: Introduction to Mineralogy and Petrology. 2nd Ed. Cambridge Press. Cambridge </a></li>
+    <li><a href="http://www.labotka.net/310/Atlas/table-of-contents.html"> Labotka, T.C., 2014, Geology 310 </a></li>
+    <li><a href="https://www.taylorfrancis.com/books/mono/10.1201/9781315116365/rocks-minerals-thin-section-brodie-mackenzie-adams"> MacKenzie, W.S., Adams, A.E. & Brodie, K.H., 2017, Rocks and Minerals in Thin Section. CRC Press, London</a></li>
+    <li><a href="https://www2.tulane.edu/~sanelson/eens211/index.html"> Nelson, S.A., 2017, Earth & Environmental Sciences 2110 Mineralogy </a></li> 
+    <li><a href="https://geo.libretexts.org/Bookshelves/Geology/Mineralogy_(Perkins_et_al.)">Perkins, D. 2022, Mineralogy</a></li>
+    <li><a href="http://www.ucl.ac.uk/~ucfbrxs/PLM/PLMhome.html">Siddall, R., 2014, Minerals Menu: a catalogue of minerals & textures in thin section.</a></li>
+    <li><a href="https://www.science.smith.edu/geosciences/petrology/petrography/mineral_list.html">Smith College Students, Petrographic Data Files.</a></li>
+    <li><a href="https://www.alexstrekeisen.it/english/index.php">Strekeisen, A., 2006-2020</a></li>
+  </ol>
+{% include "vessels/includes/footer.html" %}
+{% endblock %}

@@ -1,0 +1,31 @@
+#map { 
+/*     width: 1000px;
+    height: 700px; */
+    width: 80%;
+    height: 1000px;
+    margin: 2rem 2rem 1rem 2rem;
+    float: left;
+}
+#site-form {
+    clear:left;
+    margin: 2rem 0rem 1rem 2rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.26);
+    padding: 1rem;
+    border-radius: 16px;
+    background-color: #2d2d2d; 
+    color: #f1eeee
+  }
+
+
+#targetSite a {
+    color: #f8e64f;
+}
+
+#targetSite a:hover,
+#targetSite a:active {
+color: #e35d30;
+}
+
+.after-map {
+    clear: both;
+  }

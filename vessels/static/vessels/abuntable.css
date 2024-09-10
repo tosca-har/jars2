@@ -1,0 +1,57 @@
+.abuntable {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    max-width: 70rem;
+    margin: 2rem 2rem 1rem 1rem;
+  }
+
+  .abuntable td {
+    padding: 12px;
+    text-align: center;
+    background-color: #acaead;
+    color: white;
+    border: 1px solid #ddd;
+  }
+
+  .abuntable [data-tag="6"] {
+    text-align: center;
+    background-color: #8e0101;
+    color: white;
+  }
+  .abuntable [data-tag="5"] {
+
+    text-align: center;
+    background-color: #cd2f18;
+    color: white;
+    
+  }
+  .abuntable [data-tag="4"] {
+ 
+    text-align: center;
+    background-color: #e35d30;
+    color: white;
+  }
+  .abuntable [data-tag="3"] {
+
+    text-align: center;
+    background-color: #db7f3d;
+    color: rgb(63, 62, 62);
+  }
+  .abuntable [data-tag="2"] {
+
+    text-align: center;
+    background-color: #dbae3d;
+    color: rgb(63, 62, 62);
+  }
+  .abuntable [data-tag="1"] {
+
+    text-align: center;
+    background-color: #f8e64f;
+    color: rgb(119, 116, 116);
+  }
+  .abuntable [data-tag="0"] {
+
+    text-align: center;
+    background-color: white;
+    color: rgb(119, 116, 116);
+  }

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block css_files %}
+  <link rel="stylesheet" href="{% static "pottery/pottery.css" %}">
+  <link rel="stylesheet" href="{% static "pottery/header.css" %}"> 
+  <link rel="stylesheet" href="{% static "pottery/leaflet.css" %}">
+  <link rel="stylesheet" href="{% static "pottery/map.css" %}">
+  <script src="{% static "pottery/leaflet.js"%}"></script>
+  <script src="{% static "pottery/map.js" %}"></script>
+{% endblock %}
+
+{% block page_title %}
+  Industry Index
+{% endblock %}
+
+{% block content %}
+  {% include "pottery/includes/header.html" %} 
+  <h1>All Industries</h1>
+  <div id="map"></div>
+  <div class="key"> 
+    <img src="{% static "pottery/images/brownPot.png" %}" alt="brown pot" height="50"> Site has a full slide image. <br>
+    <br>
+    <img src="{% static "pottery/images/tanPot.png" %}" alt="brown pot" height="50"> Site has an image.  <br>
+    <br>
+    <img src="{% static "pottery/images/bluePot2.png" %}" alt="brown pot" height="50"> No images for this site. 
+    <p id="targetSite"></p> </div>
+  <script> 
+    var picon = "{% static "pottery/images/brownPot.png" %}";
+    var bicon = "{% static "pottery/images/bluePot2.png" %}";
+    var ricon = "{% static "pottery/images/tanPot.png" %}";
+    let mbsu = "{{mbsu}}";
+    let thsu = "{{thsu}}";
+    let siteNames = [];
+    let siteLat = [];
+    let siteLng = [];
+    let siteLinks = [];
+    let siteFabrics = [];
+    let siteColour = [];
+    let siteview = true; 
+    let mapcentre =  [-4.5, 150];
+    {% for site in sites %}
+      siteNames.push("{{site.name}}");
+      siteLat.push({{site.lat}});
+      siteLng.push({{site.lng}});
+      {% comment %} siteLinks.push("{% url "site" site.slug %}"); {% endcomment %}
+      siteFabrics.push("{{site.fabric_string}}"); 
+{% comment %}       {% if site.has_full %} siteColour.push(1);
+      {% elif site.has_image %} siteColour.push(2);
+      {% else %} siteColour.push(0);
+      {% endif %} {% endcomment %}
+      siteColour.push(0);
+    {% endfor %}
+      getMap(); 
+    </script> 
+   
+  {% include "pottery/includes/keytable.html" %}
+  {% include "pottery/includes/footer.html" %}
+{% endblock %}

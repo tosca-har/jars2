@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css_files %}
+  <link rel="stylesheet" href="{% static "fabrics2/fabric.css" %}">
+  <link rel="stylesheet" href="{% static "fabrics2/header.css" %}">
+{% endblock %}
+
+{% block page_title %}
+  Fabric Index
+{% endblock %}
+
+{% block content %}
+  {% include "fabrics2/includes/header.html" %}
+    <h2>No matching fabrics found.</h2>
+    <p>Try tweaking the mineral abundances and/or searching all regions. </p>
+  {% include "fabrics2/includes/footer.html" %}
+{% endblock %}

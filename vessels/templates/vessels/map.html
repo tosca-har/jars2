@@ -1,0 +1,54 @@
+{% extends "base.html" %} 
+{% load static %}
+
+{% block css_files %}
+  <link rel="stylesheet" href="{% static "vessels/glossary.css" %}">
+  <link rel="stylesheet" href="{% static "vessels/header.css" %}"> 
+  <link rel="stylesheet" href="{% static "vessels/leaflet.css" %}">
+  <link rel="stylesheet" href="{% static "vessels/map.css" %}">
+  <script src="{% static "vessels/leaflet.js"%}"></script>
+  <script src="{% static "vessels/map.js" %}"></script>
+{% endblock %}
+
+{% block page_title %} Map {% endblock %}
+{% block content %} 
+{% include "vessels/includes/header.html" %} 
+
+<h1>Map</h1>
+    <div id="map">
+    <script> 
+      var picon = "{% static "vessels/images/redPot2.png" %}";
+      let mbsu = "{{mbsu}}";
+      let thsu = "{{thsu}}";
+      let siteNames = [];
+      let siteLat = [];
+      let siteLng = [];
+      let siteLinks = [];
+      let siteVessels = [];
+      let mapcentre =  [-4.5, 160];
+      {% for site in sites %}
+        siteNames.push("{{site.name}}");
+        siteLat.push({{site.lat}});
+        siteLng.push({{site.lng}});
+        siteLinks.push("{{ site.get_absolute_url }}");
+        siteVessels.push("{{site.vessel_string}}");
+      {% endfor %}
+      getMap(); 
+    </script> 
+  </div>
+  <div class="key"> <p id="targetSite"></p></div>
+ <div class="site-form">
+
+    <table class = "industrytable" id = "it">
+      <th>Site</th> <th> Region </th> <th> Vessels </th>
+      {% for site in sites%}
+      <tr> <td> <a href="{{ site.get_absolute_url }}">{{site.slug}} </td>  <td> {{site.region}} </td> <td> {{site.vessel_string}} </td></tr>
+      {% endfor %}
+  </div> 
+
+  <br>
+ 
+
+
+ {% comment %} {% include "vessels/includes/footer.html" %}  {% endcomment %}
+{% endblock %}

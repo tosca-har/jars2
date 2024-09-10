@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block css_files %}
+  <link rel="stylesheet" href="{% static "vessels/glossary.css" %}">
+  <link rel="stylesheet" href="{% static "vessels/header.css" %}"> 
+{% endblock %}
+
+{% block page_title %}
+  Vessel Group Index
+{% endblock %}
+
+{% block content %}
+  {% include "vessels/includes/header.html" %} 
+  <h1>All Vessel Groups</h1>
+  {% comment %} {% include "vessels/includes/keytable.html" %} {% endcomment %}
+  <p>WARNING: Times are very approximate and may be wrong. Use them as a rough guide only.</p>
+  <table class = "industrytable" id = "ft">
+    <th>Name</th> <th>Start</th>  <th>End</th>
+    {% comment %} <th><a href="{% url "potindex" 3 %}">Tech.</th> <th><a href="{% url "potindex" 4 %}">Word</th> <th><a href="{% url "potindex" 5 %}">Gen.</th><th><a href="{% url "potindex" 6 %}">Temper</th> <th><a href="{% url "potindex" 7 %}">Pos.</th> <th><a href="{% url "potindex" 8 %}">Dent.</th> <th><a href="{% url "potindex" 9 %}">Incis.</th><th><a href="{% url "potindex" 10 %}">Comb</th> <th><a href="{% url "potindex" 11 %}">App.</th><th><a href="{% url "potindex" 12 %}">Coil</th> <th><a href="{% url "potindex" 13 %}">Punc.</th><th><a href="{% url "potindex" 14 %}">Paint</th> <th><a href="{% url "potindex" 15 %}">Finger</th><th><a href="{% url "potindex" 16 %}">Sculpt</th><th><a href="{% url "potindex" 17 %}">Paddle</th> <th><a href="{% url "potindex" 18 %}">Width</th><th><a href="{% url "potindex" 19 %}">Height</th> <th><a href="{% url "potindex" 20 %}">Equal</th><th><a href="{% url "potindex" 21 %}">Cook</th> <th><a href="{% url "potindex" 22 %}">Store</th> <th><a href="{% url "potindex" 23 %}">Serve</th> <th><a href="{% url "potindex" 24 %}">Cere.</th> {% endcomment %}
+    {% for industry in groups %}
+      <tr>
+        <td id="iname"> <a href="{{ industry.get_absolute_url }}">{{industry.name}} </td>
+        <td> {{industry.time_start}} </td>
+        <td> {{industry.time_end}} </td>
+        {% comment %} <td data-tag="{{industry.technique}}"> {{industry.technique}} </td>
+        <td> {{industry.word_cooking}} </td>
+        <td data-tag="{{industry.gender}}"> {{industry.gender}} </td>
+        <td data-tag="{{industry.temper}}"> {% if industry.temper %} Y {% elif industry.temper == False %} X {% else %} - {% endif %} </td>     
+        <td data-tag="{{industry.decoration_position}}"> {{industry.decoration_position}}</td>
+        <td data-tag="{{industry.decoration_dentate}}"> {% if industry.decoration_dentate %} Y {% elif industry.decoration_dentate == False %} X {% else %} - {% endif %}</td>
+        <td data-tag="{{industry.decoration_incised}}"> {% if industry.decoration_incised %} Y {% elif industry.decoration_incised == False %} X {% else %} - {% endif %}</td>
+        <td data-tag="{{industry.decoration_comb_incised}}"> {% if industry.decoration_comb_incised %} Y {% elif industry.decoration_comb_incised == False %} X {% else %} - {% endif %}</td>
+        <td data-tag="{{industry.decoration_applique}}"> {% if industry.decoration_applique %} Y {% elif industry.decoration_applique == False %} X {% else %} - {% endif %}</td>
+        <td data-tag="{{industry.decoration_exposed_coil}}"> {% if industry.decoration_exposed_coil %} Y {% elif industry.decoration_exposed_coil == False %} X {% else %} - {% endif %}</td>
+        <td data-tag="{{industry.decoration_punctate}}"> {% if industry.decoration_punctate %} Y {% elif industry.decoration_punctate == False %} X {% else %} - {% endif %}</td>
+        <td data-tag="{{industry.decoration_paint}}"> {% if industry.decoration_paint %} Y {% elif industry.decoration_paint == False %} X {% else %} - {% endif %}</td>
+        <td data-tag="{{industry.decoration_finger}}"> {% if industry.decoration_finger %} Y {% elif industry.decoration_finger == False %} X {% else %} - {% endif %}</td>
+        <td data-tag="{{industry.decoration_sculpt}}"> {% if industry.decoration_sculpt %} Y {% elif industry.decoration_sculpt == False %} X {% else %} - {% endif %}</td>
+        <td data-tag="{{industry.decoration_paddle}}"> {% if industry.decoration_paddle %} Y {% elif industry.decoration_paddle == False %} X {% else %} - {% endif %}</td>
+        <td data-tag="{{industry.form_w_more}}"> {% if industry.form_w_more %} Y {% elif industry.form_w_more == False %} X {% else %} - {% endif %}</td>
+        <td data-tag="{{industry.form_h_more}}"> {% if industry.form_h_more %} Y {% elif industry.form_h_more == False %} X {% else %} - {% endif %}</td>
+        <td data-tag="{{industry.form_equal}}"> {% if industry.form_equal %} Y {% elif industry.form_equal == False %} X {% else %} - {% endif %}</td>
+        <td data-tag="{{industry.use_cooking}}"> {% if industry.use_cooking %} Y {% elif industry.use_cooking == False %} X {% else %} - {% endif %}</td>
+        <td data-tag="{{industry.use_storage}}"> {% if industry.use_storage %} Y {% elif industry.use_storage == False %} X {% else %} - {% endif %}</td>
+        <td data-tag="{{industry.use_serving}}"> {% if industry.use_serving %} Y {% elif industry.use_serving == False %} X {% else %} - {% endif %}</td>
+        <td data-tag="{{industry.use_ceremonial}}"> {% if industry.use_ceremonial %} Y {% elif industry.use_ceremonial == False %} X {% else %} - {% endif %}</td>    {% endcomment %}
+      </tr>
+    {% endfor %}
+  </table> 
+  {% include "vessels/includes/footer.html" %}
+{% endblock %}
