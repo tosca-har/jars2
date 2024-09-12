@@ -56,6 +56,14 @@
   <div class="after-map">
     <h2>A Table? </h2>
     <table class = "industrytable" id = "it">
+      <h3>Sketches</h3>
+      {% if the_vessel.imagename %}
+      <figure><img src="{% static "vessels/images/drawings/"|add:the_vessel.imagename %}" alt={{ the_vessel.imagename }} height= 500> 
+      <figcaption> Sketch based on {{ the_vessel.imagename_ref.name }}. </figcaption> 
+      </figure>
+      {% else %}
+      <p>No images available.</p>
+      {% endif%}
 
   </div>
 
