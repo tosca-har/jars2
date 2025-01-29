@@ -13,7 +13,17 @@ h2 {
     margin: 2rem 2rem 1rem 2rem;
 }
 
+.hometable td {
+  font-size: 2rem;
+  text-align: center;
+  padding-top: 12px;
+  padding-right: 40px;
+  padding-left: 40px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
 
+}
 .linked {
     margin-left: 3rem;
 }

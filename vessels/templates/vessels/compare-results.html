@@ -16,10 +16,8 @@
 
 <h1>Map</h1>
     <div id="map">
- 
     <script> 
       var picon = "{% static "vessels/images/redPot2.png" %}";
-      var bicon = "{% static "vessels/images/bluePot2.png" %}";
       let mbsu = "{{mbsu}}";
       let thsu = "{{thsu}}";
       let siteNames = [];
@@ -27,7 +25,6 @@
       let siteLng = [];
       let siteLinks = [];
       let siteVessels = [];
-      let siteColour = [];
       let mapcentre =  [-4.5, 160];
       {% for site in sites %}
         siteNames.push("{{site.name}}");
@@ -35,21 +32,11 @@
         siteLng.push({{site.lng}});
         siteLinks.push("{{ site.get_absolute_url }}");
         siteVessels.push("{{site.vessel_string}}");
-        {% if site.production_site %} siteColour.push(1);
-        {% else %} siteColour.push(0);
-        {% endif %}
       {% endfor %}
       getMap(); 
     </script> 
   </div>
-
-  <div class="key"> 
-    <img src="{% static "vessels/images/redPot2.png" %}" alt="red pot" height="50"> Production site. <br>
-    <br>
-    <img src="{% static "vessels/images/bluePot2.png" %}" alt="blue pot" height="50"> Import site.  <br>
-
-    <p id="targetSite"></p> </div>
-
+  <div class="key"> <p id="targetSite"></p></div>
  <div class="site-form">
 
     <table class = "industrytable" id = "it">

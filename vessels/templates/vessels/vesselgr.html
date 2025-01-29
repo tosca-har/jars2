@@ -60,8 +60,18 @@
       {% for ves in vg_vessels%}
       <tr> <td> <a href="{{ ves.get_absolute_url }}">{{ves.slug}} </td> <td> {{ves.form}} </td><td> {{ves.primary_technique}} </td> <td> {{ves.gender_make}} </td></tr>
       {% endfor %}
-  </div>
-
+    </table></div>
+    <h3>Sketches</h3>
+    {% if images %}
+      {% for image in images %}
+        <figure><img src="{% static "vessels/images/drawings/"|add:image.imageloc %}" alt={{ image.name }} height= 500> 
+        <figcaption> Sketch based on {{ image.details }}. </figcaption> 
+        </figure>
+      {% endfor %}
+    {% else %}
+      <p>No images available.</p>
+    {% endif%} 
+  {% include "vessels/includes/footer.html" %}
 {% comment %} 
   <div class="after-map">
   <h2>Features </h2>
@@ -112,6 +122,4 @@
     <h3> <a href="{% url "report-type" ref.slug %}">{{ ref.fullname }}</a> ({{ ref.author_list }}) </h3>
   {% endfor %} {% endcomment %}
 
-
-  {% include "vessels/includes/footer.html" %}
 {% endblock %}

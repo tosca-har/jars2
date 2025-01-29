@@ -14,16 +14,18 @@
     border-radius: 16px;
     background-color: #2d2d2d; 
     color: #f1eeee
-  }
+}
 
-
+.key {
+    font-size: 1.5rem;
+}
 #targetSite a {
-    color: #f8e64f;
+    color: #318cd9;
 }
 
 #targetSite a:hover,
 #targetSite a:active {
-color: #e35d30;
+color: pink;
 }
 
 .after-map {

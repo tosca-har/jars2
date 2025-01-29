@@ -10,6 +10,7 @@ class Report(models.Model):
     author_list = models.CharField(max_length= 500, null=True)
     details = models.TextField(max_length= 1000, null=True, blank=True)
     link = models.CharField(max_length= 100, blank=True, null=True)
+    doi = models.CharField(max_length= 255, blank=True, null=True)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -17,11 +18,32 @@ class Report(models.Model):
 
     def __str__(self):
         return f"{self.slug} ({self.fullname})"  
+    
+    def get_absolute_url(self):
+        return reverse(
+            'vessels:report',
+            args=[self.slug]
+        )
+
+class Image(models.Model):
+    slug = models.SlugField(default="", blank= True, null = False, db_index=True)
+    name = models.CharField(max_length= 100)
+    imageloc = models.CharField(max_length= 100)
+    details = models.TextField(max_length= 1000, null=True, blank=True)
+    ref = models.ForeignKey(Report, on_delete=models.SET_NULL, null=True, related_name="image", blank=True)
+    
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.slug} ({self.name})"  
 
 
 class Sitegroup(models.Model):
     slug = models.SlugField(default="", blank= True, null = False, db_index=True)
     name = models.CharField(max_length= 100)
+    details = models.TextField(max_length= 1000, null=True, blank=True)
     
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -38,6 +60,10 @@ class Vesselgroup(models.Model):
     time_end = models.IntegerField(null=True, blank =True)
     time_end_ref = models.ForeignKey(Report, on_delete=models.SET_NULL, null=True, related_name="vg_time_end", blank=True)
     sitegroup = models.ManyToManyField(Sitegroup, related_name="vesselgroups", blank=True)
+    details = models.TextField(max_length= 1000, null=True, blank=True)
+    refs = models.ManyToManyField(Report, related_name="vesselgroups", blank=True)
+    vg = models.ManyToManyField("self", symmetrical=False, null=True, blank=True)
+    image = models.ManyToManyField(Image, related_name="vesselgroups", blank=True)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -52,16 +78,12 @@ class Vesselgroup(models.Model):
             args=[self.slug]
         )
 
-class Tag(models.Model):
-    class Types(models.TextChoices):
-        DECORATION = 'DEC', 'decoration'
-        MISC = 'MISC', 'misecellaneous'
-
+class Feature(models.Model):
     slug = models.SlugField(default="", blank=True, null=False, db_index=True)
     name = models.CharField(default="", max_length=50)
     description = models.TextField(max_length= 1000, null=True, blank=True)
-    type = models.CharField(max_length=5, choices=Types, default=Types.MISC)
-    refs = models.ManyToManyField(Report, related_name="tags", blank=True)
+    refs = models.ManyToManyField(Report, related_name="feature", blank=True)
+    image = models.ManyToManyField(Image, related_name="feature", blank=True)
 
 
 class Vessel(models.Model):
@@ -76,45 +98,10 @@ class Vessel(models.Model):
         OTHER = 'O', 'other'
         UNKNOWN = 'U', 'unknown'
 
-    class Techniques(models.TextChoices):
-        COIL = 'C', 'coil' 
-        SPIRAL = 'CS', 'coil-spiral'
-        RING = 'CR', 'coil-ring'
-        SLAB = 'S', 'slab'
-        MOLDED = 'M', 'molded'   
-        WHEEL ='W', 'wheel'
-        OTHER = 'O', 'other'
-        UNKNOWN = 'U', 'unknown'
-      
-    class Techniques2(models.TextChoices):
-        BEATING = 'B', 'beating'
-        NONE = 'N', 'none'
-        OTHER = 'O', 'other'
-        UNKNOWN = 'U', 'unknown'
-    
-    class Techniquesb(models.TextChoices):
-        BALL = 'B', 'ball'
-        SPIRAL = 'S', 'spiral'
-        SLAB = 'SL', 'slab'
-        STRIP = 'ST', 'strip'
-        OTHER = 'O', 'other'
-        UNKNOWN = 'U', 'unknown'
-
     class Gender(models.TextChoices):
         WOMEN = 'W', 'women'
         MEN = 'M', 'men'
         BOTH = 'B', 'both'
-        UNKNOWN = 'U', 'unknown'
-
-    class Use(models.TextChoices):
-        BOILING = 'B', 'boiling'
-        FRYING ='F', 'frying'
-        FORNO = 'FO', 'forno'
-        SERVING = 'SE', 'serving'
-        STORAGE = 'ST', 'storage'
-        SMOKING = 'SM', 'smoking'
-        CEREMONIAL = 'C', 'ceremonial'
-        OTHER = 'O', 'other'
         UNKNOWN = 'U', 'unknown'
 
     class Frequency(models.TextChoices):
@@ -153,13 +140,8 @@ class Vessel(models.Model):
     region = models.CharField(max_length=20, choices=Region, default=Region.UNKNOWN)
     language = models.CharField(default="", max_length=50, null=True, blank =True)
     language_code = models.CharField(default="", max_length=5, null=True, blank =True)
-    primary_technique = models.CharField(max_length=20, choices=Techniques, default=Techniques.UNKNOWN)
-    secondary_technique = models.CharField(max_length=20, choices=Techniques2, default=Techniques2.UNKNOWN)
-    base_technique = models.CharField(max_length=20, choices=Techniquesb, default=Techniquesb.UNKNOWN)
-    rim_technique = models.CharField(max_length=20, choices=Techniques, default=Techniques.UNKNOWN)
     word = models.CharField(default="", max_length=50, null=True, blank = True)
-    use = models.CharField(max_length=20, choices=Use, default=Use.UNKNOWN)
-    comments = models.CharField(null=True, max_length=500, blank =True)
+    details = models.TextField(max_length= 1000, null=True, blank=True)
     language_family = models.CharField(null=True, max_length=500, blank =True)
     language_superfamily = models.CharField(null=True, max_length=100, blank =True)
     gender_make = models.CharField(max_length=7, choices=Gender, default=Gender.UNKNOWN)
@@ -201,11 +183,9 @@ class Vessel(models.Model):
     lip_bulge_outside = models.CharField(max_length=7, choices=Frequency, default=Frequency.UNKNOWN)
     lip_bulge_both = models.CharField(max_length=7, choices=Frequency, default=Frequency.UNKNOWN)
     handle = models.CharField(max_length=7, choices=Frequency, default=Frequency.UNKNOWN)
-    traded = models.CharField(max_length=7, choices=Frequency, default=Frequency.UNKNOWN)
-    imagename = models.CharField(default="", max_length=50, null=True, blank = True)
-    imagename_ref = models.ForeignKey(Report, on_delete=models.SET_NULL, null=True, related_name="imagename", blank=True)
+    image = models.ManyToManyField(Image, related_name="vessels", blank=True)
     refs = models.ManyToManyField(Report, related_name="vessels", blank=True)
-    tags = models.ManyToManyField(Tag, related_name="vessels", blank=True)
+    feature = models.ManyToManyField(Feature, related_name="vessels", blank=True)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -244,12 +224,15 @@ class Site(models.Model):
     slug = models.SlugField(default="", blank= True, null = False, db_index=True)
     name = models.CharField(max_length= 100)
     sitegroup = models.ManyToManyField(Sitegroup, related_name="sites", blank=True)
+    details = models.TextField(max_length= 1000, null=True, blank=True)
     region = models.CharField(max_length=20, choices=Region, default=Region.UNKNOWN)
     lat = models.DecimalField(null=True, max_digits=9, decimal_places=6) 
     lng = models.DecimalField(null=True, max_digits=9, decimal_places=6)
     vessel = models.ManyToManyField(Vessel, related_name="site", blank=True)
+    import_vessel = models.ManyToManyField(Vessel, related_name="isite", blank=True)
     geonames_id = models.IntegerField(null=True, blank=True)
     open_location_code = models.CharField(null=True, blank=True, max_length=100)
+    production_site = models.BooleanField(default=False) 
    
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -270,9 +253,17 @@ class Site(models.Model):
     @property
     def vessel_string(self):
         fabs = self.vessel.all()
-        fabstring = ''
+        fabstring = ' '
+        if fabs:
+            fabstring = fabstring + 'local:'
+
         for fab in fabs:
-            fabstring = fabstring + " (" + fab.name + "-" + fab.form + ")"
+            fabstring = fabstring + " " + fab.name + ","
+        ifabs = self.import_vessel.all()
+        if ifabs:
+            fabstring = fabstring + ' imports:'
+        for ifab in ifabs:
+            fabstring = fabstring + " " + ifab.name + ","
         return fabstring
 
     

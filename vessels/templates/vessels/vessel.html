@@ -53,20 +53,47 @@
   {% else %} <p>No site information available.</p>
   {% endif %} {% endcomment %}
 
+  <div>
+    <p> Time Period: {{ the_vessel.time_start }} BP - {{the_vessel.time_end}} BP </p>
+    <p> {{ the_vessel.details }} </p>
+    <h2>A Map of sites: production and import. </h2>
+    <p> Need to import sites and if production or import.- so import production. Import import. </p>
+    <h2>The Potters </h2>
+    <p> Language: {{ the_vessel.language }} include glottolog link? </p>
+    <p> Gender Makers: {{ the_vessel.gender_make }}  </p>
+    <p> Gender Decorators: {{ the_vessel.gender_decorate }}  </p>
+
+    <h2> Build </h2>
+    <p> Base: , Rim:, Primary:, Secondary: </p>
+    <p> Tempering. Link to fabrics here? </p>
+    <h2> Use </h2>
+    <p> import use </p>
+    <h2> Morphology </h2>
+    <p> List morphology features but separate by common and rare. </p>
+    <h2> Decoration </h2>
+    <p> List decoration features but separate by common and rare. </p>
+  </div> 
+
+
+
   <div class="after-map">
     <h2>A Table? </h2>
-    <table class = "industrytable" id = "it">
+    
       <h3>Sketches</h3>
-      {% if the_vessel.imagename %}
-      <figure><img src="{% static "vessels/images/drawings/"|add:the_vessel.imagename %}" alt={{ the_vessel.imagename }} height= 500> 
-      <figcaption> Sketch based on {{ the_vessel.imagename_ref.name }}. </figcaption> 
-      </figure>
+      {% if vessel_images %}
+        {% for image in vessel_images %}
+          <figure><img src="{% static "vessels/images/drawings/"|add:image.imageloc %}" alt={{ image.name }} height= 500> 
+          <figcaption> Sketch based on {{ image.details }}. </figcaption> 
+          </figure>
+        {% endfor %}
       {% else %}
-      <p>No images available.</p>
-      {% endif%}
-
+        <p>No images available.</p>
+      {% endif%} 
+    <h2>References:</h2>
+      {% for ref in v_ref %}
+        <h3> <a href="{{ ref.get_absolute_url }}">{{ref.slug}}({{ ref.author_list }}) </h3>
   </div>
-
+  {% include "vessels/includes/footer.html" %}
 {% comment %} 
   <div class="after-map">
   <h2>Features </h2>
@@ -112,11 +139,6 @@
   <br>
  
 </div> {% endcomment %}
-{% comment %}   <h2>References:</h2>
-  {% for ref in {{industry.refs}} %}
-    <h3> <a href="{% url "report-type" ref.slug %}">{{ ref.fullname }}</a> ({{ ref.author_list }}) </h3>
-  {% endfor %} {% endcomment %}
 
-
-  {% include "vessels/includes/footer.html" %}
+  {% endfor %} 
 {% endblock %}

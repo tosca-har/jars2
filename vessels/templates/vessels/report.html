@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css_files %}
+  <link rel="stylesheet" href="{% static "vessels/glossary.css" %}">
+  <link rel="stylesheet" href="{% static "vessels/header.css" %}"> 
+  {% endblock %}
+
+{% block page_title %}
+  Reference
+{% endblock %}
+
+{% block content %}
+{% include "vessels/includes/header.html" %}
+  
+<h2>{{ report.fullname }}</h2>
+<h2>{{ report.author_list }}</h2>
+<h2>{{ report.details }}</h2>
+{% if report.link %} 
+<h2><a href={{ report.link }}>{{ report.link }}</a></h2>
+{% endif %}
+{% include "vessels/includes/footer.html" %}
+{% endblock %}

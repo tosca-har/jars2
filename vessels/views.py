@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import Http404, HttpResponseNotFound, HttpResponseRedirect
 from django.urls import reverse
 from decouple import config
-from .models import Vessel, Vesselgroup, Site, Sitegroup, Report
+from .models import Vessel, Vesselgroup, Site, Sitegroup, Report, Image, Feature
 
 mbsu = config('MBSU')
 thsu = config('THSU')
@@ -10,12 +10,17 @@ thsu = config('THSU')
 def home(request):
     return render(request, "vessels/home.html")
 
-def index(request):
+def search(request):
     vesselgroups = Vesselgroup.objects.all().order_by("name")
-    return render(request, "vessels/index.html", {
+    return render(request, "vessels/search.html", {
         "groups": vesselgroups
     })
 
+def compare(request):
+    vesselgroups = Vesselgroup.objects.all().order_by("name")
+    return render(request, "vessels/compare.html", {
+        "groups": vesselgroups
+    })
 def map(request):
     sites = Site.objects.all().order_by("name")
     return render(request, "vessels/map.html", {
@@ -26,11 +31,12 @@ def map(request):
 
 def vesselgr(request, slug):
     identified_vg = get_object_or_404(Vesselgroup, slug=slug)
-    id_vess = identified_vg.vessels.all()
+    vessels = identified_vg.vessels.all()
     return render(request, "vessels/vesselgr.html", {
         "groups": identified_vg,
-        "vg_vessels": id_vess,
-        "vg_sg": identified_vg.sitegroup.all()
+        "vg_vessels": vessels,
+        "vg_sg": identified_vg.sitegroup.all(),
+        "images": Image.objects.all().filter(vessels__in=vessels).distinct(),
     })
 
 def sitegr(request, slug):
@@ -53,8 +59,13 @@ def vessel(request, slug):
     identified_v = get_object_or_404(Vessel, slug=slug)
     return render(request, "vessels/vessel.html", {
         "the_vessel": identified_v,
+        "vessel_images": identified_v.image.all(),
         "v_ref": identified_v.refs.all()
     })
-
+def report(request, slug):
+    identified_r = get_object_or_404(Report, slug=slug)
+    return render(request, "vessels/report.html", {
+        "report": identified_r,
+    })
 def glossary(request):
     return render(request, "vessels/glossary.html")

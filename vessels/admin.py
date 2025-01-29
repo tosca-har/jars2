@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Vessel, Vesselgroup, Site, Sitegroup, Report, Tag
+from .models import Vessel, Vesselgroup, Site, Sitegroup, Report, Feature, Image
 
 class ReportAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
@@ -7,12 +7,18 @@ class ReportAdmin(admin.ModelAdmin):
     
 admin.site.register(Report, ReportAdmin)
 
-class TagAdmin(admin.ModelAdmin):
+class FeatureAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
     ordering = ('name',)
-    list_filter = ("type",)
     
-admin.site.register(Tag, TagAdmin)
+admin.site.register(Feature, FeatureAdmin)
+
+
+class ImageAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ("name",)}
+    ordering = ('name',)
+    
+admin.site.register(Image, ImageAdmin)
 
 class VesselAdmin(admin.ModelAdmin):
     list_filter = ("vesselgroup",)
