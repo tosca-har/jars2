@@ -15,7 +15,7 @@ Glossary
   <li><a href="#com">Common</a></li>
   <li><a href="#non">None reported</a></li>
   <li><a href="#occ">Occasionally</a></li>
-  <li><a href="#unk">Unknown</a></li>
+  <li><a href="#unk">x</a></li>
   <li><a href="#gro">Vessel type groups</a></li>
   <li><a href="#typ">Vessel types</a></li>
 
@@ -32,7 +32,6 @@ Glossary
   <h3><a href="#type">* Vessel forms</a></h3>
   <h3><a href="#build">* Vessel construction </a></h3>
   <h3><a href="#rim">* Rim morphology </a></h3>
-  <h3><a href="#mor">* Other morphology </a></h3>
   <h3><a href="#decp">* Decoration position </a></h3>
   <h3><a href="#dect">* Decoration type</a></h3>
   <h3><a href="#patt">* Decoration pattern</a></h3>
@@ -46,21 +45,25 @@ For example the type Futuna Polynesian Plainware jars are part of the Futuna Pol
 <h2 id="quant">Quantifiers</h2>  
 <p>The challenge in describing vessel types is that features or properties, will occur in different proportions of a type. For example all Agarabi kabe, are used for cooking, they commonly have outcurving or everted rims, they 
   occasionally have direct rims, but they never have sculptural decoration. As always is difficult to use with 
-certainty, this database uses <mark id="com">commonly</mark>, <mark id="occ">occasionally</mark>, <mark id="non">none reported </mark> and <mark id="unk">unknown</mark>. <mark>Common</mark> refers to features reported or observable
+certainty, this database uses <mark id="com">commonly</mark>, <mark id="occ">occasionally</mark> and <mark id="non">none reported </mark>. <mark>Common</mark> refers to features reported or observable
 in several vessels or sherds, or where numbers are available greater than 10 percent. <mark>Occasionally</mark> refers to features with only single vessel examples, or 
-present but in less than 10 percent in larger samples. Both <mark>'none reported'</mark> and <mark>'unknown'</mark> indicate the lack of examples of the
-feature, but <mark>'none reported'</mark> is used when other features of the same type have been observed. </p>
+present but in less than 10 percent in larger samples.
 <h2 id="part">Vessel parts</h2>
 <h3 id="lip">Lip</h3>
 <p>Edge or margin of the vessel mouth. Features related to lips include <a href="#lipdec"> decorated lip </a>, <a href="#lipnotc">notched</a> .</p>
 <h3 id="spo">Spout</h3>
 <p>x</p>
+{% comment %} <figure><img src="{% static "vessels/images/spout.jpg" %}" alt="Spount." ></figure>
+<figcaption> Example of a spout in a Pacific jugs.</figcaption> {% endcomment %}
 <h3 id="rim">Rim</h3>
 <p>When the vessel wall changes orientation, the rim is the area between the change of orientation and the mouth. Direct rims have no change and so there is no clear area and it equates to the lip. </p>
-<h3 id="neck">Neck</h3>
-<p>A restriction of the vessel opening, above the  maximum diameter.</p>
-<h3 id="coll">Collar</h3>
-<p>x.</p>
+<h3 id="neck">Neck and collar</h3>
+<p>The region from the vessel mouth to a point of inflection.
+  In some reports this region is called a 'collar' if it does not constrict the vessel opening. For this vocabulary, 'neck' includes collar. 
+</p>
+
+{% comment %} <figure><img src="{% static "vessels/images/necks.jpg" %}" alt="Neck and collar." ></figure>
+<figcaption> Examples of necks in different Pacific vessel forms.</figcaption> {% endcomment %}
 <h3 id="sho">Shoulder</h3>
 <p>Present in restricted vessels. The region between the vessel maximum diameter and mouth or neck.</p>
 <h3 id="car">Carination</h3>
@@ -75,9 +78,9 @@ feature, but <mark>'none reported'</mark> is used when other features of the sam
 <p>Appendages on the vessel base.</p>
 <h2 id="form">Vessel forms</h2>
 <h3 id="res">Restricted jar</h3>
-<p>x.</p>
+<p>Vessel has a mouth that is less than the maximum diameter.</p>
 <h3 id="ures">Unrestricted jar or bowl</h3>
-<p>x.</p>
+<p>Vessel opening is equal to or greater than its maximum diameter.</p>
 <h3 id="for">Forno</h3>
 <p>x.</p>
 <h3 id="jug">Jug</h3>
@@ -94,33 +97,132 @@ feature, but <mark>'none reported'</mark> is used when other features of the sam
 <h3 id="temp">Manual tempering</h3>
 <p>x.</p>
 <h3 id="conb">Base construction</h3>
-<p>x.</p>
+<h4 id="spib">Spiral base</h4>
+<p>Spiral start</p>
 <h3 id="conp">Primary construction</h3>
 <p>x.</p>
 <h3 id="conr">Rim construction</h3>
 <p>x.</p>
 <h3 id="cons">Secondary construction</h3>
 <p>x.</p>
-<h2 id="rim">Rim morphology</h2>
-<h3 id="rim">Rim direction</h3>
-<h3 id="out">Outcurving</h3>
+<h2 id="rimorph">Rim morphology</h2>
+<h3 id="rimdir">Rim direction</h3>
+<h4 id="out">Outcurving rim</h4>
 <p>x.</p>
-<h3 id="ev">Everted</h3>
+<h4 id="ev">Everted rim</h4>
 <p>x.</p>
-<h3 id="dout">Direct out</h3>
+<h4 id="dout">Direct out rim</h4>
 <p>x.</p>
-<h3 id="dir">Direct</h3>
+<h4 id="dir">Direct rim</h4>
 <p>x.</p>
-<h3 id="din">Direct in</h3>
+<h4 id="din">Direct in rim</h4>
 <p>x.</p>
-<h3 id="inv">Inverted</h3>
+<h4 id="inv">Inverted rim</h4>
 <p>x.</p>
-<h3 id="inc">Incurving</h3>
+<h4 id="inc">Incurving rim</h4>
 <p>x.</p>
 <h3 id="rim">Rim profile</h3>
-<h3 id="abr">Outcurving</h3>
+<h4 id="para">Parallel</h4>
 <p>x.</p>
+<h4 id="abrn">Abrupt narrow rim</h4>
+<p>x.</p>
+<h4 id="abrw">Abrupt wide rim</h4>
+<p>x.</p>
+<h4 id="gradi">Gradually narrow rim</h4>
+<p>x.</p>
+<h4 id="gradoe">Gradually exterior thickenend rim</h4>
+<p>x.</p>
+<h4 id="gradoi">Gradually thickened interior rim</h4>
+<p>x.</p>
+<h4 id="roundb">Rounded both sides rim</h4>
+<p>x.</p>
+<h4 id="roundi">Rounded thickened interior rim</h4>
+<p>x.</p>
+<h4 id="roundo">Rounded thickened exterior rim</h4>
+<p>x.</p>
+<h2 id="decp">Decoration position</h2>
+<h3 id="declip">Decorated lip</h3>
+<p>x.Includes notching, short incised rim, triangular notching, impressed .</p>
+<h3 id="decrim">Decorated rim</h3>
+<p>x.Includes very top for unrestricted.</p>
+<h3 id="intdecRim">Internal decorated rim</h3>
+<p>x.Includes very top for unrestricted.</p>
+<h3 id="decnec">Decorated neck</h3>
+<p>x.Includes top upper body for unrestricted.includes rim</p>
+<h3 id="decsho">Decorated shoulder</h3>
+<p>x.Includes upper body for unrestricted.includes neck and rim</p>
+<h3 id="decbody">Decorated body</h3>
+<p>x. Includes shoulder, neck and rim</p>
 
+<h2 id="dect">Decoration type</h2>
+<h3 id="plain">Plain</h3>
+<p>No exposed coil, clay removal and addition. Can have slip or painting.</p>
+<h3 id="expo">Exposed coils</h3>
+<p>x.Includes exposing in triangle or other patterns.</p>
+<h3 id="rem">Clay removal</h3>
+<h4 id="impr">Impressing</h4>
+<p>x.</p>
+<h5 id="punct">Punctation (simple impressing)</h5>
+<p>x.</p>
+<h5 id="imprcom">Comb impressing</h5>
+<p>x.</p>
+<h5 id="dent">Dentate</h5>
+<p>x.</p>
+<h5 id="pad">Paddle impressing</h5>
+<p>x.</p>
+<h5 id="cord">Cord impressing</h5>
+<p>x.</p>
+<h4 id="fing">Finger marks</h4>
+<p>Gorging and dragging, fingernail impression, .</p>
+<h4 id="incis">Incising</h4>
+<p>Fine lines are made in the clay, with a pointed tool that is pushed or pulled along displacing the clay.</p>
+<h5 id="incsin">Simple incising</h5>
+<p>When a tool with a single point, is used to make the incisions. Incisions can be straight or wavy lines and can vary in length.</p>
+<h5 id="inccom">Comb incising</h5>
+<p>When a multi-pronged tool is used to make simiulatenous incisions in straight or wavy lines. These can vary in length from
+  short patterns to lines that circumscribe the vessel.</p>
+<h4 id="gro">Grooving</h4>
+<p>When the clay is removed in continuous channels, with a wider, rounder pointed tool, than fine incison. The edge of the 
+  groove is clean and sharp and the strokes end abruptly.</p> 
+  <h4 id="sco">Scouring</h4>
+<p>When the vessel has multiple striations for texture.</p> 
+<h4 id="carv">Carving</h4>
+<p>Where the clay is removed from the vessel wall for decoration. Larger amounts of clay (curls of clay) are removed than incision, but the wall is not perforated.</p>
+<h4 id="perf">Perforating</h4>
+<p>Where the clay is completely removed from the vessel wall. This can be for decoration and for functional reasons such as
+  to make a pot for smoking fish.</p>
+<h3 id="addi">Clay addition</h3>
+<h4 id="appl">Applique</h4>
+<p>x.</p>
+<h5 id="lug">Nubbins and lugs</h5>
+<p>x.</p>
+<h5 id="lug">Bands</h5>
+<p>x.Includes notched bands. Includes remnant coil. </p>
+<h4 id="sculp">Sculpting</h4>
+<p>x.</p>
+<h3 id="liq">Colourants</h3>
+<h4 id="red">Red slip</h4>
+<p>x. Sometimes includes the addition of white lime.</p>
+<h4 id="paint">Painting</h4>
+<p>x. Note that sometimes this was not done by the original makers, but by the buyers.</p>
+
+<h2 id="fun">Vessel function</h2>
+<h3 id="cook">Cooking</h3>
+<p>x. Includes frying and smoking.</p>
+<h3 id="serve">Serving</h3>
+<p>x. s</p>
+<h3 id="eat">Eating</h3>
+<p>x. s</p>
+<h3 id="store">Storage</h3>
+<p>x. s</p>
+<h3 id="tran">Transfer</h3>
+<p>x. s</p>
+<h3 id="lamp">Lamp</h3>
+<p>Lamps .</p>
+<h3 id="lid">Lid</h3>
+<p>Lamps .</p>
+<h3 id="music">Musical instrument</h3>
+<p>Lamps .</p>
 {% comment %} <figure><img src="{% static "fabrics2/images/int_colours.jpg" %}" alt="Interference colours." ></figure>
 <figcaption> Interference colours from the Michel-Levy chart. Modified by K. Hardy from full chart, see <a href="https://en.m.wikipedia.org/wiki/File:Michel-Lévy_interference_colour_chart_(21257606712).jpg">ZEISS Microscopy Michel-Levy chart</a>.
  </figcaption> {% endcomment %}

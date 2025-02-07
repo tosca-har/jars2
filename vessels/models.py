@@ -3,6 +3,20 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.urls import reverse
 from django.utils.text import slugify
 
+
+
+class Fabric(models.Model):
+    slug = models.SlugField(default="", blank= True, null = False, db_index=True)
+    name = models.CharField(max_length= 20, blank=True)
+    fullname = models.CharField(max_length= 100, blank=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.slug} ({self.fullname})"  
+
 class Report(models.Model):
     slug = models.SlugField(default="", blank= True, null = False, db_index=True)
     name = models.CharField(max_length= 20, blank=True)
@@ -31,6 +45,7 @@ class Image(models.Model):
     imageloc = models.CharField(max_length= 100)
     details = models.TextField(max_length= 1000, null=True, blank=True)
     ref = models.ForeignKey(Report, on_delete=models.SET_NULL, null=True, related_name="image", blank=True)
+    legend = models.TextField(max_length= 1000, null=True, blank=True)
     
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -79,24 +94,33 @@ class Vesselgroup(models.Model):
         )
 
 class Feature(models.Model):
+    class Type(models.TextChoices):
+        MORPHOLOGY = 'M', 'morphology'
+        RIM = 'R', 'rim morphology'
+        DECORATION = 'D', 'decoration'
+        PLACE = 'P', 'decorated area'
+        USE = 'U', 'use'
+
     slug = models.SlugField(default="", blank=True, null=False, db_index=True)
     name = models.CharField(default="", max_length=50)
     description = models.TextField(max_length= 1000, null=True, blank=True)
     refs = models.ManyToManyField(Report, related_name="feature", blank=True)
     image = models.ManyToManyField(Image, related_name="feature", blank=True)
+    tag = models.CharField(default="", max_length=10, null=True, blank=True)
+    type = models.CharField(max_length=20, choices=Type, default=Type.MORPHOLOGY)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.name} ({self.type})"
+
+
+
 
 
 class Vessel(models.Model):
-    class Types(models.TextChoices):
-        RESTRICTED = 'RP', 'restricted-pot'
-        UNRESTRICTED = 'UP', 'unrestricted-pot'
-        SEMIRESTRICTED = 'SP', 'semirestricted-pot' 
-        BOWL = 'B', 'bowl'
-        FORNO = 'F', 'forno'
-        CUP = 'C', 'cup'
-        JUG = 'J', 'jug'
-        OTHER = 'O', 'other'
-        UNKNOWN = 'U', 'unknown'
 
     class Gender(models.TextChoices):
         WOMEN = 'W', 'women'
@@ -104,14 +128,6 @@ class Vessel(models.Model):
         BOTH = 'B', 'both'
         UNKNOWN = 'U', 'unknown'
 
-    class Frequency(models.TextChoices):
-        PRESENT = 'P', 'present'
-        DOMINANT = 'D', 'dominant'
-        COMMON = 'C', 'common'
-        OCCASIONAL = 'O', 'occasional'
-        RARE = 'R', 'rare'
-        ABSENT = 'A', 'absent'
-        UNKNOWN = 'U', 'unknown'
 
     class Region(models.TextChoices):
         MARIANAS = 'MAR', 'Marianas'
@@ -129,12 +145,41 @@ class Vessel(models.Model):
         NEMELANESIA = 'NME', 'NE Melanesia'
         COOK = 'COO', 'Cook'
         TUVALU = 'TUV', 'Tuvalu'
+        PHILIPPINES = 'PHI', 'Philippines'
+        TAIWAN = 'TAI', 'Taiwan'
+        OTHER = 'OTH', 'Other'
         UNKNOWN = 'U', 'unknown'
 
+    class Base(models.TextChoices):
+        BALL = 'B', 'ball'
+        SPIRAL = 'S', 'spiral'
+        SLAB = 'SL', 'slab'
+        PINCHING = 'P', 'pinching'
+        STRIP = 'ST', 'strip'
+        OTHER = 'O', 'other'
+        UNKNOWN = 'U', 'unknown'
+    
+    class Techniques(models.TextChoices):
+        COIL = 'C', 'coil' 
+        SPIRAL = 'CS', 'coil-spiral'
+        RING = 'CR', 'coil-ring'
+        SLAB = 'S', 'slab'
+        PINCHING = 'P', 'pinching'
+        MOLDED = 'M', 'molded'   
+        WHEEL ='W', 'wheel'
+        OTHER = 'O', 'other'
+        UNKNOWN = 'U', 'unknown'
+      
+    class Techniques2(models.TextChoices):
+        BEATING = 'B', 'beating'
+        PADDLE = 'PA', 'paddle and anvil'
+        NONE = 'N', 'none'
+        OTHER = 'O', 'other'
+        UNKNOWN = 'U', 'unknown'
+    
     slug = models.SlugField(default="", blank=True, null=False, db_index=True)
     name = models.CharField(default="", max_length=50)
     vesselgroup = models.ManyToManyField(Vesselgroup, related_name="vessels", blank=True)
-    form = models.CharField(max_length=2, choices=Types, default=Types.UNKNOWN)
     time_start = models.IntegerField(null=True, blank =True)
     time_end = models.IntegerField(null=True, blank =True)
     region = models.CharField(max_length=20, choices=Region, default=Region.UNKNOWN)
@@ -146,46 +191,16 @@ class Vessel(models.Model):
     language_superfamily = models.CharField(null=True, max_length=100, blank =True)
     gender_make = models.CharField(max_length=7, choices=Gender, default=Gender.UNKNOWN)
     gender_decorate = models.CharField(max_length=7, choices=Gender, default=Gender.UNKNOWN)
-    has_neck = models.CharField(max_length=7, choices=Frequency, default=Frequency.UNKNOWN)
-    has_round_base = models.CharField(max_length=7, choices=Frequency, default=Frequency.UNKNOWN)
-    has_pointed_base = models.CharField(max_length=7, choices=Frequency, default=Frequency.UNKNOWN)
-    has_flat_base = models.CharField(max_length=7, choices=Frequency, default=Frequency.UNKNOWN)
-    temper = models.BooleanField(null = True, blank = True)
-    decoration_plain = models.CharField(max_length=7, choices=Frequency, default=Frequency.UNKNOWN)
-    decoration_single_punctate = models.CharField(max_length=7, choices=Frequency, default=Frequency.UNKNOWN)
-    decoration_comb_punctate = models.CharField(max_length=7, choices=Frequency, default=Frequency.UNKNOWN)
-    decoration_fingerdrag = models.CharField(max_length=7, choices=Frequency, default=Frequency.UNKNOWN)
-    decoration_shell_punctate = models.CharField(max_length=7, choices=Frequency, default=Frequency.UNKNOWN)
-    decoration_dentate = models.CharField(max_length=7, choices=Frequency, default=Frequency.UNKNOWN)
-    decoration_single_incised = models.CharField(max_length=7, choices=Frequency, default=Frequency.UNKNOWN)
-    decoration_comb_incised = models.CharField(max_length=7, choices=Frequency, default=Frequency.UNKNOWN)
-    decoration_applique = models.CharField(max_length=7, choices=Frequency, default=Frequency.UNKNOWN)
-    decoration_exposed_coil = models.CharField(max_length=7, choices=Frequency, default=Frequency.UNKNOWN)
-    decoration_carved = models.CharField(max_length=7, choices=Frequency, default=Frequency.UNKNOWN)
-    decoration_paint = models.CharField(max_length=7, choices=Frequency, default=Frequency.UNKNOWN)
-    decoration_redslip = models.CharField(max_length=7, choices=Frequency, default=Frequency.UNKNOWN)
-    decoration_sculpt = models.CharField(max_length=7, choices=Frequency, default=Frequency.UNKNOWN)
-    decoration_paddle = models.CharField(max_length=7, choices=Frequency, default=Frequency.UNKNOWN)
-    decoration_lip = models.CharField(max_length=7, choices=Frequency, default=Frequency.UNKNOWN)
-    decoration_neck = models.CharField(max_length=7, choices=Frequency, default=Frequency.UNKNOWN)
-    decoration_whole = models.CharField(max_length=7, choices=Frequency, default=Frequency.UNKNOWN)
-    rim_direct = models.CharField(max_length=7, choices=Frequency, default=Frequency.UNKNOWN)
-    rim_direct_out =models.CharField(max_length=7, choices=Frequency, default=Frequency.UNKNOWN)
-    rim_direct_in = models.CharField(max_length=7, choices=Frequency, default=Frequency.UNKNOWN)
-    rim_incurving = models.CharField(max_length=7, choices=Frequency, default=Frequency.UNKNOWN)
-    rim_outcurving = models.CharField(max_length=7, choices=Frequency, default=Frequency.UNKNOWN)
-    rim_everted = models.CharField(max_length=7, choices=Frequency, default=Frequency.UNKNOWN)
-    rim_inverted = models.CharField(max_length=7, choices=Frequency, default=Frequency.UNKNOWN)
-    lip_gradual_in = models.CharField(max_length=7, choices=Frequency, default=Frequency.UNKNOWN)
-    lip_gradual_out = models.CharField(max_length=7, choices=Frequency, default=Frequency.UNKNOWN)
-    lip_abrupt = models.CharField(max_length=7, choices=Frequency, default=Frequency.UNKNOWN)
-    lip_bulge_inside = models.CharField(max_length=7, choices=Frequency, default=Frequency.UNKNOWN)
-    lip_bulge_outside = models.CharField(max_length=7, choices=Frequency, default=Frequency.UNKNOWN)
-    lip_bulge_both = models.CharField(max_length=7, choices=Frequency, default=Frequency.UNKNOWN)
-    handle = models.CharField(max_length=7, choices=Frequency, default=Frequency.UNKNOWN)
+    temper = models.BooleanField(null = True, blank = True, default="") 
     image = models.ManyToManyField(Image, related_name="vessels", blank=True)
     refs = models.ManyToManyField(Report, related_name="vessels", blank=True)
-    feature = models.ManyToManyField(Feature, related_name="vessels", blank=True)
+    fabric = models.ManyToManyField(Fabric, related_name="vessels", blank=True)
+    typical_feature = models.ManyToManyField(Feature, related_name="vessels_typical", blank=True)
+    common_feature = models.ManyToManyField(Feature, related_name="vessels_common", blank=True)
+    primary_technique = models.CharField(max_length=20, choices=Techniques, default=Techniques.UNKNOWN)
+    secondary_technique = models.CharField(max_length=20, choices=Techniques2, default=Techniques2.UNKNOWN)
+    base_technique = models.CharField(max_length=20, choices=Base, default=Base.UNKNOWN)
+    rim_technique = models.CharField(max_length=20, choices=Techniques, default=Techniques.UNKNOWN)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -220,6 +235,9 @@ class Site(models.Model):
         NEMELANESIA = 'NME', 'NE Melanesia'
         COOK = 'COO', 'Cook'
         TUVALU = 'TUV', 'Tuvalu'
+        PHILIPPINES = 'PHI', 'Philippines'
+        TAIWAN = 'TAI', 'Taiwan'
+        OTHER = 'OTH', 'Other'
         UNKNOWN = 'U', 'unknown'
     slug = models.SlugField(default="", blank= True, null = False, db_index=True)
     name = models.CharField(max_length= 100)
