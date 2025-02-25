@@ -2,70 +2,92 @@
 {% load static %}
 
 {% block css_files %}
-  {% comment %} 
-  <link rel="stylesheet" href="{% static "vessels/leaflet.css" %}">
-  <script src="{% static "vessels/leaflet.js"%}"></script>
-  <script src="{% static "vessels/map.js" %}"></script> {% endcomment %}
-  <link rel="stylesheet" href="{% static "vessels/glossary.css" %}">
-  <link rel="stylesheet" href="{% static "vessels/header.css" %}"> 
+<link rel="stylesheet" href="{% static "vessels/glossary.css" %}">
+<link rel="stylesheet" href="{% static "vessels/header.css" %}"> 
+<link rel="stylesheet" href="{% static "vessels/leaflet.css" %}">
+<link rel="stylesheet" href="{% static "vessels/map.css" %}">
+<script src="{% static "vessels/leaflet.js"%}"></script>
+<script src="{% static "vessels/map.js" %}"></script>
 {% endblock %}
 
 {% block page_title %} Vessel Details {% endblock %}
 {% block content %} {% include "vessels/includes/header.html" %} 
 <h1>{{ the_vessel.name }}</h1>
-  
- {% comment %}<h2>Sites: </h2>
-  {% if vg_sg %} 
-    <ul>
-    {% for site in vg_sg%}
-      <li> {{site.name}}</li>
-    {% endfor %}
-    </ul> {% endcomment %}
-
-    {% comment %}  <div id="map"></div>
-    <div> <p id="targetSite"></p><div>
+{% if prod_sites or imp_sites %}
+    <div id="map">
+ 
     <script> 
-      var picon = "{% static "fabrics2/images/redPot2.png" %}";
-      var bicon = "{% static "fabrics2/images/ltgreyPot.png" %}";
-      var ricon = "{% static "fabrics2/images/tanPot.png" %}";
+      var picon = "{% static "vessels/images/redPot2.png" %}";
+      var bicon = "{% static "vessels/images/bluePot2.png" %}";
       let mbsu = "{{mbsu}}";
       let thsu = "{{thsu}}";
       let siteNames = [];
       let siteLat = [];
       let siteLng = [];
       let siteLinks = [];
-      let siteFabrics = [];
+      let siteVessels = [];
       let siteColour = [];
-      let siteview = false;
-      let mapcentre =  [-4.5, 150];
-      {% for site in fabric_sites %}
+      let mapcentre =  [-4.5, 160];
+      {% for site in prod_sites %}
         siteNames.push("{{site.name}}");
         siteLat.push({{site.lat}});
         siteLng.push({{site.lng}});
-        siteLinks.push("{% url "site-type" site.slug %}");
-        siteFabrics.push("");
+        siteLinks.push("{{ site.get_absolute_url }}");
+        siteVessels.push("{{site.vessel_string}}");
         siteColour.push(1);
         mapcentre = [{{site.lat}}, {{site.lng}}];
       {% endfor %}
+      {% for site in imp_sites %}
+        siteNames.push("{{site.name}}");
+        siteLat.push({{site.lat}});
+        siteLng.push({{site.lng}});
+        siteLinks.push("{{ site.get_absolute_url }}");
+        siteVessels.push("{{site.vessel_string}}");
+        siteColour.push(0);
+      {% endfor %}
       getMap(); 
     </script> 
+  </div>
+
+  <div class="key"> 
+    <img src="{% static "vessels/images/redPot2.png" %}" alt="red pot" height="50"> Production site. <br>
+    <br>
+    <img src="{% static "vessels/images/bluePot2.png" %}" alt="blue pot" height="50"> Import site.  <br>
+
+    <p id="targetSite"></p> </div>
 
   {% else %} <p>No site information available.</p>
-  {% endif %} {% endcomment %}
+  {% endif %}
 
-  <div>
+  <div class="after-map">
     <p> Time Period: {{ the_vessel.time_start }} BP - {{the_vessel.time_end}} BP </p>
     <p> {{ the_vessel.details }} </p>
     <h2>A Map of sites: production and import. </h2>
     <p> Need to import sites and if production or import.- so import production. Import import. </p>
+    <h2>Belongs to Vessel Groups:</h2>
+    {% if vgr %}
+      {% for gr in vgr %}
+        <h3> <a href="{{ gr.get_absolute_url }}"> {{gr.name}} </a> </h3>
+      {% endfor %}
+    {% else %}
+      <p>No groups recorded.</p>
+    {% endif%} 
     <h2>The Potters </h2>
     <p> Language: {{ the_vessel.language }} include glottolog link? </p>
     <p> Gender Makers: {{ the_vessel.gender_make }}  </p>
     <p> Gender Decorators: {{ the_vessel.gender_decorate }}  </p>
 
-    <h2> Build </h2>
-    <p> Base: , Rim:, Primary:, Secondary: </p>
-    <p> Tempering. Link to fabrics here? </p>
+    <h2> Creation </h2>
+    <p> Base: {{ the_vessel.base_technique }}, Rim: {{ the_vessel.rim_technique }}, Primary: {{ the_vessel.primary_technique }}, Secondary: {{ the_vessel.secondary_technique }} </p>
+    <p> Manual tempering: {{ the_vessel.temper }} </p>
+    {% if fabrics %}
+    <p>Fabrics: </p>
+    {% for fab in fabrics %}
+      <h3> <a href="https://kudenfabrics.anu.edu.au/{{ fab.name }}"> {{fab.fullname}} </a> </h3>
+    {% endfor %}
+  {% else %}
+    <p>No fabrics recorded.</p>
+  {% endif%} 
     <h2> Use </h2>
     <p> import use </p>
     <h2> Morphology </h2>
@@ -76,7 +98,7 @@
 
 
 
-  <div class="after-map">
+  <div >
     <h2>A Table? </h2>
     
       <h3>Sketches</h3>
@@ -91,54 +113,9 @@
       {% endif%} 
     <h2>References:</h2>
       {% for ref in v_ref %}
-        <h3> <a href="{{ ref.get_absolute_url }}">{{ref.slug}}({{ ref.author_list }}) </h3>
+        <h3> <a href="{{ ref.get_absolute_url }}"> {{ref.name}} ({{ ref.author_list }})</a> </h3>
+      {% endfor %}
   </div>
   {% include "vessels/includes/footer.html" %}
-{% comment %} 
-  <div class="after-map">
-  <h2>Features </h2>
-  <table class = "industrytable" id = "it">
-    <th>Feature</th> <th> Value </th>
-    <tr> <td> Region </td> <td> {{industry.region}} </td></tr>
-      <tr> <td> Start time (BP) </td> <td> {{industry.time_start}} </td></tr>
-      <tr> <td> End time (BP) </td> <td> {{industry.time_end}} </td></tr>
-      <tr> <td> Technique </td>  <td data-tag="{{industry.technique}}"> {{industry.technique}} </td></tr>
-      <tr> <td> Language </td> <td> {{industry.language}} </td></tr>
-      <tr> <td> Cooking pot </td> <td> {{industry.word_cooking}} </td></tr>
-      <tr> <td> Other words </td> <td> {{industry.words_other}} </td></tr>
-      <tr> <td> Language code </td> <td> {{industry.language_code}} </td></tr>
-      <tr> <td> Language family </td> <td> {{industry.language_family}} </td></tr>
-      <tr> <td> Language superfamily </td> <td> {{industry.language_superfamily}} </td></tr>
-      <tr> <td> Potters' gender </td> <td data-tag="{{industry.gender}}"> {{industry.gender}} </td></tr>
-      <tr> <td> Added temper </td> <td data-tag="{{industry.temper}}"> {% if industry.temper %} Y {% elif industry.temper == False %} X {% else %} - {% endif %} </td> </tr>
-      <tr> <td> Position of decoration </td> <td data-tag="{{industry.decoration_position}}"> {{industry.decoration_position}}</td></tr>
-      <tr> <td> Decoration: dentate </td> <td data-tag="{{industry.decoration_dentate}}"> {% if industry.decoration_dentate %} Y {% elif industry.decoration_dentate == False %} X {% else %} - {% endif %}</td></tr>
-      <tr> <td> Decoration: incised </td> <td data-tag="{{industry.decoration_incised}}"> {% if industry.decoration_incised %} Y {% elif industry.decoration_incised == False %} X {% else %} - {% endif %}</td></tr>
-      <tr> <td> Decoration: comb incised  </td>  <td data-tag="{{industry.decoration_comb_incised}}"> {% if industry.decoration_comb_incised %} Y {% elif industry.decoration_comb_incised == False %} X {% else %} - {% endif %}</td></tr>
-      <tr> <td> Decoration: applique  </td> <td data-tag="{{industry.decoration_applique}}"> {% if industry.decoration_applique %} Y {% elif industry.decoration_applique == False %} X {% else %} - {% endif %}</td></tr>
-      <tr> <td> Decoration: exposed coil </td> <td data-tag="{{industry.decoration_exposed_coil}}"> {% if industry.decoration_exposed_coil %} Y {% elif industry.decoration_exposed_coil == False %} X {% else %} - {% endif %}</td></tr>
-      <tr> <td> Decoration: punctate  </td> <td data-tag="{{industry.decoration_punctate}}"> {% if industry.decoration_punctate %} Y {% elif industry.decoration_punctate == False %} X {% else %} - {% endif %}</td></tr>
-      <tr> <td> Decoration: paint  </td>  <td data-tag="{{industry.decoration_paint}}"> {% if industry.decoration_paint %} Y {% elif industry.decoration_paint == False %} X {% else %} - {% endif %}</td></tr>
-      <tr> <td> Decoration: finger </td>   <td data-tag="{{industry.decoration_finger}}"> {% if industry.decoration_finger %} Y {% elif industry.decoration_finger == False %} X {% else %} - {% endif %}</td></tr>
-      <tr> <td> Decoration: sculpture </td>  <td data-tag="{{industry.decoration_sculpt}}"> {% if industry.decoration_sculpt %} Y {% elif industry.decoration_sculpt == False %} X {% else %} - {% endif %}</td></tr>
-      <tr> <td> Decoration: paddle </td>  <td data-tag="{{industry.decoration_paddle}}"> {% if industry.decoration_paddle %} Y {% elif industry.decoration_paddle == False %} X {% else %} - {% endif %}</td></tr>
-      <tr> <td> Form: width > height </td>  <td data-tag="{{industry.form_w_more}}"> {% if industry.form_w_more %} Y {% elif industry.form_w_more == False %} X {% else %} - {% endif %}</td></tr>
-      <tr> <td> Form: height > width </td> <td data-tag="{{industry.form_h_more}}"> {% if industry.form_h_more %} Y {% elif industry.form_h_more == False %} X {% else %} - {% endif %}</td></tr>
-      <tr> <td> Form: width = height </td> <td data-tag="{{industry.form_equal}}"> {% if industry.form_equal %} Y {% elif industry.form_equal == False %} X {% else %} - {% endif %}</td></tr>
-      <tr> <td> Use: cooking </td> <td data-tag="{{industry.use_cooking}}"> {% if industry.use_cooking %} Y {% elif industry.use_cooking == False %} X {% else %} - {% endif %}</td></tr>
-      <tr> <td> Use: storage </td> <td data-tag="{{industry.use_storage}}"> {% if industry.use_storage %} Y {% elif industry.use_storage == False %} X {% else %} - {% endif %}</td></tr>  
-      <tr> <td> Use: serving </td> <td data-tag="{{industry.use_serving}}"> {% if industry.use_serving %} Y {% elif industry.use_serving == False %} X {% else %} - {% endif %}</td> </tr>
-      <tr> <td> Use: ceremonial </td> <td data-tag="{{industry.use_ceremonial}}"> {% if industry.use_ceremonial %} Y {% elif industry.use_ceremonial == False %} X {% else %} - {% endif %}</td> </tr>
-
  
-
-  
-  </table>
-  {% include "pottery/includes/keytable.html" %}
-  <h3 id="des">{{ industry.comments }}</h3>  
-  <br>
- 
-</div> {% endcomment %}
-
-  {% endfor %} 
 {% endblock %}

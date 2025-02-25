@@ -77,8 +77,9 @@ class Vesselgroup(models.Model):
     sitegroup = models.ManyToManyField(Sitegroup, related_name="vesselgroups", blank=True)
     details = models.TextField(max_length= 1000, null=True, blank=True)
     refs = models.ManyToManyField(Report, related_name="vesselgroups", blank=True)
-    vg = models.ManyToManyField("self", symmetrical=False, null=True, blank=True)
+    vg_parent = models.ManyToManyField("self", symmetrical=False, null=True, blank=True)
     image = models.ManyToManyField(Image, related_name="vesselgroups", blank=True)
+    fabric = models.ManyToManyField(Fabric, related_name="vesselgroups", blank=True)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -247,7 +248,9 @@ class Site(models.Model):
     lat = models.DecimalField(null=True, max_digits=9, decimal_places=6) 
     lng = models.DecimalField(null=True, max_digits=9, decimal_places=6)
     vessel = models.ManyToManyField(Vessel, related_name="site", blank=True)
+    vesselgroup = models.ManyToManyField(Vesselgroup, related_name="site", blank=True)
     import_vessel = models.ManyToManyField(Vessel, related_name="isite", blank=True)
+    import_vesselgroup = models.ManyToManyField(Vesselgroup, related_name="isite", blank=True)
     geonames_id = models.IntegerField(null=True, blank=True)
     open_location_code = models.CharField(null=True, blank=True, max_length=100)
     production_site = models.BooleanField(default=False) 
@@ -282,6 +285,17 @@ class Site(models.Model):
             fabstring = fabstring + ' imports:'
         for ifab in ifabs:
             fabstring = fabstring + " " + ifab.name + ","
+            ifabs = self.import_vessel.all()
+        gfabs = self.vesselgroup.all()  
+        if gfabs:
+            fabstring = fabstring + ' groups:'
+        for gfab in gfabs:
+            fabstring = fabstring + " " + gfab.name + ","
+        igfabs = self.import_vesselgroup.all()  
+        if igfabs:
+            fabstring = fabstring + ' groups imported:'
+        for igfab in igfabs:
+            fabstring = fabstring + " " + igfab.name + ","
         return fabstring
 
     

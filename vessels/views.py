@@ -51,7 +51,10 @@ def site(request, slug):
     identified_v = get_object_or_404(Site, slug=slug)
     return render(request, "vessels/site.html", {
         "site": identified_v,
-        "vessels": identified_v.vessel.all()
+        "vessels": identified_v.vessel.all(),
+        "ivessels": identified_v.import_vessel.all(),
+        "vesselgr": identified_v.vesselgroup.all(),
+        "ivesselgr": identified_v.import_vesselgroup.all()
     })
 
 
@@ -59,8 +62,16 @@ def vessel(request, slug):
     identified_v = get_object_or_404(Vessel, slug=slug)
     return render(request, "vessels/vessel.html", {
         "the_vessel": identified_v,
+        "fabrics": identified_v.fabric.all(),
         "vessel_images": identified_v.image.all(),
-        "v_ref": identified_v.refs.all()
+        "v_ref": identified_v.refs.all(),
+        "vgr": identified_v.vesselgroup.all(),
+        "typ_features": identified_v.typical_feature.all(),
+        "com_features": identified_v.common_feature.all(),
+        "prod_sites": identified_v.site.all(),
+        "imp_sites": identified_v.isite.all(),
+        "mbsu": mbsu,
+        "thsu":thsu
     })
 def report(request, slug):
     identified_r = get_object_or_404(Report, slug=slug)
