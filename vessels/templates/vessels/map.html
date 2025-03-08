@@ -34,7 +34,7 @@
         siteLat.push({{site.lat}});
         siteLng.push({{site.lng}});
         siteLinks.push("{{ site.get_absolute_url }}");
-        siteVessels.push("{{site.vessel_string}}");
+        siteVessels.push("{{site.maptag}}");
         {% if site.production_site %} siteColour.push(1);
         {% else %} siteColour.push(0);
         {% endif %}

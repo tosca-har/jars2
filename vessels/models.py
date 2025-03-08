@@ -253,10 +253,32 @@ class Site(models.Model):
     import_vesselgroup = models.ManyToManyField(Vesselgroup, related_name="isite", blank=True)
     geonames_id = models.IntegerField(null=True, blank=True)
     open_location_code = models.CharField(null=True, blank=True, max_length=100)
-    production_site = models.BooleanField(default=False) 
+    production_site = models.BooleanField(default=False)
+    maptag = models.TextField(null=True, blank=True, max_length=500) 
    
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
+        self.maptag = ' '
+        fabs = self.vessel.all()
+        if fabs:
+            self.maptag = self.maptag + 'local:'
+            for fab in fabs:
+                self.maptag = self.maptag + " " + fab.name + ","
+        ifabs = self.import_vessel.all()
+        if ifabs:
+            self.maptag = self.maptag + ' imports:'
+        for ifab in ifabs:
+            self.maptag = self.maptag + " " + ifab.name + ","
+        gfabs = self.vesselgroup.all()  
+        if gfabs:
+            self.maptag = self.maptag + ' groups:'
+        for gfab in gfabs:
+            self.maptag = self.maptag + " " + gfab.name + ","
+        igfabs = self.import_vesselgroup.all()  
+        if igfabs:
+            self.maptag = self.maptag + ' groups imported:'
+        for igfab in igfabs:
+            self.maptag = self.maptag + " " + igfab.name + ","
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -277,7 +299,6 @@ class Site(models.Model):
         fabstring = ' '
         if fabs:
             fabstring = fabstring + 'local:'
-
         for fab in fabs:
             fabstring = fabstring + " " + fab.name + ","
         ifabs = self.import_vessel.all()
