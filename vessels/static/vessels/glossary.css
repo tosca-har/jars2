@@ -6,12 +6,38 @@ h1 {
 }
 
 h2 {
-    font-size: 2rem;
-    color: #3ab2e9;
+    font-size: 3.5rem;
+    color: pink;
     text-align: left;
     font-weight: normal;
     margin: 2rem 2rem 1rem 2rem;
 }
+h3 {
+  font-size: 3rem;
+  color: #3ab2e9;
+  text-align: left;
+  font-weight: bold;
+  margin: 2.2rem 2rem 1rem 2rem;
+}
+h4 {
+  font-size: 2.5rem;
+  color: #3ab2e9;
+  text-align: left;
+  font-weight: normal;
+  margin: 2.4rem 2rem 1rem 2rem;
+}
+h5 {
+  font-size: 2rem;
+  color: #3ab2e9;
+  text-align: left;
+  font-weight: normal;
+  margin: 2.6rem 2rem 1rem 2rem;
+}
+
+
+
+
+
 
 .hometable td {
   font-size: 2rem;
@@ -33,17 +59,16 @@ p {
 }
 figcaption {
     font-size: 0.8rem;
-    color: #f8e64f;
-    
+    color: #3ab2e9;
+    margin: 0.5rem 2rem 1rem 2rem;
     font-style: italic;
 }
 a {
-    /* color: #2e7fd4; */
-    color: #318cd9;
+    color: pink;
 }
 a:hover,
 a:active {
-  color: pink;
+  color: #1310a7;
   }
 
 figcaption a {
@@ -53,7 +78,7 @@ figcaption a {
 
 figcaption a:hover,
 figcaption a:active {
-    color: pink;
+    color: #1310a7;
 }
 
 
@@ -92,8 +117,8 @@ li a:active {
 ol {
     float: none;
     list-style: none;
-    margin: 0rem 2rem 0rem 0rem;
-    width: 100%;
+    margin: 2rem 2rem 2rem 2rem;
+    width: 90%;
     box-shadow: 0 2px 8px rgba(0,0,0,0.26);
     padding: 1rem;
     border-radius: 16px;
@@ -104,7 +129,11 @@ mark {
     background-color: transparent;
     color: #ccc;
     font-style: italic;
+  
 }
+
+
+
 #map { 
     width: 1000px;
     height: 400px;
