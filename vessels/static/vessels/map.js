@@ -10,6 +10,7 @@ getMap = function () {
     let satellite = L.tileLayer(mbSUrl, {tileSize: 512, zoomOffset: -1, attribution: mbAttr});
     let sites = L.featureGroup();
     let prod = L.featureGroup();
+    let noinfo = L.featureGroup();
 
     var potIcon = L.icon({
         iconUrl: picon,
@@ -19,10 +20,14 @@ getMap = function () {
         iconUrl: bicon,
         iconSize: [15, 20]
     });
+    var potIconG = L.icon({
+        iconUrl: grcon,
+        iconSize: [15, 20]
+    });
     let map = L.map('map', {
         center: mapcentre,
         zoom: 4.5,
-        layers: [streets, sites, prod]
+        layers: [streets, sites, prod, noinfo]
     });
 
     let baseLayers = {
@@ -38,15 +43,19 @@ getMap = function () {
         complex = "<a href=" +sitelink+">"+sitename+ "</a>" + siteVes;
         if (siteColour[i] == 0) {
             marker = L.marker([siteLat[i],siteLng[i]],{icon: potIconB, title: sitename, link: sitelink, ves: siteVes}).bindPopup(complex).on("click", markerOnClick).addTo(sites);
-        } else {
+        } else if (siteColour[i] == 1) {
             marker = L.marker([siteLat[i],siteLng[i]],{icon: potIcon, title: sitename, link: sitelink, ves: siteVes}).bindPopup(complex).on("click", markerOnClick).addTo(prod);
+        }
+        else {
+            marker = L.marker([siteLat[i],siteLng[i]],{icon: potIconG, title: sitename, link: sitelink, ves: siteVes}).bindPopup(complex).on("click", markerOnClick).addTo(noinfo);
         }
            
     } 
     let overlays = {}
     overlays = {
         'Production': prod,
-        'Import': sites
+        'Import': sites,
+        'No Info': noinfo
         }; 
 
     var layerControl = L.control.layers(baseLayers, overlays).addTo(map);

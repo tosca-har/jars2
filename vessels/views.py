@@ -35,8 +35,14 @@ def vesselgr(request, slug):
     return render(request, "vessels/vesselgr.html", {
         "groups": identified_vg,
         "vg_vessels": vessels,
-        "vg_sg": identified_vg.sitegroup.all(),
+        "vg_parents": identified_vg.vg_parent.all(),
         "images": Image.objects.all().filter(vessels__in=vessels).distinct(),
+        "prod_sites": identified_vg.site.all(),
+        "imp_sites": identified_vg.isite.all(),
+        "vg_fabrics": identified_vg.fabric.all(),
+        "v_ref": identified_vg.refs.all(),
+        "mbsu": mbsu,
+        "thsu":thsu
     })
 
 def sitegr(request, slug):
@@ -67,7 +73,7 @@ def vessel(request, slug):
         "v_ref": identified_v.refs.all(),
         "vgr": identified_v.vesselgroup.all(),
         "typ_features": identified_v.typical_feature.all(),
-        "com_features": identified_v.common_feature.all(),
+        "com_features": identified_v.occasional_feature.all(),
         "prod_sites": identified_v.site.all(),
         "imp_sites": identified_v.isite.all(),
         "mbsu": mbsu,

@@ -57,12 +57,12 @@
   <div class="after-map">
     <h2>Vessels </h2>
     <table class = "industrytable" id = "it">
-      <th>Vessel</th> <th> Production </th> <th> Technique </th> <th> Gender </th>
+      <th>Vessel</th> <th> Production </th> <th> Start (BP) </th> <th> End (BP)</th><th> Details</th>
       {% for ves in vessels%}
-      <tr> <td> <a href="{{ ves.get_absolute_url }}">{{ves.slug}} </td> <td> local </td><td> {{ves.primary_technique}} </td> <td> {{ves.gender_make}} </td></tr>
+      <tr> <td> <a href="{{ ves.get_absolute_url }}">{{ves.name}} </td> <td> local </td><td> {{ves.time_start}} </td> <td> {{ves.time_end}} </td><td> {{ves.details}} </td></tr>
       {% endfor %}
       {% for ives in ivessels%}
-      <tr> <td> <a href="{{ ives.get_absolute_url }}">{{ives.slug}} </td> <td> imported </td><td> {{ives.primary_technique}} </td> <td> {{ives.gender_make}} </td></tr>
+      <tr> <td> <a href="{{ ives.get_absolute_url }}">{{ives.name}} </td> <td> imported </td><td> {{ives.time_start}} </td> <td> {{ives.gtime_end}} </td><td> {{ives.details}} </td></tr>
       {% endfor %}
       </table>
       <h2>Vessel Groups </h2>

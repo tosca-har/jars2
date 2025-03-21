@@ -20,6 +20,7 @@
     <script> 
       var picon = "{% static "vessels/images/redPot2.png" %}";
       var bicon = "{% static "vessels/images/bluePot2.png" %}";
+      var grcon = "{% static "vessels/images/ltgreyPot.png" %}";
       let mbsu = "{{mbsu}}";
       let thsu = "{{thsu}}";
       let siteNames = [];
@@ -35,8 +36,11 @@
         siteLng.push({{site.lng}});
         siteLinks.push("{{ site.get_absolute_url }}");
         siteVessels.push("{{site.maptag}}");
-        {% if site.production_site %} siteColour.push(1);
-        {% else %} siteColour.push(0);
+        {% if site.maptag %} 
+          {% if site.production_site %} siteColour.push(1);
+          {% else %} siteColour.push(0);
+        {% endif %}
+        {% else %} siteColour.push(2);
         {% endif %}
       {% endfor %}
       getMap(); 
@@ -55,7 +59,7 @@
     <table class = "industrytable" id = "it">
       <th>Site</th> <th> Region </th> <th> Vessels </th>
       {% for site in sites%}
-      <tr> <td> <a href="{{ site.get_absolute_url }}">{{site.slug}} </td>  <td> {{site.region}} </td> <td> {{site.vessel_string}} </td></tr>
+      <tr> <td> <a href="{{ site.get_absolute_url }}">{{site.slug}} </td>  <td> {{site.region}} </td> <td> {{site.maptag}} </td></tr>
       {% endfor %}
       </table>
   </div> 

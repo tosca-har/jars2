@@ -124,10 +124,10 @@ class Feature(models.Model):
 class Vessel(models.Model):
 
     class Gender(models.TextChoices):
-        WOMEN = 'W', 'women'
-        MEN = 'M', 'men'
-        BOTH = 'B', 'both'
-        UNKNOWN = 'U', 'unknown'
+        WOMEN = 'women', 'women'
+        MEN = 'men', 'men'
+        BOTH = 'both', 'both'
+        UNKNOWN = 'unknown', 'unknown'
 
 
     class Region(models.TextChoices):
@@ -152,31 +152,31 @@ class Vessel(models.Model):
         UNKNOWN = 'U', 'unknown'
 
     class Base(models.TextChoices):
-        BALL = 'B', 'ball'
-        SPIRAL = 'S', 'spiral'
-        SLAB = 'SL', 'slab'
-        PINCHING = 'P', 'pinching'
-        STRIP = 'ST', 'strip'
-        OTHER = 'O', 'other'
-        UNKNOWN = 'U', 'unknown'
+        BALL = 'ball', 'ball'
+        SPIRAL = 'spiral', 'spiral'
+        SLAB = 'slab', 'slab'
+        PINCHING = 'pinching', 'pinching'
+        STRIP = 'strip', 'strip'
+        OTHER = 'other', 'other'
+        UNKNOWN = 'unknown', 'unknown'
     
     class Techniques(models.TextChoices):
-        COIL = 'C', 'coil' 
-        SPIRAL = 'CS', 'coil-spiral'
-        RING = 'CR', 'coil-ring'
-        SLAB = 'S', 'slab'
-        PINCHING = 'P', 'pinching'
-        MOLDED = 'M', 'molded'   
-        WHEEL ='W', 'wheel'
-        OTHER = 'O', 'other'
-        UNKNOWN = 'U', 'unknown'
+        COIL = 'coil', 'coil' 
+        SPIRAL = 'coil-spiral', 'coil-spiral'
+        RING = 'coil-ring', 'coil-ring'
+        SLAB = 'slab', 'slab'
+        PINCHING = 'pinching', 'pinching'
+        MOLDED = 'molded', 'molded'   
+        WHEEL ='wheel', 'wheel'
+        OTHER = 'other', 'other'
+        UNKNOWN = 'unknown', 'unknown'
       
     class Techniques2(models.TextChoices):
-        BEATING = 'B', 'beating'
-        PADDLE = 'PA', 'paddle and anvil'
-        NONE = 'N', 'none'
-        OTHER = 'O', 'other'
-        UNKNOWN = 'U', 'unknown'
+        BEATING = 'beating', 'beating'
+        PADDLE = 'paddle and anvil', 'paddle and anvil'
+        NONE = 'none', 'none'
+        OTHER = 'other', 'other'
+        UNKNOWN = 'unknown', 'unknown'
     
     slug = models.SlugField(default="", blank=True, null=False, db_index=True)
     name = models.CharField(default="", max_length=50)
@@ -197,7 +197,7 @@ class Vessel(models.Model):
     refs = models.ManyToManyField(Report, related_name="vessels", blank=True)
     fabric = models.ManyToManyField(Fabric, related_name="vessels", blank=True)
     typical_feature = models.ManyToManyField(Feature, related_name="vessels_typical", blank=True)
-    common_feature = models.ManyToManyField(Feature, related_name="vessels_common", blank=True)
+    occasional_feature = models.ManyToManyField(Feature, related_name="vessels_common", blank=True)
     primary_technique = models.CharField(max_length=20, choices=Techniques, default=Techniques.UNKNOWN)
     secondary_technique = models.CharField(max_length=20, choices=Techniques2, default=Techniques2.UNKNOWN)
     base_technique = models.CharField(max_length=20, choices=Base, default=Base.UNKNOWN)

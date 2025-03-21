@@ -2,66 +2,90 @@
 {% load static %}
 
 {% block css_files %}
-  {% comment %} 
-  <link rel="stylesheet" href="{% static "vessels/leaflet.css" %}">
-  <script src="{% static "vessels/leaflet.js"%}"></script>
-  <script src="{% static "vessels/map.js" %}"></script> {% endcomment %}
-  <link rel="stylesheet" href="{% static "vessels/glossary.css" %}">
-  <link rel="stylesheet" href="{% static "vessels/header.css" %}"> 
+<link rel="stylesheet" href="{% static "vessels/glossary.css" %}">
+<link rel="stylesheet" href="{% static "vessels/header.css" %}"> 
+<link rel="stylesheet" href="{% static "vessels/leaflet.css" %}">
+<link rel="stylesheet" href="{% static "vessels/map.css" %}">
+<script src="{% static "vessels/leaflet.js"%}"></script>
+<script src="{% static "vessels/map.js" %}"></script>
 {% endblock %}
 
 {% block page_title %} Vessel Group Details {% endblock %}
 {% block content %} {% include "vessels/includes/header.html" %} 
 <h1>{{ groups.name }}</h1>
-  
- {% comment %}<h2>Sites: </h2>
-  {% if vg_sg %} 
-    <ul>
-    {% for site in vg_sg%}
-      <li> {{site.name}}</li>
-    {% endfor %}
-    </ul> {% endcomment %}
+<div><p> Time Period: {{ groups.time_start }} BP - {{groups.time_end}} BP </p>
+<h4>{{ groups.details }}</h4>
+</div>
+{% if prod_sites or imp_sites %}
+<div id="map">
 
-    {% comment %}  <div id="map"></div>
-    <div> <p id="targetSite"></p><div>
-    <script> 
-      var picon = "{% static "fabrics2/images/redPot2.png" %}";
-      var bicon = "{% static "fabrics2/images/ltgreyPot.png" %}";
-      var ricon = "{% static "fabrics2/images/tanPot.png" %}";
-      let mbsu = "{{mbsu}}";
-      let thsu = "{{thsu}}";
-      let siteNames = [];
-      let siteLat = [];
-      let siteLng = [];
-      let siteLinks = [];
-      let siteFabrics = [];
-      let siteColour = [];
-      let siteview = false;
-      let mapcentre =  [-4.5, 150];
-      {% for site in fabric_sites %}
-        siteNames.push("{{site.name}}");
-        siteLat.push({{site.lat}});
-        siteLng.push({{site.lng}});
-        siteLinks.push("{% url "site-type" site.slug %}");
-        siteFabrics.push("");
-        siteColour.push(1);
-        mapcentre = [{{site.lat}}, {{site.lng}}];
-      {% endfor %}
-      getMap(); 
-    </script> 
+<script> 
+  var picon = "{% static "vessels/images/redPot2.png" %}";
+  var bicon = "{% static "vessels/images/bluePot2.png" %}";
+  var grcon = "{% static "vessels/images/ltgreyPot.png" %}";
+  let mbsu = "{{mbsu}}";
+  let thsu = "{{thsu}}";
+  let siteNames = [];
+  let siteLat = [];
+  let siteLng = [];
+  let siteLinks = [];
+  let siteVessels = [];
+  let siteColour = [];
+  let mapcentre =  [-4.5, 160];
+  {% for site in prod_sites %}
+    siteNames.push("{{site.name}}");
+    siteLat.push({{site.lat}});
+    siteLng.push({{site.lng}});
+    siteLinks.push("{{ site.get_absolute_url }}");
+    siteVessels.push("{{site.vessel_string}}");
+    siteColour.push(1);
+    mapcentre = [{{site.lat}}, {{site.lng}}];
+  {% endfor %}
+  {% for site in imp_sites %}
+    siteNames.push("{{site.name}}");
+    siteLat.push({{site.lat}});
+    siteLng.push({{site.lng}});
+    siteLinks.push("{{ site.get_absolute_url }}");
+    siteVessels.push("{{site.vessel_string}}");
+    siteColour.push(0);
+  {% endfor %}
+  getMap(); 
+</script> 
+</div>
 
-  {% else %} <p>No site information available.</p>
-  {% endif %} {% endcomment %}
+<div class="key"> 
+<img src="{% static "vessels/images/redPot2.png" %}" alt="red pot" height="50"> Production site. <br>
+<br>
+<img src="{% static "vessels/images/bluePot2.png" %}" alt="blue pot" height="50"> Import site.  <br>
+
+<p id="targetSite"></p> </div>
+
+{% else %} <p>No site information available.</p>
+{% endif %}
 
   <div class="after-map">
     <h2>Vessels </h2>
     <table class = "industrytable" id = "it">
-      <th>Vessel</th> <th>Form</th> <th> Technique </th> <th> Gender </th>
+      <th>Vessel</th> <th>Start (BP)</th> <th>End (BP)</th> <th> Details </th>
       {% for ves in vg_vessels%}
-      <tr> <td> <a href="{{ ves.get_absolute_url }}">{{ves.slug}} </td> <td> {{ves.form}} </td><td> {{ves.primary_technique}} </td> <td> {{ves.gender_make}} </td></tr>
+      <tr> <td> <a href="{{ ves.get_absolute_url }}">{{ves.name}} </td> <td> {{ves.time_start}} </td><td> {{ves.time_end}} </td><td> {{ves.details}} </td> </tr>
       {% endfor %}
     </table></div>
-    <h3>Sketches</h3>
+    {% if vg_parents %}
+    <h2>In Vessel Groups </h2>
+    {% for par in vg_parents%}
+      <h4> <a href="{{ par.get_absolute_url }}">{{par.name}} </a> </h4>
+    {% endfor %}
+    {% endif%} 
+    
+
+    {% if vg_fabrics %}
+    <h2>Fabrics: </h2>
+    {% for fab in vg_fabrics%}
+      <h5> <a href="https://kudenfabrics.anu.edu.au/{{ fab.name }}"> {{fab.fullname}} </a> </h5>
+    {% endfor %}
+    {% endif%} 
+    <h2>Sketches</h2>
     {% if images %}
       {% for image in images %}
         <figure><img src="{% static "vessels/images/drawings/"|add:image.imageloc %}" alt={{ image.name }} height= 500> 
@@ -71,6 +95,13 @@
     {% else %}
       <p>No images available.</p>
     {% endif%} 
+
+
+
+    <h2>References:</h2>
+    {% for ref in v_ref %}
+      <h4> <a href="{{ ref.get_absolute_url }}"> {{ref.name}} ({{ ref.author_list }})</a> </h4>
+    {% endfor %}
   {% include "vessels/includes/footer.html" %}
 {% comment %} 
   <div class="after-map">

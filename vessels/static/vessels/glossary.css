@@ -54,6 +54,7 @@ h5 {
     margin-left: 3rem;
 }
 p {
+  margin: 0.5rem 2rem 1rem 2rem;
     color: #f1eeee;
     font-size: 1.5rem;
 }
@@ -144,11 +145,15 @@ mark {
     clear: left;
 }
 
-  
+/* #fea tr {
+  border-right: 2px solid black;
+} */
+
+
 .industrytable {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
-    width: 100%;
+    /* width: 100%; */
     margin: 2rem 1rem 1rem 1rem;
   }
   
@@ -156,10 +161,25 @@ mark {
     padding: 8px;
   }
   
+  #fea td {
+    border: 3px solid #ddd;
+    vertical-align: top;
+    
+  } 
+
+  #fea th {
+    background-color: #2d2d2d; 
+    border: 3px solid #ddd;
+    
+  } 
+  #it {
+    width: 95%; 
+    
+  } 
   .industrytable tr {
     border-bottom: 2px solid black;
-  } 
-  
+    }
+
   .industrytable td {
   color: white;
   }
@@ -171,7 +191,7 @@ mark {
     color: rgb(73, 72, 72);
     border: 1px solid #ddd;
   }
-  
+/*   
   .industrytable [data-tag="False"] {
 
     text-align: center;
@@ -297,4 +317,4 @@ mark {
       text-align: center;
       background-color: yellow;
       color: black;
-    }
+    } */

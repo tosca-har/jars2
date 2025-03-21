@@ -19,6 +19,7 @@
     <script> 
       var picon = "{% static "vessels/images/redPot2.png" %}";
       var bicon = "{% static "vessels/images/bluePot2.png" %}";
+      var grcon = "{% static "vessels/images/ltgreyPot.png" %}";
       let mbsu = "{{mbsu}}";
       let thsu = "{{thsu}}";
       let siteNames = [];
@@ -63,43 +64,84 @@
     <p> Time Period: {{ the_vessel.time_start }} BP - {{the_vessel.time_end}} BP </p>
     <p> {{ the_vessel.details }} </p>
  
-    <h2>Belongs to Vessel Groups:</h2>
+    <h3>Belongs to Vessel Groups:</h3>
     {% if vgr %}
       {% for gr in vgr %}
-        <h3> <a href="{{ gr.get_absolute_url }}"> {{gr.name}} </a> </h3>
+        <p> <a href="{{ gr.get_absolute_url }}"> {{gr.name}} </a> </p>
       {% endfor %}
     {% else %}
       <p>No groups recorded.</p>
-    {% endif%} 
-    <h2>The Potters </h2>
-    <p> Language: {{ the_vessel.language }} include glottolog link? </p>
+    {% endif %} 
+    <h3>The Potters </h3>
+     <p> Language: {{ the_vessel.language }} 
+      {% if the_vessel.language_code %} 
+        (ISO 639-3: <a href="https://iso639-3.sil.org/code/{{ the_vessel.language_code }}"> {{the_vessel.language_code}} </a>) 
+      {% endif %} 
+    </p>
     <p> Gender Makers: {{ the_vessel.gender_make }}  </p>
     <p> Gender Decorators: {{ the_vessel.gender_decorate }}  </p>
 
-    <h2> Creation </h2>
+    <h3>Vessel Creation </h3>
     <p> Base: {{ the_vessel.base_technique }}, Rim: {{ the_vessel.rim_technique }}, Primary: {{ the_vessel.primary_technique }}, Secondary: {{ the_vessel.secondary_technique }} </p>
     <p> Manual tempering: {{ the_vessel.temper }} </p>
+    <h4>Fabrics: </h4>
     {% if fabrics %}
-    <p>Fabrics: </p>
-    {% for fab in fabrics %}
-      <h3> <a href="https://kudenfabrics.anu.edu.au/{{ fab.name }}"> {{fab.fullname}} </a> </h3>
-    {% endfor %}
-  {% else %}
-    <p>No fabrics recorded.</p>
-  {% endif%} 
-    <h2> Use </h2>
-    <p> import use </p>
-    <h2> Morphology </h2>
-    <p> List morphology features but separate by common and rare. </p>
-    <h2> Decoration </h2>
-    <p> List decoration features but separate by common and rare. </p>
-  </div> 
+      {% for fab in fabrics %}
+       <p> <a href="https://kudenfabrics.anu.edu.au/{{ fab.name }}"> {{fab.fullname}} </a> </p>
+      {% endfor %}
+    {% else %}
+      <p>No fabrics recorded.</p>
+    {% endif%} 
 
-
-
-  <div >
-    <h2>A Table? </h2>
+    <table class = "industrytable" id = "fea">
+      <th colspan="2"><h3> Use </h3></th> 
+      <tr><td><h4>Common</h4></td> <td><h4>Occasional*</h4></td></tr>
+      <tr><td>  {% for tf in typ_features %}
+        {% if tf.type == "U" %} <p> <a href="{% url "vessels:glossary" %}#{{tf.tag}}">{{tf.name}} </a> </p> {% endif %}
+        {% endfor %} </td>
+        <td>{% for cf in com_features %}
+          {% if cf.type == "U" %}<p><a href="{% url "vessels:glossary" %}#{{cf.tag}}">{{cf.name}} </a> </p> {% endif %}
+          {% endfor %}</td></tr>
+    </table>
+  
+    <table class = "industrytable" id = "fea">
+      <th colspan="2"><h3> Morphology </h3></th> <th colspan="2"><h3> Rim Morphology </h3></th> 
+      <tr><td><h4>Common</h4></td> <td><h4>Occasional*</h4></td><td><h4>Common</h4></td> <td><h4>Occasional*</h4></td></tr>
+      <tr><td>  {% for tf in typ_features %}
+        {% if tf.type == "M" %} <p> <a href="{% url "vessels:glossary" %}#{{tf.tag}}">{{tf.name}} </a> </p> {% endif %}
+        {% endfor %} </td>
+        <td>{% for cf in com_features %}
+          {% if cf.type == "M" %}<p><a href="{% url "vessels:glossary" %}#{{cf.tag}}">{{cf.name}} </a> </p> {% endif %}
+          {% endfor %}</td>     
+      <td>  {% for tf in typ_features %}
+        {% if tf.type == "R" %} <p> <a href="{% url "vessels:glossary" %}#{{tf.tag}}">{{tf.name}} </a> </p> {% endif %}
+        {% endfor %} </td>
+        <td>{% for cf in com_features %}
+          {% if cf.type == "R" %}<p><a href="{% url "vessels:glossary" %}#{{cf.tag}}">{{cf.name}} </a> </p> {% endif %}
+          {% endfor %}</td></tr>
+    </table>
     
+    <table class = "industrytable" id = "fea">
+    <th colspan="2"><h3> Decoration </h3></th> <th colspan="2"><h3> Decoration Position </h3></th> 
+    
+      <tr><td><h4>Common</h4></td> <td><h4>Occasional*</h4></td><td><h4>Common</h4></td> <td><h4>Occasional*</h4></td></tr>
+      <tr><td>  {% for tf in typ_features %}
+        {% if tf.type == "D" %} <p> <a href="{% url "vessels:glossary" %}#{{tf.tag}}">{{tf.name}} </a> </p> {% endif %}
+        {% endfor %} </td>
+        <td>{% for cf in com_features %}
+          {% if cf.type == "D" %}<p><a href="{% url "vessels:glossary" %}#{{cf.tag}}">{{cf.name}} </a> </p> {% endif %}
+          {% endfor %}</td>
+
+      <td>  {% for tf in typ_features %}
+        {% if tf.type == "P" %} <p> <a href="{% url "vessels:glossary" %}#{{tf.tag}}">{{tf.name}} </a> </p> {% endif %}
+        {% endfor %} </td>
+        <td>{% for cf in com_features %}
+          {% if cf.type == "P" %}<p><a href="{% url "vessels:glossary" %}#{{cf.tag}}">{{cf.name}} </a> </p> {% endif %}
+          {% endfor %}</td></tr>
+    </table>
+<p>* refers to features with only single vessel examples, or present but in less than 10 percent in larger samples.</p>
+  </div> 
+  <div >  
       <h3>Sketches</h3>
       {% if vessel_images %}
         {% for image in vessel_images %}
@@ -110,9 +152,9 @@
       {% else %}
         <p>No images available.</p>
       {% endif%} 
-    <h2>References:</h2>
+    <h3>References</h3>
       {% for ref in v_ref %}
-        <h3> <a href="{{ ref.get_absolute_url }}"> {{ref.name}} ({{ ref.author_list }})</a> </h3>
+        <p> <a href="{{ ref.get_absolute_url }}"> {{ref.name}} ({{ ref.author_list }})</a> </p>
       {% endfor %}
   </div>
   {% include "vessels/includes/footer.html" %}
