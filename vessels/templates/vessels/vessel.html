@@ -73,17 +73,15 @@
       <p>No groups recorded.</p>
     {% endif %} 
     <h3>The Potters </h3>
-     <p> Language: {{ the_vessel.language }} 
-      {% if the_vessel.language_code %} 
-        (ISO 639-3: <a href="https://iso639-3.sil.org/code/{{ the_vessel.language_code }}"> {{the_vessel.language_code}} </a>) 
-      {% endif %} 
+     <p> Language: <a href="https://iso639-3.sil.org/code/{{ the_vessel.language_code }}"> {{ the_vessel.language }} (iso:{{the_vessel.language_code}}) </a>
+       
     </p>
-    <p> Gender Makers: {{ the_vessel.gender_make }}  </p>
-    <p> Gender Decorators: {{ the_vessel.gender_decorate }}  </p>
+    <p> Gender Makers: <a href="{% url "vessels:glossary" %}#gen">{{ the_vessel.gender_make }}</a>  </p>
+    <p> Gender Decorators: <a href="{% url "vessels:glossary" %}#gen">{{ the_vessel.gender_decorate }}</a>   </p>
 
     <h3>Vessel Creation </h3>
-    <p> Base: {{ the_vessel.base_technique }}, Rim: {{ the_vessel.rim_technique }}, Primary: {{ the_vessel.primary_technique }}, Secondary: {{ the_vessel.secondary_technique }} </p>
-    <p> Manual tempering: {{ the_vessel.temper }} </p>
+    <p> Base: <a href="{% url "vessels:glossary" %}#conb">{{ the_vessel.base_technique }} </a>, Rim: <a href="{% url "vessels:glossary" %}#conp">{{ the_vessel.rim_technique }} </a>, Primary: <a href="{% url "vessels:glossary" %}#conp">{{ the_vessel.primary_technique }} </a>, Secondary: <a href="{% url "vessels:glossary" %}#cons">{{ the_vessel.secondary_technique }}</a> </p>
+    <p> Manual tempering: <a href="{% url "vessels:glossary" %}#temp">{{ the_vessel.temper }}</a> </p>
     <h4>Fabrics: </h4>
     {% if fabrics %}
       {% for fab in fabrics %}

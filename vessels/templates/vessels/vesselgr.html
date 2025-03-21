@@ -64,7 +64,7 @@
 {% endif %}
 
   <div class="after-map">
-    <h2>Vessels </h2>
+    <h3>Vessels </h3>
     <table class = "industrytable" id = "it">
       <th>Vessel</th> <th>Start (BP)</th> <th>End (BP)</th> <th> Details </th>
       {% for ves in vg_vessels%}
@@ -72,17 +72,17 @@
       {% endfor %}
     </table></div>
     {% if vg_parents %}
-    <h2>In Vessel Groups </h2>
+    <h3>In Vessel Groups </h3>
     {% for par in vg_parents%}
-      <h4> <a href="{{ par.get_absolute_url }}">{{par.name}} </a> </h4>
+      <p> <a href="{{ par.get_absolute_url }}">{{par.name}} </a> </p>
     {% endfor %}
     {% endif%} 
     
 
     {% if vg_fabrics %}
-    <h2>Fabrics: </h2>
+    <h3>Fabrics </h3>
     {% for fab in vg_fabrics%}
-      <h5> <a href="https://kudenfabrics.anu.edu.au/{{ fab.name }}"> {{fab.fullname}} </a> </h5>
+      <p> <a href="https://kudenfabrics.anu.edu.au/{{ fab.name }}"> {{fab.fullname}} </a> </p>
     {% endfor %}
     {% endif%} 
     <h2>Sketches</h2>
@@ -100,7 +100,7 @@
 
     <h2>References:</h2>
     {% for ref in v_ref %}
-      <h4> <a href="{{ ref.get_absolute_url }}"> {{ref.name}} ({{ ref.author_list }})</a> </h4>
+      <p> <a href="{{ ref.get_absolute_url }}"> {{ref.name}} ({{ ref.author_list }})</a> </p>
     {% endfor %}
   {% include "vessels/includes/footer.html" %}
 {% comment %} 
