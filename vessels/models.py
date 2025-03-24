@@ -166,7 +166,8 @@ class Vessel(models.Model):
         RING = 'coil-ring', 'coil-ring'
         SLAB = 'slab', 'slab'
         PINCHING = 'pinching', 'pinching'
-        MOLDED = 'molded', 'molded'   
+        MOLDED = 'molded', 'molded' 
+        HAMMERING = 'hammering', 'hammering'  
         WHEEL ='wheel', 'wheel'
         OTHER = 'other', 'other'
         UNKNOWN = 'unknown', 'unknown'
@@ -174,7 +175,7 @@ class Vessel(models.Model):
     class Techniques2(models.TextChoices):
         BEATING = 'beating', 'beating'
         PADDLE = 'paddle and anvil', 'paddle and anvil'
-        NONE = 'none', 'none'
+        SCRAPING = 'scraping', 'scraping'
         OTHER = 'other', 'other'
         UNKNOWN = 'unknown', 'unknown'
     
