@@ -17,6 +17,11 @@
 <h1>Search Results</h1>
 <p> {{query}} </p>
 <div>
+  {% for site in sites%}
+  <p>{{site.name}}</p>
+  {% endfor %}
+</div>
+<div>
   {% for vessel in vessels%}
   <p>{{vessel.name}}</p>
   {% endfor %}

@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import Http404, HttpResponseNotFound, HttpResponseRedirect
 from django.urls import reverse
 from decouple import config
-from .models import Vessel, Vesselgroup, Site, Sitegroup, Report, Image, Feature
+from .models import Vessel, Vesselgroup, Site, Sitegroup, Report, Image
 from .forms import SearchForm
 
 mbsu = config('MBSU')
@@ -22,7 +22,10 @@ def search(request):
             if valStart:
                 query = query + "from " + str(valStart) + "BP"
                 vessels = vessels.filter(time_end__lte=valStart)
-            if valEnd:
+            if valEnd == 0:
+                query = query + " to " + str(valEnd) + "BP"
+                vessels = vessels.filter(time_start__gte=valEnd)
+            elif valEnd:
                 query = query + " to " + str(valEnd) + "BP"
                 vessels = vessels.filter(time_start__gte=valEnd)
             valB = form.cleaned_data.get("base_build")
@@ -390,27 +393,22 @@ def search(request):
 
 
             query = query + "." 
-
-            # sites = Site.objects.all().filter(fabrics__in = fabrics).distinct()
-
             vessels = vessels.distinct()
-            #if len(vessels) > 0:
-                #return render(request, "vessels/search-results.html", {
-                    #"vessels": vessels,
-                    #"features": features1,
-                    #"query": query,
-                    # "query2": query2,
-                    # "sites": sites,
-                    # "mbsu": mbsu,
-                    # "thsu":thsu
-                #})
-            #else: return HttpResponseRedirect("no-match")
-            return render(request, "vessels/search-results.html", {
-                "vessels": vessels,
-                "query": query,
-                #"features": features,
+            sites = Site.objects.all()
+            sitesP = sites.filter(vessel__in = vessels)
+            sitesI = sites.filter(import_vessel__in = vessels)  
+            sites = (sitesP | sitesI).distinct()
 
-             })
+        
+            if len(vessels) > 0:
+                return render(request, "vessels/search-results.html", {
+                    "vessels": vessels,
+                    "query": query,
+                    "sites": sites,
+                    "mbsu": mbsu,
+                    "thsu":thsu
+                })
+            else: return HttpResponseRedirect("no-match")
         else: return HttpResponseRedirect("no-match")       
     else:   
         form = SearchForm()
