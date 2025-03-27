@@ -5,49 +5,164 @@
 {% block css_files %}
   <link rel="stylesheet" href="{% static "vessels/glossary.css" %}">
   <link rel="stylesheet" href="{% static "vessels/header.css" %}"> 
+  <link rel="stylesheet" href="{% static "vessels/search.css" %}">
 {% endblock %}
 
 {% block page_title %}
-  Vessel Group Index
+  Vessel Search
 {% endblock %}
 
 {% block content %}
   {% include "vessels/includes/header.html" %} 
-  <h1>All Vessel Groups</h1>
-  {% comment %} {% include "vessels/includes/keytable.html" %} {% endcomment %}
-  <p>WARNING: Times are very approximate and may be wrong. Use them as a rough guide only.</p>
-  <table class = "industrytable" id = "ft">
-    <th>Name</th> <th>Start</th>  <th>End</th>
-    {% comment %} <th><a href="{% url "potindex" 3 %}">Tech.</th> <th><a href="{% url "potindex" 4 %}">Word</th> <th><a href="{% url "potindex" 5 %}">Gen.</th><th><a href="{% url "potindex" 6 %}">Temper</th> <th><a href="{% url "potindex" 7 %}">Pos.</th> <th><a href="{% url "potindex" 8 %}">Dent.</th> <th><a href="{% url "potindex" 9 %}">Incis.</th><th><a href="{% url "potindex" 10 %}">Comb</th> <th><a href="{% url "potindex" 11 %}">App.</th><th><a href="{% url "potindex" 12 %}">Coil</th> <th><a href="{% url "potindex" 13 %}">Punc.</th><th><a href="{% url "potindex" 14 %}">Paint</th> <th><a href="{% url "potindex" 15 %}">Finger</th><th><a href="{% url "potindex" 16 %}">Sculpt</th><th><a href="{% url "potindex" 17 %}">Paddle</th> <th><a href="{% url "potindex" 18 %}">Width</th><th><a href="{% url "potindex" 19 %}">Height</th> <th><a href="{% url "potindex" 20 %}">Equal</th><th><a href="{% url "potindex" 21 %}">Cook</th> <th><a href="{% url "potindex" 22 %}">Store</th> <th><a href="{% url "potindex" 23 %}">Serve</th> <th><a href="{% url "potindex" 24 %}">Cere.</th> {% endcomment %}
-    {% for industry in groups %}
-      <tr>
-        <td id="iname"> <a href="{{ industry.get_absolute_url }}">{{industry.name}} </td>
-        <td> {{industry.time_start}} </td>
-        <td> {{industry.time_end}} </td>
-        {% comment %} <td data-tag="{{industry.technique}}"> {{industry.technique}} </td>
-        <td> {{industry.word_cooking}} </td>
-        <td data-tag="{{industry.gender}}"> {{industry.gender}} </td>
-        <td data-tag="{{industry.temper}}"> {% if industry.temper %} Y {% elif industry.temper == False %} X {% else %} - {% endif %} </td>     
-        <td data-tag="{{industry.decoration_position}}"> {{industry.decoration_position}}</td>
-        <td data-tag="{{industry.decoration_dentate}}"> {% if industry.decoration_dentate %} Y {% elif industry.decoration_dentate == False %} X {% else %} - {% endif %}</td>
-        <td data-tag="{{industry.decoration_incised}}"> {% if industry.decoration_incised %} Y {% elif industry.decoration_incised == False %} X {% else %} - {% endif %}</td>
-        <td data-tag="{{industry.decoration_comb_incised}}"> {% if industry.decoration_comb_incised %} Y {% elif industry.decoration_comb_incised == False %} X {% else %} - {% endif %}</td>
-        <td data-tag="{{industry.decoration_applique}}"> {% if industry.decoration_applique %} Y {% elif industry.decoration_applique == False %} X {% else %} - {% endif %}</td>
-        <td data-tag="{{industry.decoration_exposed_coil}}"> {% if industry.decoration_exposed_coil %} Y {% elif industry.decoration_exposed_coil == False %} X {% else %} - {% endif %}</td>
-        <td data-tag="{{industry.decoration_punctate}}"> {% if industry.decoration_punctate %} Y {% elif industry.decoration_punctate == False %} X {% else %} - {% endif %}</td>
-        <td data-tag="{{industry.decoration_paint}}"> {% if industry.decoration_paint %} Y {% elif industry.decoration_paint == False %} X {% else %} - {% endif %}</td>
-        <td data-tag="{{industry.decoration_finger}}"> {% if industry.decoration_finger %} Y {% elif industry.decoration_finger == False %} X {% else %} - {% endif %}</td>
-        <td data-tag="{{industry.decoration_sculpt}}"> {% if industry.decoration_sculpt %} Y {% elif industry.decoration_sculpt == False %} X {% else %} - {% endif %}</td>
-        <td data-tag="{{industry.decoration_paddle}}"> {% if industry.decoration_paddle %} Y {% elif industry.decoration_paddle == False %} X {% else %} - {% endif %}</td>
-        <td data-tag="{{industry.form_w_more}}"> {% if industry.form_w_more %} Y {% elif industry.form_w_more == False %} X {% else %} - {% endif %}</td>
-        <td data-tag="{{industry.form_h_more}}"> {% if industry.form_h_more %} Y {% elif industry.form_h_more == False %} X {% else %} - {% endif %}</td>
-        <td data-tag="{{industry.form_equal}}"> {% if industry.form_equal %} Y {% elif industry.form_equal == False %} X {% else %} - {% endif %}</td>
-        <td data-tag="{{industry.use_cooking}}"> {% if industry.use_cooking %} Y {% elif industry.use_cooking == False %} X {% else %} - {% endif %}</td>
-        <td data-tag="{{industry.use_storage}}"> {% if industry.use_storage %} Y {% elif industry.use_storage == False %} X {% else %} - {% endif %}</td>
-        <td data-tag="{{industry.use_serving}}"> {% if industry.use_serving %} Y {% elif industry.use_serving == False %} X {% else %} - {% endif %}</td>
-        <td data-tag="{{industry.use_ceremonial}}"> {% if industry.use_ceremonial %} Y {% elif industry.use_ceremonial == False %} X {% else %} - {% endif %}</td>    {% endcomment %}
-      </tr>
-    {% endfor %}
-  </table> 
+  <form method="POST">
+    {% csrf_token %}
+    <div class="flex-container">
+
+      <h1>Vessel Search</h1>
+      <h3>Time Period </h3>
+      <p>Limit to vessels made between {{ form.starttime }} BP to {{ form.endtime }} BP. </p>
+      <h3>Construction</h3>
+      <p><a href="{% url "vessels:glossary" %}#conb">Base</a>: {{ form.base_build }}  &emsp; &emsp; &emsp; <a href="{% url "vessels:glossary" %}#conp">Primary build</a>: {{ form.primary_build }}  &emsp; &emsp; &emsp; <a href="{% url "vessels:glossary" %}#conp">Rim build</a>: {{ form.rim_build }}  &emsp; &emsp; &emsp; <a href="{% url "vessels:glossary" %}#cons">Secondary build</a>: {{ form.secondary_build }} 
+        &emsp; &emsp; &emsp; <a href="{% url "vessels:glossary" %}#temp">Temper</a>: {{ form.tempered }}  </p>
+      <h3>Potters</h3> 
+      <p><a href="{% url "vessels:glossary" %}#gen">Makers</a>: {{ form.gender_make }} &emsp; &emsp; &emsp; <a href="{% url "vessels:glossary" %}#gen">Decorators</a>: {{ form.gender_dec }} </p> 
+      <br><p>Find vessel types with the following features. Features are consided present if they occur typically or occasionally.</p>
+      <h3> Use </h3>
+      <p>
+      {{ form.cooking }} <a href="{% url "vessels:glossary" %}#cook">cooking</a> &emsp;
+      {{ form.boiling }} <a href="{% url "vessels:glossary" %}#boil">boiling</a> &emsp;
+      {{ form.baking }} <a href="{% url "vessels:glossary" %}#bake">baking</a> &emsp;
+      {{ form.frying }} <a href="{% url "vessels:glossary" %}#fry">frying</a> &emsp;
+      {{ form.smoking }} <a href="{% url "vessels:glossary" %}#smoke">smoking</a> &emsp;
+    </p>     
+    <p>
+      {{ form.serving }} <a href="{% url "vessels:glossary" %}#serve">serving</a> &emsp;
+      {{ form.eating }} <a href="{% url "vessels:glossary" %}#eat">eating</a> &emsp;
+      {{ form.storage }} <a href="{% url "vessels:glossary" %}#store">storage</a> &emsp;
+      {{ form.transfer }} <a href="{% url "vessels:glossary" %}#tran">transfer</a> &emsp;
+    </p>     
+    <p>
+      {{ form.burial }} <a href="{% url "vessels:glossary" %}#burial">burial</a> &emsp;
+      {{ form.ceremonial }} <a href="{% url "vessels:glossary" %}#ritual">ceremonial</a> &emsp;
+      {{ form.lid }} <a href="{% url "vessels:glossary" %}#lid">lid</a> &emsp;   
+      {{ form.hearth }} <a href="{% url "vessels:glossary" %}#hea">hearth</a> &emsp;
+      {{ form.light }} <a href="{% url "vessels:glossary" %}#light">light</a> &emsp;
+      {{ form.musical_instrument }} <a href="{% url "vessels:glossary" %}#music">musical instrument</a> &emsp;
+     </p>
+      <h3> Morphology </h3>
+      <p>
+      {{ form.spout }} <a href="{% url "vessels:glossary" %}#spo">has spout</a> &emsp;
+      {{ form.multimouth }} <a href="{% url "vessels:glossary" %}#mulm">has multi-mouths</a> &emsp;
+      {{ form.neck }} <a href="{% url "vessels:glossary" %}#neck">has neck</a> &emsp;
+      {{ form.collar }} <a href="{% url "vessels:glossary" %}#coll">has collar</a> &emsp;
+      {{ form.carination }} <a href="{% url "vessels:glossary" %}#car">has carination</a> &emsp;
+      {{ form.handle }} <a href="{% url "vessels:glossary" %}#han">has handle</a> &emsp;
+      {{ form.feet }} <a href="{% url "vessels:glossary" %}#feet">has feet</a> &emsp;
+      {{ form.ringfoot }} <a href="{% url "vessels:glossary" %}#rfoot">has ring foot</a> &emsp;
+    </p>
+    <p>
+      {{ form.restricted }} <a href="{% url "vessels:glossary" %}#res">restricted</a> &emsp;
+      {{ form.unrestricted }} <a href="{% url "vessels:glossary" %}#ures">unrestricted</a> &emsp;
+    </p>
+    <p>
+      {{ form.jar }} <a href="{% url "vessels:glossary" %}#jar">jar</a> &emsp;  
+      {{ form.bowl }} <a href="{% url "vessels:glossary" %}#bowl">bowl</a> &emsp;
+      {{ form.dish }} <a href="{% url "vessels:glossary" %}#dish">dish</a> &emsp;
+      {{ form.plate }} <a href="{% url "vessels:glossary" %}#pla">plate</a> &emsp;
+      {{ form.cup }} <a href="{% url "vessels:glossary" %}#cup">cup</a> &emsp;  
+      {{ form.jug }} <a href="{% url "vessels:glossary" %}#jug">jug</a> &emsp;
+      {{ form.forno }} <a href="{% url "vessels:glossary" %}#for">forno</a> &emsp;
+      {{ form.lamp }} <a href="{% url "vessels:glossary" %}#lamp">lamp</a> &emsp;
+    </p>
+    <p>
+      {{ form.nipplebase }} <a href="{% url "vessels:glossary" %}#nip">nipple on base</a> &emsp;  
+      {{ form.pointedbase }} <a href="{% url "vessels:glossary" %}#poibase">pointed base</a> &emsp;  
+      {{ form.roundedbase }} <a href="{% url "vessels:glossary" %}#roubase">rounded base</a> &emsp;  
+      {{ form.flatbase }} <a href="{% url "vessels:glossary" %}#flatbase">flat base</a> &emsp;  
+    </p>
+      <h3> Rim Morphology </h3>
+      <p>
+        {{ form.rim_outc }} <a href="{% url "vessels:glossary" %}#out">outcurving rim</a> &emsp;  
+        {{ form.rim_eve }} <a href="{% url "vessels:glossary" %}#ev">everted rim</a> &emsp;  
+        {{ form.rim_dir_out }} <a href="{% url "vessels:glossary" %}#dout">direct out rim</a> &emsp;  
+        {{ form.rim_dir }} <a href="{% url "vessels:glossary" %}#dir">direct rim</a> &emsp;  
+        {{ form.rim_dir_in }} <a href="{% url "vessels:glossary" %}#din">direct in rim</a> &emsp;  
+        {{ form.rim_invert }} <a href="{% url "vessels:glossary" %}#inv">inverted rim</a> &emsp;  
+        {{ form.rim_incur }} <a href="{% url "vessels:glossary" %}#inc">incurving rim</a> &emsp;  
+      </p>     
+      <p>
+        {{ form.rim_para }} <a href="{% url "vessels:glossary" %}#para">parallel rim</a> &emsp;  
+        {{ form.rim_abr_nar }} <a href="{% url "vessels:glossary" %}#abrn">abrupt narrow rim</a> &emsp;  
+        {{ form.rim_abr_wide }} <a href="{% url "vessels:glossary" %}#abrw">abrupt wide rim</a> &emsp;
+      </p>     
+      <p>  
+        {{ form.rim_grad_nar }} <a href="{% url "vessels:glossary" %}#gradi">gradually narrow rim</a> &emsp;  
+        {{ form.rim_grad_thick_ex }} <a href="{% url "vessels:glossary" %}#gradoe">gradually thickened exterior rim</a> &emsp;  
+        {{ form.rim_grad_thick_int }} <a href="{% url "vessels:glossary" %}#gradoi">gradually thickened interior rim</a> &emsp;
+      </p>     
+      <p>  
+        {{ form.rim_round_both }} <a href="{% url "vessels:glossary" %}#roundb">rounded both sides rim</a> &emsp;  
+        {{ form.rim_thick_ex }} <a href="{% url "vessels:glossary" %}#roundi">rounded thickened interior rim</a> &emsp;  
+        {{ form.rim_thick_int }} <a href="{% url "vessels:glossary" %}#roundo">rounded thickened exterior rim</a> &emsp;  
+      </p>  
+
+      <h3> Decoration Position </h3>
+      <p>
+        {{ form.dec_lip }} <a href="{% url "vessels:glossary" %}#declip">decorated lip</a> &emsp;  
+        {{ form.dec_rim }} <a href="{% url "vessels:glossary" %}#decrim">decorated rim</a> &emsp;  
+        {{ form.dec_internal_rim }} <a href="{% url "vessels:glossary" %}#intdecrim">decorated internal rim</a> &emsp;  
+        {{ form.dec_neck }} <a href="{% url "vessels:glossary" %}#decnec">decorated neck</a> &emsp;  
+        {{ form.dec_shoulders }} <a href="{% url "vessels:glossary" %}#decsho">decorated shoulder</a> &emsp;  
+        {{ form.dec_body }} <a href="{% url "vessels:glossary" %}#decbody">decorated body</a> &emsp;  
+      </p>     
+      
+      <h3> Decoration </h3>
+      <p>
+        {{ form.plain }} <a href="{% url "vessels:glossary" %}#plain">plain</a> &emsp; 
+      </p>
+      <p>   
+        {{ form.exposed_coil }} <a href="{% url "vessels:glossary" %}#expo">exposed coil</a> &emsp;  
+        {{ form.finger_marks }} <a href="{% url "vessels:glossary" %}#fing">finger marks</a> &emsp;
+      </p>
+      <p>   
+        {{ form.impressing }} <a href="{% url "vessels:glossary" %}#impr">impressing</a> &emsp;  
+        {{ form.punctation }} <a href="{% url "vessels:glossary" %}#punct">punctation</a> &emsp;  
+        {{ form.comb_impression }} <a href="{% url "vessels:glossary" %}#imprcom">comb impression</a> &emsp;  
+        {{ form.dentate }} <a href="{% url "vessels:glossary" %}#dent">dentate</a> &emsp;  
+        {{ form.paddle_impressing }} <a href="{% url "vessels:glossary" %}#padi">paddle impressing</a> &emsp;  
+        {{ form.cord_impressing }} <a href="{% url "vessels:glossary" %}#cord">cord impressing</a> &emsp; 
+      </p>
+      <p>  
+        {{ form.incising }} <a href="{% url "vessels:glossary" %}#incis">incising</a> &emsp;  
+        {{ form.simple_incising }} <a href="{% url "vessels:glossary" %}#incsin">simple incising</a> &emsp;  
+        {{ form.comb_incising }} <a href="{% url "vessels:glossary" %}#inccom">comb incising</a> &emsp;  
+        {{ form.grooving }} <a href="{% url "vessels:glossary" %}#gro">grooving</a> &emsp;  
+        {{ form.scouring }} <a href="{% url "vessels:glossary" %}#sco">scouring</a> &emsp;  
+        {{ form.carving }} <a href="{% url "vessels:glossary" %}#carv">carving</a> &emsp;  
+        {{ form.perforating }} <a href="{% url "vessels:glossary" %}#perf">perforating</a> &emsp;
+      </p>
+      <p>   
+        {{ form.applique }} <a href="{% url "vessels:glossary" %}#appl">applique</a> &emsp;  
+        {{ form.nubbins_lugs }} <a href="{% url "vessels:glossary" %}#lug">nubbins and lugs</a> &emsp;  
+        {{ form.bands }} <a href="{% url "vessels:glossary" %}#band">bands</a> &emsp;  
+        {{ form.sculpting }} <a href="{% url "vessels:glossary" %}#sculp">sculpting</a> &emsp; 
+      </p>
+      <p>  
+        {{ form.red_slip }} <a href="{% url "vessels:glossary" %}#red">red slip</a> &emsp;  
+        {{ form.glaze }} <a href="{% url "vessels:glossary" %}#glaze">glaze</a> &emsp;  
+        {{ form.painting }} <a href="{% url "vessels:glossary" %}#paint">painting</a> &emsp;  
+            
+      </p>      
+    </div>
+    <br>
+    <div class = "submit">
+      <p>
+      <input type="submit" value="Submit"> 
+      &emsp; 
+      <input type="reset">
+      </p>
+    </div>
+
+  </form>
   {% include "vessels/includes/footer.html" %}
 {% endblock %}

@@ -8,6 +8,7 @@ urlpatterns = [
     path("search", views.search, name="search"),
     path("compare", views.compare, name="compare"),
     path("glossary", views.glossary, name="glossary"),
+    path("no-match", views.no_match, name="no-match"),
     path("vessel_<slug:slug>", views.vessel, name="vessel"),
     path("vesselgroup_<slug:slug>", views.vesselgr, name="vesselgr"),
     path("report_<slug:slug>", views.report, name="report"),

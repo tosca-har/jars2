@@ -10,11 +10,23 @@
   <script src="{% static "vessels/map.js" %}"></script>
 {% endblock %}
 
-{% block page_title %} Map {% endblock %}
+{% block page_title %} Search Results {% endblock %}
 {% block content %} 
 {% include "vessels/includes/header.html" %} 
 
-<h1>Map</h1>
+<h1>Search Results</h1>
+<p> {{query}} </p>
+<div>
+  {% for vessel in vessels%}
+  <p>{{vessel.name}}</p>
+  {% endfor %}
+</div>
+<div>
+  {% comment %} {% for feature in features%}
+  <p>{{feature.name}}</p>
+  {% endfor %} {% endcomment %}
+</div>
+{% comment %} <h1>Map</h1>
     <div id="map">
     <script> 
       var picon = "{% static "vessels/images/redPot2.png" %}";
@@ -48,6 +60,6 @@
   </div> 
 
   <br>
- 
+  {% endcomment %}
   {% include "vessels/includes/footer.html" %}
 {% endblock %}
