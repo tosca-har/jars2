@@ -71,16 +71,16 @@
     <th>Name </th> <th>Details</th> <th>Morphology</th><th>Rim morphology</th> <th>Decoration Position</th> <th>Decoration</th><th>Use</th>
     {% for ves in vessels %}
     <tr> <td rowspan="2"> <a href="{{ ves.get_absolute_url }}">{{ves.name}} </td><td>de1</td> 
-    <td>{% if ves.morph_spout == 2 %} <a href="{% url "vessels:glossary" %}#spo" style="background-color:Gold;color:OrangeRed;padding:4px 5px"> has spout</a> {% endif %}
-      {% if ves.morph_multimouth == 2 %} <a href="{% url "vessels:glossary" %}#mulm" style="background-color:Gold;color:OliveDrab;padding:4px 5px">has multi-mouth</a> {% endif %}
-      {% if ves.morph_neck == 2 %} <a href="{% url "vessels:glossary" %}#neck" style="background-color:Gold;color:Black;padding:4px 5px">has neck</a> {% endif %}
-      {% if ves.morph_collar == 2 %} <a href="{% url "vessels:glossary" %}#coll" style="background-color:Gold;color:FireBrick;padding:4px 5px">has collar</a> {% endif %}
-      {% if ves.morph_carination == 2 %} <a href="{% url "vessels:glossary" %}#car" style="background-color:Gold;color:ForestGreen;padding:4px 5px">has carination</a> {% endif %}
-      {% if ves.morph_handle == 2 %} <a href="{% url "vessels:glossary" %}#han" style="background-color:Gold;color:Grey;padding:4px 5px">has handle</a> {% endif %}
-      {% if ves.morph_feet == 2 %} <a href="{% url "vessels:glossary" %}#feet" style="background-color:Gold;color:DodgerBlue;padding:4px 5px">has feet</a> {% endif %}
-      {% if ves.morph_ringfoot == 2 %} <a href="{% url "vessels:glossary" %}#rfoot" style="background-color:Gold;color:Indigo;padding:4px 5px">has ring foot</a> {% endif %}
-      {% if ves.morph_restricted == 2 %} <a href="{% url "vessels:glossary" %}#res" style="background-color:Indigo;color:Gold;padding:4px 5px">restricted</a> {% endif %}
-      {% if ves.morph_unrestricted == 2 %} <a href="{% url "vessels:glossary" %}#unres" style="background-color:Indigo;color:LightCoral;padding:4px 5px">unrestricted</a> {% endif %}
+    <td>{% if ves.morph_spout == 2 %} <a href="{% url "vessels:glossary" %}#spo" style="background-color:Pink;color:OrangeRed;padding:4px 5px"> has spout</a> {% endif %}
+      {% if ves.morph_multimouth == 2 %} <a href="{% url "vessels:glossary" %}#mulm" style="background-color:Pink;color:OliveDrab;padding:4px 5px">has multi-mouth</a> {% endif %}
+      {% if ves.morph_neck == 2 %} <a href="{% url "vessels:glossary" %}#neck" style="background-color:Pink;color:Black;padding:4px 5px">has neck</a> {% endif %}
+      {% if ves.morph_collar == 2 %} <a href="{% url "vessels:glossary" %}#coll" style="background-color:Pink;color:FireBrick;padding:4px 5px">has collar</a> {% endif %}
+      {% if ves.morph_carination == 2 %} <a href="{% url "vessels:glossary" %}#car" style="background-color:Pink;color:ForestGreen;padding:4px 5px">has carination</a> {% endif %}
+      {% if ves.morph_handle == 2 %} <a href="{% url "vessels:glossary" %}#han" style="background-color:Pink;color:Grey;padding:4px 5px">has handle</a> {% endif %}
+      {% if ves.morph_feet == 2 %} <a href="{% url "vessels:glossary" %}#feet" style="background-color:Pink;color:DodgerBlue;padding:4px 5px">has feet</a> {% endif %}
+      {% if ves.morph_ringfoot == 2 %} <a href="{% url "vessels:glossary" %}#rfoot" style="background-color:Pink;color:Indigo;padding:4px 5px">has ring foot</a> {% endif %}
+      {% if ves.morph_restricted == 2 %} <a href="{% url "vessels:glossary" %}#res" style="background-color:#1310a7;color:#3ab2e9;padding:4px 5px">restricted</a> {% endif %}
+      {% if ves.morph_unrestricted == 2 %} <a href="{% url "vessels:glossary" %}#unres" style="background-color:#1310a7;color:LightCoral;padding:4px 5px">unrestricted</a> {% endif %}
       {% if ves.morph_jar == 2 %} <a href="{% url "vessels:glossary" %}#jar" style="background-color:LightBlue;color:OrangeRed;padding:4px 5px">jar</a> {% endif %}
       {% if ves.morph_bowl == 2 %} <a href="{% url "vessels:glossary" %}#bowl" style="background-color:LightBlue;color:Indigo;padding:4px 5px">bowl</a> {% endif %}
       {% if ves.morph_dish == 2 %} <a href="{% url "vessels:glossary" %}#dish" style="background-color:LightBlue;color:Black;padding:4px 5px">dish</a> {% endif %}
@@ -89,21 +89,82 @@
       {% if ves.morph_jug == 2 %} <a href="{% url "vessels:glossary" %}#jug" style="background-color:LightBlue;color:Brown;padding:4px 5px">jug</a> {% endif %}
       {% if ves.morph_forno == 2 %} <a href="{% url "vessels:glossary" %}#for" style="background-color:LightBlue;color:MediumBlue;padding:4px 5px">forno</a> {% endif %}
       {% if ves.morph_lamp == 2 %} <a href="{% url "vessels:glossary" %}#lamp" style="background-color:LightBlue;color:DarkGreen;padding:4px 5px">lamp</a> {% endif %}
-      {% if ves.morph_nipplebase == 2 %} <a href="{% url "vessels:glossary" %}#nip" style="background-color:Maroon;color:Gold;padding:4px 5px">nipple</a> {% endif %}
-      {% if ves.morph_pointedbase == 2 %} <a href="{% url "vessels:glossary" %}#poibase" style="background-color:Maroon;color:LightCoral;padding:4px 5px">pointed base</a> {% endif %}
-      {% if ves.morph_roundedbase == 2 %} <a href="{% url "vessels:glossary" %}#roubase" style="background-color:Maroon;color:LightBlue;padding:4px 5px">rounded base</a> {% endif %}
-      {% if ves.morph_flatbase == 2 %} <a href="{% url "vessels:glossary" %}#flatbase" style="background-color:Maroon;color:LightGreen;padding:4px 5px">flat base</a> {% endif %}
-    </td><td>rim1</td><td>decp1</td><td>dec1</td><td>u1</td></tr>
-    <tr><td>de1</td> <td>{% if ves.morph_spout == 1 %} <a href="{% url "vessels:glossary" %}#spo" style="background-color:Gold;color:OrangeRed;padding:4px 5px"> has spout*</a> {% endif %}
-      {% if ves.morph_multimouth == 1 %} <a href="{% url "vessels:glossary" %}#mulm" style="background-color:Gold;color:OliveDrab;padding:4px 5px">has multi-mouth*</a> {% endif %}
-      {% if ves.morph_neck == 1 %} <a href="{% url "vessels:glossary" %}#neck" style="background-color:Gold;color:Black;padding:4px 5px">has neck*</a> {% endif %}
-      {% if ves.morph_collar == 1 %} <a href="{% url "vessels:glossary" %}#coll" style="background-color:Gold;color:FireBrick;padding:4px 5px">has collar*</a> {% endif %}
-      {% if ves.morph_carination == 1 %} <a href="{% url "vessels:glossary" %}#car" style="background-color:Gold;color:ForestGreen;padding:4px 5px">has carination*</a> {% endif %}
-      {% if ves.morph_handle == 1 %} <a href="{% url "vessels:glossary" %}#han" style="background-color:Gold;color:Grey;padding:4px 5px">has handle*</a> {% endif %}
-      {% if ves.morph_feet == 1 %} <a href="{% url "vessels:glossary" %}#feet" style="background-color:Gold;color:DodgerBlue;padding:4px 5px">has feet*</a> {% endif %}
-      {% if ves.morph_ringfoot == 1 %} <a href="{% url "vessels:glossary" %}#rfoot" style="background-color:Gold;color:Indigo;padding:4px 5px">has ring foot*</a> {% endif %}
-      {% if ves.morph_restricted == 1 %} <a href="{% url "vessels:glossary" %}#res" style="background-color:Indigo;color:Gold;padding:4px 5px">restricted*</a> {% endif %}
-      {% if ves.morph_unrestricted == 1 %} <a href="{% url "vessels:glossary" %}#unres" style="background-color:Indigo;color:LightCoral;padding:4px 5px">unrestricted*</a> {% endif %}
+      {% if ves.morph_nipplebase == 2 %} <a href="{% url "vessels:glossary" %}#nip" style="background-color:#2d2d2d;color:Gold;padding:4px 5px">nipple</a> {% endif %}
+      {% if ves.morph_pointedbase == 2 %} <a href="{% url "vessels:glossary" %}#poibase" style="background-color:#2d2d2d;color:LightCoral;padding:4px 5px">pointed base</a> {% endif %}
+      {% if ves.morph_roundedbase == 2 %} <a href="{% url "vessels:glossary" %}#roubase" style="background-color:#2d2d2d;color:LightBlue;padding:4px 5px">rounded base</a> {% endif %}
+      {% if ves.morph_flatbase == 2 %} <a href="{% url "vessels:glossary" %}#flatbase" style="background-color:#2d2d2d;color:LightGreen;padding:4px 5px">flat base</a> {% endif %}
+    </td><td>{% if ves.rim_outcurving == 2 %} <a href="{% url "vessels:glossary" %}#out" style="background-color:Pink;color:Indigo;padding:4px 5px">outcurving rim</a> {% endif %}  
+      {% if ves.rim_everted == 2 %} <a href="{% url "vessels:glossary" %}#ev" style="background-color:Pink;color:OliveDrab;padding:4px 5px">everted rim</a> {% endif %}  
+      {% if ves.rim_direct_out == 2 %} <a href="{% url "vessels:glossary" %}#dout" style="background-color:Pink;color:Black;padding:4px 5px">direct out rim</a> {% endif %}  
+      {% if ves.rim_direct == 2 %} <a href="{% url "vessels:glossary" %}#dir" style="background-color:Pink;color:FireBrick;padding:4px 5px">direct rim</a> {% endif %}  
+      {% if ves.rim_direct_in == 2 %} <a href="{% url "vessels:glossary" %}#din" style="background-color:Pink;color:ForestGreen;padding:4px 5px">direct in rim</a> {% endif %}  
+      {% if ves.rim_inverted == 2 %} <a href="{% url "vessels:glossary" %}#inv"  style="background-color:Pink;color:Grey;padding:4px 5px">inverted rim</a> {% endif %}  
+      {% if ves.rim_incurving == 2 %} <a href="{% url "vessels:glossary" %}#inc" style="background-color:Pink;color:DodgerBlue;padding:4px 5px">incurving rim</a> {% endif %}  
+      {% if ves.rim_parallel == 2 %} <a href="{% url "vessels:glossary" %}#para" style="background-color:#1310a7;color:#3ab2e9;padding:4px 5px">parallel rim</a> {% endif %}  
+      {% if ves.rim_abrupt_narrow == 2 %} <a href="{% url "vessels:glossary" %}#abrn" style="background-color:LightBlue;color:OrangeRed;padding:4px 5px">abrupt narrow rim</a> {% endif %}  
+      {% if ves.rim_abrupt_wide == 2 %} <a href="{% url "vessels:glossary" %}#abrw" style="background-color:LightBlue;color:Indigo;padding:4px 5px">abrupt wide rim</a> {% endif %}
+      {% if ves.rim_gradually_narrow == 2 %} <a href="{% url "vessels:glossary" %}#gradi" style="background-color:#2d2d2d;color:Gold;padding:4px 5px">gradually narrow rim</a> {% endif %}  
+      {% if ves.rim_gradually_thickened_exterior == 2 %} <a href="{% url "vessels:glossary" %}#gradoe" style="background-color:#2d2d2d;color:LightCoral;padding:4px 5px">gradually thickened exterior rim</a> {% endif %}  
+      {% if ves.rim_gradually_thickened_interior == 2 %} <a href="{% url "vessels:glossary" %}#gradoi" style="background-color:#2d2d2d;color:LightGreen;padding:4px 5px">gradually thickened interior rim</a> {% endif %}
+      {% if ves.rim_rounded_both == 2 %} <a href="{% url "vessels:glossary" %}#roundb" style="background-color:#ddd;color:Brown;padding:4px 5px">rounded both sides rim</a> {% endif %}  
+      {% if ves.rim_thickened_interior == 2 %} <a href="{% url "vessels:glossary" %}#roundi" style="background-color:#ddd;color:MediumBlue;padding:4px 5px" >rounded thickened interior rim</a> {% endif %}  
+      {% if ves.rim_thickened_exterior == 2 %} <a href="{% url "vessels:glossary" %}#roundo" style="background-color:#ddd;color:DarkGreen;padding:4px 5px">rounded thickened exterior rim</a> {% endif %}
+    </td><td> {% if ves.dec_lip == 2 %} <a href="{% url "vessels:glossary" %}#declip" style="background-color:Pink;color:Indigo;padding:4px 5px">decorated lip</a> {% endif %} 
+      {% if ves.dec_rim == 2 %} <a href="{% url "vessels:glossary" %}#decrim" style="background-color:Pink;color:OliveDrab;padding:4px 5px">decorated rim</a> {% endif %}  
+      {% if ves.dec_internal_rim == 2 %} <a href="{% url "vessels:glossary" %}#intdecrim" style="background-color:Pink;color:Black;padding:4px 5px">decorated internal rim</a> {% endif %}  
+      {% if ves.dec_neck == 2 %} <a href="{% url "vessels:glossary" %}#decnec" style="background-color:Pink;color:FireBrick;padding:4px 5px">decorated neck</a> {% endif %}  
+      {% if ves.dec_shoulders == 2 %} <a href="{% url "vessels:glossary" %}#decsho" style="background-color:Pink;color:ForestGreen;padding:4px 5px">decorated shoulder</a> {% endif %}  
+      {% if ves.dec_body == 2 %} <a href="{% url "vessels:glossary" %}#decbody" style="background-color:Pink;color:Grey;padding:4px 5px">decorated body</a> {% endif %}  
+  </td><td>  {% if ves.dec_plain == 2 %} <a href="{% url "vessels:glossary" %}#plain" style="background-color:#2d2d2d;color:#ddd;padding:4px 5px">plain</a> {% endif %} 
+    {% if ves.dec_exposed_coil == 2 %} <a href="{% url "vessels:glossary" %}#expo" style="background-color:Pink;color:Indigo;padding:4px 5px">exposed coil</a> {% endif %} 
+    {% if ves.dec_finger_marks == 2 %} <a href="{% url "vessels:glossary" %}#fing" style="background-color:Pink;color:FireBrick;padding:4px 5px">finger marks</a> {% endif %} 
+    {% if ves.dec_impressing == 2 %} <a href="{% url "vessels:glossary" %}#impr" style="background-color:#1310a7;color:#3ab2e9;padding:4px 5px">impressing</a> {% endif %}   
+    {% if ves.dec_punctation == 2 %} <a href="{% url "vessels:glossary" %}#punct" style="background-color:#1310a7;color:LightCoral;padding:4px 5px">punctation</a> {% endif %}   
+    {% if ves.dec_comb_impression == 2 %} <a href="{% url "vessels:glossary" %}#imprcom" style="background-color:#1310a7;color:LightGreen;padding:4px 5px">comb impression</a> {% endif %}   
+    {% if ves.dec_dentate == 2 %} <a href="{% url "vessels:glossary" %}#dent" style="background-color:#1310a7;color:LightBlue;padding:4px 5px">dentate</a> {% endif %}   
+    {% if ves.dec_paddle_impressing == 2 %} <a href="{% url "vessels:glossary" %}#padi" style="background-color:#1310a7;color:Gold;padding:4px 5px">paddle impressing</a> {% endif %}   
+    {% if ves.dec_cord_impressing == 2 %} <a href="{% url "vessels:glossary" %}#cord" style="background-color:#1310a7;color:#ddd;padding:4px 5px">cord impressing</a> {% endif %}  
+    {% if ves.dec_incising == 2 %} <a href="{% url "vessels:glossary" %}#incis" style="background-color:LightBlue;color:OrangeRed;padding:4px 5px">incising</a> {% endif %}   
+    {% if ves.dec_simple_incising == 2 %} <a href="{% url "vessels:glossary" %}#incsin" style="background-color:LightBlue;color:Indigo;padding:4px 5px">simple incising</a> {% endif %}   
+    {% if ves.dec_comb_incising == 2 %} <a href="{% url "vessels:glossary" %}#inccom" style="background-color:LightBlue;color:Black;padding:4px 5px">comb incising</a> {% endif %}   
+    {% if ves.dec_grooving == 2 %} <a href="{% url "vessels:glossary" %}#gro" style="background-color:LightBlue;color:FireBrick;padding:4px 5px">grooving</a> {% endif %}   
+    {% if ves.dec_scouring == 2 %} <a href="{% url "vessels:glossary" %}#sco" style="background-color:LightBlue;color:ForestGreen;padding:4px 5px">scouring</a> {% endif %}   
+    {% if ves.dec_carving == 2 %} <a href="{% url "vessels:glossary" %}#carv" style="background-color:LightBlue;color:Brown;padding:4px 5px">carving</a> {% endif %}   
+    {% if ves.dec_perforating == 2 %} <a href="{% url "vessels:glossary" %}#perf" style="background-color:LightBlue;color:MediumBlue;padding:4px 5px">perforating</a> {% endif %} 
+    {% if ves.dec_applique == 2 %} <a href="{% url "vessels:glossary" %}#appl" style="background-color:#2d2d2d;color:Gold;padding:4px 5px">applique</a> {% endif %}   
+    {% if ves.dec_nubbins_lugs == 2 %} <a href="{% url "vessels:glossary" %}#lug" style="background-color:#2d2d2d;color:LightCoral;padding:4px 5px">nubbins and lugs</a> {% endif %}   
+    {% if ves.dec_bands == 2 %} <a href="{% url "vessels:glossary" %}#band" style="background-color:#2d2d2d;color:LightGreen;padding:4px 5px">bands</a> {% endif %}   
+    {% if ves.dec_sculpting == 2 %} <a href="{% url "vessels:glossary" %}#sculp" style="background-color:#2d2d2d;color:LightBlue;padding:4px 5px">sculpting</a> {% endif %}  
+    {% if ves.dec_red_slip == 2 %} <a href="{% url "vessels:glossary" %}#red" style="background-color:#ddd;color:Brown;padding:4px 5px">red slip</a> {% endif %}   
+    {% if ves.dec_glaze == 2 %} <a href="{% url "vessels:glossary" %}#glaze" style="background-color:#ddd;color:MediumBlue;padding:4px 5px">glaze</a> {% endif %}   
+    {% if ves.dec_painting == 2 %} <a href="{% url "vessels:glossary" %}#paint" style="background-color:#ddd;color:DarkGreen;padding:4px 5px">painting</a> {% endif %} </td>
+    <td>{% if ves.use_cooking == 2 %} <a href="{% url "vessels:glossary" %}#cook" style="background-color:Pink;color:Indigo;padding:4px 5px">cooking</a> {% endif %}
+      {% if ves.use_boiling == 2 %} <a href="{% url "vessels:glossary" %}#boil" style="background-color:Pink;color:DodgerBlue;padding:4px 5px">boiling</a> {% endif %}
+      {% if ves.use_baking == 2 %} <a href="{% url "vessels:glossary" %}#bake" style="background-color:Pink;color:Grey;padding:4px 5px">baking</a> {% endif %}
+      {% if ves.use_frying == 2 %} <a href="{% url "vessels:glossary" %}#fry" style="background-color:Pink;color:ForestGreen;padding:4px 5px">frying</a> {% endif %}
+      {% if ves.use_smoking == 2 %} <a href="{% url "vessels:glossary" %}#smoke" style="background-color:Pink;color:FireBrick;padding:4px 5px">smoking</a> {% endif %}
+
+      {% if ves.use_serving == 2 %} <a href="{% url "vessels:glossary" %}#serve" style="background-color:#1310a7;color:#3ab2e9;padding:4px 5px">serving</a> {% endif %}
+      {% if ves.use_eating == 2 %} <a href="{% url "vessels:glossary" %}#eat" style="background-color:#1310a7;color:LightCoral;padding:4px 5px">eating</a> {% endif %}
+      {% if ves.use_storage == 2 %} <a href="{% url "vessels:glossary" %}#store" style="background-color:#1310a7;color:Gold;padding:4px 5px">storage</a> {% endif %}
+      {% if ves.use_transfer == 2 %} <a href="{% url "vessels:glossary" %}#tran" style="background-color:#1310a7;color:LightBlue;padding:4px 5px">transfer</a> {% endif %}
+
+      {% if ves.use_burial == 2 %} <a href="{% url "vessels:glossary" %}#burial" style="background-color:LightBlue;color:OrangeRed;padding:4px 5px">burial</a> {% endif %}
+      {% if ves.use_ceremonial == 2 %} <a href="{% url "vessels:glossary" %}#ritual" style="background-color:LightBlue;color:Indigo;padding:4px 5px">ceremonial</a> {% endif %}
+      {% if ves.use_lid == 2 %} <a href="{% url "vessels:glossary" %}#lid" style="background-color:LightBlue;color:Black;padding:4px 5px">lid</a> {% endif %}   
+      {% if ves.use_hearth == 2 %} <a href="{% url "vessels:glossary" %}#hea" style="background-color:LightBlue;color:FireBrick;padding:4px 5px">hearth</a> {% endif %}
+      {% if ves.use_light == 2 %} <a href="{% url "vessels:glossary" %}#light" style="background-color:LightBlue;color:ForestGreen;padding:4px 5px">light</a> {% endif %}
+      {% if ves.use_musical_instrument == 2 %} <a href="{% url "vessels:glossary" %}#music" style="background-color:LightBlue;color:Brown;padding:4px 5px">musical instrument</a>{% endif %}</td></tr>
+    <tr><td>de1</td> <td>{% if ves.morph_spout == 1 %} <a href="{% url "vessels:glossary" %}#spo" style="background-color:Pink;color:OrangeRed;padding:4px 5px"> has spout*</a> {% endif %}
+      {% if ves.morph_multimouth == 1 %} <a href="{% url "vessels:glossary" %}#mulm" style="background-color:Pink;color:OliveDrab;padding:4px 5px">has multi-mouth*</a> {% endif %}
+      {% if ves.morph_neck == 1 %} <a href="{% url "vessels:glossary" %}#neck" style="background-color:Pink;color:Black;padding:4px 5px">has neck*</a> {% endif %}
+      {% if ves.morph_collar == 1 %} <a href="{% url "vessels:glossary" %}#coll" style="background-color:Pink;color:FireBrick;padding:4px 5px">has collar*</a> {% endif %}
+      {% if ves.morph_carination == 1 %} <a href="{% url "vessels:glossary" %}#car" style="background-color:Pink;color:ForestGreen;padding:4px 5px">has carination*</a> {% endif %}
+      {% if ves.morph_handle == 1 %} <a href="{% url "vessels:glossary" %}#han" style="background-color:Pink;color:Grey;padding:4px 5px">has handle*</a> {% endif %}
+      {% if ves.morph_feet == 1 %} <a href="{% url "vessels:glossary" %}#feet" style="background-color:Pink;color:DodgerBlue;padding:4px 5px">has feet*</a> {% endif %}
+      {% if ves.morph_ringfoot == 1 %} <a href="{% url "vessels:glossary" %}#rfoot" style="background-color:Pink;color:Indigo;padding:4px 5px">has ring foot*</a> {% endif %}
+      {% if ves.morph_restricted == 1 %} <a href="{% url "vessels:glossary" %}#res" style="background-color:#1310a7;color:Gold;padding:4px 5px">restricted*</a> {% endif %}
+      {% if ves.morph_unrestricted == 1 %} <a href="{% url "vessels:glossary" %}#unres" style="background-color:#1310a7;color:LightCoral;padding:4px 5px">unrestricted*</a> {% endif %}
       {% if ves.morph_jar == 1 %} <a href="{% url "vessels:glossary" %}#jar" style="background-color:LightBlue;color:OrangeRed;padding:4px 5px">jar*</a> {% endif %}
       {% if ves.morph_bowl == 1 %} <a href="{% url "vessels:glossary" %}#bowl" style="background-color:LightBlue;color:Indigo;padding:4px 5px">bowl*</a> {% endif %}
       {% if ves.morph_dish == 1 %} <a href="{% url "vessels:glossary" %}#dish" style="background-color:LightBlue;color:Black;padding:4px 5px">dish*</a> {% endif %}
@@ -112,10 +173,72 @@
       {% if ves.morph_jug == 1 %} <a href="{% url "vessels:glossary" %}#jug" style="background-color:LightBlue;color:Brown;padding:4px 5px">jug*</a> {% endif %}
       {% if ves.morph_forno == 1 %} <a href="{% url "vessels:glossary" %}#for" style="background-color:LightBlue;color:MediumBlue;padding:4px 5px">forno*</a> {% endif %}
       {% if ves.morph_lamp == 1 %} <a href="{% url "vessels:glossary" %}#lamp" style="background-color:LightBlue;color:DarkGreen;padding:4px 5px">lamp*</a> {% endif %}
-      {% if ves.morph_nipplebase == 1 %} <a href="{% url "vessels:glossary" %}#nip" style="background-color:Maroon;color:Gold;padding:4px 5px">nipple*</a> {% endif %}
-      {% if ves.morph_pointedbase == 1 %} <a href="{% url "vessels:glossary" %}#poibase" style="background-color:Maroon;color:LightCoral;padding:4px 5px">pointed base*</a> {% endif %}
-      {% if ves.morph_roundedbase == 1 %} <a href="{% url "vessels:glossary" %}#roubase" style="background-color:Maroon;color:LightBlue;padding:4px 5px">rounded base*</a> {% endif %}
-      {% if ves.morph_flatbase == 1 %} <a href="{% url "vessels:glossary" %}#flatbase" style="background-color:Maroon;color:LightGreen;padding:4px 5px">flat base*</a> {% endif %}</td><td>rim1</td><td>decp1</td><td>dec1</td><td>u1</td></tr>
+      {% if ves.morph_nipplebase == 1 %} <a href="{% url "vessels:glossary" %}#nip" style="background-color:#2d2d2d;color:Gold;padding:4px 5px">nipple*</a> {% endif %}
+      {% if ves.morph_pointedbase == 1 %} <a href="{% url "vessels:glossary" %}#poibase" style="background-color:#2d2d2d;color:LightCoral;padding:4px 5px">pointed base*</a> {% endif %}
+      {% if ves.morph_roundedbase == 1 %} <a href="{% url "vessels:glossary" %}#roubase" style="background-color:#2d2d2d;color:LightBlue;padding:4px 5px">rounded base*</a> {% endif %}
+      {% if ves.morph_flatbase == 1 %} <a href="{% url "vessels:glossary" %}#flatbase" style="background-color:#2d2d2d;color:LightGreen;padding:4px 5px">flat base*</a> {% endif %}</td>
+      <td>{% if ves.rim_outcurving == 1 %} <a href="{% url "vessels:glossary" %}#out" style="background-color:Pink;color:Indigo;padding:4px 5px">outcurving rim*</a> {% endif %}  
+        {% if ves.rim_everted == 1 %} <a href="{% url "vessels:glossary" %}#ev" style="background-color:Pink;color:OliveDrab;padding:4px 5px">everted rim*</a> {% endif %}  
+        {% if ves.rim_direct_out == 1 %} <a href="{% url "vessels:glossary" %}#dout" style="background-color:Pink;color:Black;padding:4px 5px">direct out rim*</a> {% endif %}  
+        {% if ves.rim_direct == 1 %} <a href="{% url "vessels:glossary" %}#dir" style="background-color:Pink;color:FireBrick;padding:4px 5px">direct rim*</a> {% endif %}  
+        {% if ves.rim_direct_in == 1 %} <a href="{% url "vessels:glossary" %}#din" style="background-color:Pink;color:ForestGreen;padding:4px 5px">direct in rim*</a> {% endif %}  
+        {% if ves.rim_inverted == 1 %} <a href="{% url "vessels:glossary" %}#inv"  style="background-color:Pink;color:Grey;padding:4px 5px">inverted rim*</a> {% endif %}  
+        {% if ves.rim_incurving == 1 %} <a href="{% url "vessels:glossary" %}#inc" style="background-color:Pink;color:DodgerBlue;padding:4px 5px">incurving rim*</a> {% endif %}  
+        {% if ves.rim_parallel == 1 %} <a href="{% url "vessels:glossary" %}#para" style="background-color:#1310a7;color:#3ab2e9;padding:4px 5px">parallel rim*</a> {% endif %}  
+        {% if ves.rim_abrupt_narrow == 1 %} <a href="{% url "vessels:glossary" %}#abrn" style="background-color:LightBlue;color:OrangeRed;padding:4px 5px">abrupt narrow rim*</a> {% endif %}  
+        {% if ves.rim_abrupt_wide == 1 %} <a href="{% url "vessels:glossary" %}#abrw" style="background-color:LightBlue;color:Indigo;padding:4px 5px">abrupt wide rim*</a> {% endif %}
+        {% if ves.rim_gradually_narrow == 1 %} <a href="{% url "vessels:glossary" %}#gradi" style="background-color:#2d2d2d;color:Gold;padding:4px 5px">gradually narrow rim*</a> {% endif %}  
+        {% if ves.rim_gradually_thickened_exterior == 1 %} <a href="{% url "vessels:glossary" %}#gradoe" style="background-color:#2d2d2d;color:LightCoral;padding:4px 5px">gradually thickened exterior rim*</a> {% endif %}  
+        {% if ves.rim_gradually_thickened_interior == 1 %} <a href="{% url "vessels:glossary" %}#gradoi" style="background-color:#2d2d2d;color:LightGreen;padding:4px 5px">gradually thickened interior rim*</a> {% endif %}
+        {% if ves.rim_rounded_both == 1 %} <a href="{% url "vessels:glossary" %}#roundb" style="background-color:#ddd;color:Brown;padding:4px 5px">rounded both sides rim*</a> {% endif %}  
+        {% if ves.rim_thickened_interior == 1 %} <a href="{% url "vessels:glossary" %}#roundi" style="background-color:#ddd;color:MediumBlue;padding:4px 5px" >rounded thickened interior rim*</a> {% endif %}  
+        {% if ves.rim_thickened_exterior == 1 %} <a href="{% url "vessels:glossary" %}#roundo" style="background-color:#ddd;color:DarkGreen;padding:4px 5px">rounded thickened exterior rim*</a> {% endif %}</td>
+        <td>{% if ves.dec_lip == 1 %} <a href="{% url "vessels:glossary" %}#declip" style="background-color:Pink;color:Indigo;padding:4px 5px">decorated lip*</a> {% endif %} 
+          {% if ves.dec_rim == 1 %} <a href="{% url "vessels:glossary" %}#decrim" style="background-color:Pink;color:OliveDrab;padding:4px 5px">decorated rim*</a> {% endif %}  
+          {% if ves.dec_internal_rim == 1 %} <a href="{% url "vessels:glossary" %}#intdecrim" style="background-color:Pink;color:Black;padding:4px 5px">decorated internal rim*</a> {% endif %}  
+          {% if ves.dec_neck == 1 %} <a href="{% url "vessels:glossary" %}#decnec" style="background-color:Pink;color:FireBrick;padding:4px 5px">decorated neck*</a> {% endif %}  
+          {% if ves.dec_shoulders == 1 %} <a href="{% url "vessels:glossary" %}#decsho" style="background-color:Pink;color:ForestGreen;padding:4px 5px">decorated shoulder*</a> {% endif %}  
+          {% if ves.dec_body == 1 %} <a href="{% url "vessels:glossary" %}#decbody" style="background-color:Pink;color:Grey;padding:4px 5px">decorated body*</a> {% endif %} </td>
+          <td> {% if ves.dec_plain == 1 %} <a href="{% url "vessels:glossary" %}#plain" style="background-color:#2d2d2d;color:#ddd;padding:4px 5px">plain*</a> {% endif %} 
+            {% if ves.dec_exposed_coil == 1 %} <a href="{% url "vessels:glossary" %}#expo" style="background-color:Pink;color:Indigo;padding:4px 5px">exposed coil*</a> {% endif %} 
+            {% if ves.dec_finger_marks == 1 %} <a href="{% url "vessels:glossary" %}#fing" style="background-color:Pink;color:FireBrick;padding:4px 5px">finger marks*</a> {% endif %} 
+            {% if ves.dec_impressing == 1 %} <a href="{% url "vessels:glossary" %}#impr" style="background-color:#1310a7;color:#3ab2e9;padding:4px 5px">impressing*</a> {% endif %}   
+            {% if ves.dec_punctation == 1 %} <a href="{% url "vessels:glossary" %}#punct" style="background-color:#1310a7;color:LightCoral;padding:4px 5px">punctation*</a> {% endif %}   
+            {% if ves.dec_comb_impression == 1 %} <a href="{% url "vessels:glossary" %}#imprcom" style="background-color:#1310a7;color:LightGreen;padding:4px 5px">comb impression*</a> {% endif %}   
+            {% if ves.dec_dentate == 1 %} <a href="{% url "vessels:glossary" %}#dent" style="background-color:#1310a7;color:LightBlue;padding:4px 5px">dentate*</a> {% endif %}   
+            {% if ves.dec_paddle_impressing == 1 %} <a href="{% url "vessels:glossary" %}#padi" style="background-color:#1310a7;color:Gold;padding:4px 5px">paddle impressing*</a> {% endif %}   
+            {% if ves.dec_cord_impressing == 1 %} <a href="{% url "vessels:glossary" %}#cord" style="background-color:#1310a7;color:#ddd;padding:4px 5px">cord impressing*</a> {% endif %}  
+            {% if ves.dec_incising == 1 %} <a href="{% url "vessels:glossary" %}#incis" style="background-color:LightBlue;color:OrangeRed;padding:4px 5px">incising*</a> {% endif %}   
+            {% if ves.dec_simple_incising == 1 %} <a href="{% url "vessels:glossary" %}#incsin" style="background-color:LightBlue;color:Indigo;padding:4px 5px">simple incising*</a> {% endif %}   
+            {% if ves.dec_comb_incising == 1 %} <a href="{% url "vessels:glossary" %}#inccom" style="background-color:LightBlue;color:Black;padding:4px 5px">comb incising*</a> {% endif %}   
+            {% if ves.dec_grooving == 1 %} <a href="{% url "vessels:glossary" %}#gro" style="background-color:LightBlue;color:FireBrick;padding:4px 5px">grooving*</a> {% endif %}   
+            {% if ves.dec_scouring == 1 %} <a href="{% url "vessels:glossary" %}#sco" style="background-color:LightBlue;color:ForestGreen;padding:4px 5px">scouring*</a> {% endif %}   
+            {% if ves.dec_carving == 1 %} <a href="{% url "vessels:glossary" %}#carv" style="background-color:LightBlue;color:Brown;padding:4px 5px">carving*</a> {% endif %}   
+            {% if ves.dec_perforating == 1 %} <a href="{% url "vessels:glossary" %}#perf" style="background-color:LightBlue;color:MediumBlue;padding:4px 5px">perforating*</a> {% endif %} 
+            {% if ves.dec_applique == 1 %} <a href="{% url "vessels:glossary" %}#appl" style="background-color:#2d2d2d;color:Gold;padding:4px 5px">applique*</a> {% endif %}   
+            {% if ves.dec_nubbins_lugs == 1 %} <a href="{% url "vessels:glossary" %}#lug" style="background-color:#2d2d2d;color:LightCoral;padding:4px 5px">nubbins and lugs*</a> {% endif %}   
+            {% if ves.dec_bands == 1 %} <a href="{% url "vessels:glossary" %}#band" style="background-color:#2d2d2d;color:LightGreen;padding:4px 5px">bands*</a> {% endif %}   
+            {% if ves.dec_sculpting == 1 %} <a href="{% url "vessels:glossary" %}#sculp" style="background-color:#2d2d2d;color:LightBlue;padding:4px 5px">sculpting*</a> {% endif %}  
+            {% if ves.dec_red_slip == 1 %} <a href="{% url "vessels:glossary" %}#red" style="background-color:#ddd;color:Brown;padding:4px 5px">red slip*</a> {% endif %}   
+            {% if ves.dec_glaze == 1 %} <a href="{% url "vessels:glossary" %}#glaze" style="background-color:#ddd;color:MediumBlue;padding:4px 5px">glaze*</a> {% endif %}   
+            {% if ves.dec_painting == 1 %} <a href="{% url "vessels:glossary" %}#paint" style="background-color:#ddd;color:DarkGreen;padding:4px 5px">painting*</a> {% endif %}</td>
+            <td>{% if ves.use_cooking == 1 %} <a href="{% url "vessels:glossary" %}#cook" style="background-color:Pink;color:Indigo;padding:4px 5px">cooking*</a> {% endif %}
+              {% if ves.use_boiling == 1 %} <a href="{% url "vessels:glossary" %}#boil" style="background-color:Pink;color:DodgerBlue;padding:4px 5px">boiling*</a> {% endif %}
+              {% if ves.use_baking == 1 %} <a href="{% url "vessels:glossary" %}#bake" style="background-color:Pink;color:Grey;padding:4px 5px">baking*</a> {% endif %}
+              {% if ves.use_frying == 1 %} <a href="{% url "vessels:glossary" %}#fry" style="background-color:Pink;color:ForestGreen;padding:4px 5px">frying*</a> {% endif %}
+              {% if ves.use_smoking == 1 %} <a href="{% url "vessels:glossary" %}#smoke" style="background-color:Pink;color:FireBrick;padding:4px 5px">smoking*</a> {% endif %}
+        
+              {% if ves.use_serving == 1 %} <a href="{% url "vessels:glossary" %}#serve" style="background-color:#1310a7;color:#3ab2e9;padding:4px 5px">serving*</a> {% endif %}
+              {% if ves.use_eating == 1 %} <a href="{% url "vessels:glossary" %}#eat" style="background-color:#1310a7;color:LightCoral;padding:4px 5px">eating*</a> {% endif %}
+              {% if ves.use_storage == 1 %} <a href="{% url "vessels:glossary" %}#store" style="background-color:#1310a7;color:Gold;padding:4px 5px">storage*</a> {% endif %}
+              {% if ves.use_transfer == 1 %} <a href="{% url "vessels:glossary" %}#tran" style="background-color:#1310a7;color:LightBlue;padding:4px 5px">transfer*</a> {% endif %}
+        
+              {% if ves.use_burial == 1 %} <a href="{% url "vessels:glossary" %}#burial" style="background-color:LightBlue;color:OrangeRed;padding:4px 5px">burial*</a> {% endif %}
+              {% if ves.use_ceremonial == 1 %} <a href="{% url "vessels:glossary" %}#ritual" style="background-color:LightBlue;color:Indigo;padding:4px 5px">ceremonial*</a> {% endif %}
+              {% if ves.use_lid == 1 %} <a href="{% url "vessels:glossary" %}#lid" style="background-color:LightBlue;color:Black;padding:4px 5px">lid*</a> {% endif %}   
+              {% if ves.use_hearth == 1 %} <a href="{% url "vessels:glossary" %}#hea" style="background-color:LightBlue;color:FireBrick;padding:4px 5px">hearth*</a> {% endif %}
+              {% if ves.use_light == 1 %} <a href="{% url "vessels:glossary" %}#light" style="background-color:LightBlue;color:ForestGreen;padding:4px 5px">light*</a> {% endif %}
+              {% if ves.use_musical_instrument == 1 %} <a href="{% url "vessels:glossary" %}#music" style="background-color:LightBlue;color:Brown;padding:4px 5px">musical instrument*</a>{% endif %}</td></tr>
     {% endfor %}
   </table>
 
