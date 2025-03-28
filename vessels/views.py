@@ -391,13 +391,14 @@ def search(request):
                  vessels = vessels.filter(dec_painting__gt=0 )
                  query = query + "; paint decoration"  
 
-
+            val = form.cleaned_data.get("regions_to_include") 
+            vessels = vessels.filter(region__in=val)
             query = query + "." 
+            query2 = "Regions searched: " + ', '.join(val) + '.'
+            query = query + query2
             vessels = vessels.distinct()
             sites = Site.objects.all()
-
-
-        
+     
             if len(vessels) > 0:
                 return render(request, "vessels/search-results.html", {
                     "vessels": vessels,

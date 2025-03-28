@@ -129,26 +129,6 @@ class Vessel(models.Model):
         BOTH = 'both', 'both'
         UNKNOWN = 'unknown', 'unknown'
 
-    class Region(models.TextChoices):
-        MARIANAS = 'MAR', 'Marianas'
-        CAROLINES = 'CAR', 'Carolines'
-        BISMARCK = 'BIS', 'Bismarck'
-        PNG = 'PNG', 'PNG'
-        SOLOMONS = 'SOL', 'Solomons'
-        VANUATU = 'VAN', 'Vanuatu'
-        MALUKU = 'MAL', 'Maluku'
-        NEWCAL = 'NCA', 'New Caledonia'
-        FIJI = 'FIJ', 'Fiji'
-        SAMOA = 'SAM', 'Samoa'
-        TONGA = 'TON', 'Tonga'
-        MARQUESA = 'MAQ', 'Marquesa'
-        NEMELANESIA = 'NME', 'NE Melanesia'
-        COOK = 'COO', 'Cook'
-        TUVALU = 'TUV', 'Tuvalu'
-        PHILIPPINES = 'PHI', 'Philippines'
-        TAIWAN = 'TAI', 'Taiwan'
-        OTHER = 'OTH', 'Other'
-        UNKNOWN = 'U', 'unknown'
 
     class Base(models.TextChoices):
         BALL = 'ball', 'ball'
@@ -183,7 +163,7 @@ class Vessel(models.Model):
     vesselgroup = models.ManyToManyField(Vesselgroup, related_name="vessels", blank=True)
     time_start = models.IntegerField(null=True, blank =True)
     time_end = models.IntegerField(null=True, blank =True)
-    region = models.CharField(max_length=20, choices=Region, default=Region.UNKNOWN)
+    region = models.CharField(null=True, max_length=100)
     language = models.CharField(default="", max_length=50, null=True, blank =True)
     language_code = models.CharField(default="", max_length=5, null=True, blank =True)
     word = models.CharField(default="", max_length=50, null=True, blank = True)

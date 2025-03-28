@@ -150,9 +150,10 @@
       <p>  
         {{ form.red_slip }} <a href="{% url "vessels:glossary" %}#red">red slip</a> &emsp;  
         {{ form.glaze }} <a href="{% url "vessels:glossary" %}#glaze">glaze</a> &emsp;  
-        {{ form.painting }} <a href="{% url "vessels:glossary" %}#paint">painting</a> &emsp;  
-            
-      </p>      
+        {{ form.painting }} <a href="{% url "vessels:glossary" %}#paint">painting</a> &emsp;             
+      </p> 
+      <h3>Region</h3>
+      <p> {{ form.regions_to_include }} </p>
     </div>
     <br>
     <div class = "submit">

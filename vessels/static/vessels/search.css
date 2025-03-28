@@ -33,7 +33,12 @@ label {
     border-radius: 16px;
     background-color: #2d2d2d; 
 } */
+.flex-container {
 
+    margin: 2rem 0rem 0rem 1rem;
+    padding: 1rem;
+    padding-top: 0rem;
+}
 
 .submit {
 

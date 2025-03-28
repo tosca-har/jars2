@@ -1,5 +1,5 @@
 from django import forms
-from .models import Feature
+from .models import Feature, Vessel
 
 
 
@@ -46,7 +46,6 @@ gender = (
 )
 
 
-
 def feature_choices():
     features =  Feature.objects.all().order_by("name")
     flist =  tuple()
@@ -56,50 +55,16 @@ def feature_choices():
         ) 
     return flist
 
-def feature_choicesM():
-    features =  Feature.objects.all().filter(type='M').order_by("name")
-    flist =  tuple()
-    for f in features:
-        flist += (
-        (f.name, f),   
-        ) 
-    return flist
 
-def feature_choicesR():
-    features =  Feature.objects.all().filter(type='R').order_by("name")
-    flist =  tuple()
-    for f in features:
-        flist += (
-        (f.name, f),   
+def region_choices():
+    regions =  Vessel.objects.all()
+    regionlist =  tuple()
+    for region in regions:
+        regionlist += (
+        (region.region, region.region),   
         ) 
-    return flist
+    return list(set([i for i in regionlist]))
 
-def feature_choicesD():
-    features =  Feature.objects.all().filter(type='D').order_by("name")
-    flist =  tuple()
-    for f in features:
-        flist += (
-        (f.name, f),   
-        ) 
-    return flist
-
-def feature_choicesP():
-    features =  Feature.objects.all().filter(type='P').order_by("name")
-    flist =  tuple()
-    for f in features:
-        flist += (
-        (f.name, f),   
-        ) 
-    return flist
-
-def feature_choicesU():
-    features =  Feature.objects.all().filter(type='U').order_by("name")
-    flist =  tuple()
-    for f in features:
-        flist += (
-        (f.name, f),   
-        ) 
-    return flist
 
 class SearchForm(forms.Form):
     base_build = forms.ChoiceField(choices= techniquesb, required = False)
@@ -193,4 +158,6 @@ class SearchForm(forms.Form):
     painting = forms.BooleanField(required = False)
     starttime = forms.IntegerField(required = False, initial=5000, min_value = 0, max_value = 6000)
     endtime = forms.IntegerField(required = False, initial = 0, min_value = 0, max_value = 6000)
+    regions_to_include = forms.MultipleChoiceField(choices = region_choices, widget= forms.CheckboxSelectMultiple(attrs={"checked":""}), 
+        error_messages= {"required": "Please select at least one region."})
 
