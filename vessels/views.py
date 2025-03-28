@@ -395,16 +395,15 @@ def search(request):
             query = query + "." 
             vessels = vessels.distinct()
             sites = Site.objects.all()
-            sitesP = sites.filter(vessel__in = vessels)
-            sitesI = sites.filter(import_vessel__in = vessels)  
-            sites = (sitesP | sitesI).distinct()
+
 
         
             if len(vessels) > 0:
                 return render(request, "vessels/search-results.html", {
                     "vessels": vessels,
                     "query": query,
-                    "sites": sites,
+                    "prod_sites": sites.filter(vessel__in = vessels).distinct(),
+                    "imp_sites": sites.filter(import_vessel__in = vessels).distinct() ,
                     "mbsu": mbsu,
                     "thsu":thsu
                 })

@@ -155,10 +155,12 @@ mark {
     border-collapse: collapse;
     /* width: 100%; */
     margin: 2rem 1rem 1rem 1rem;
+    line-height: 22pt;
   }
   
   .industrytable td, .industrytable th {
     padding: 8px;
+    color: whitesmoke
   }
   
   #fea td {
@@ -188,7 +190,7 @@ mark {
     padding-bottom: 12px;
     text-align: left;
     background-color: #acaead;
-    color: rgb(73, 72, 72);
+    color:whitesmoke;
     border: 1px solid #ddd;
   }
 /*   

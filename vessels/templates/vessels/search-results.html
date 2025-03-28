@@ -16,55 +16,159 @@
 
 <h1>Search Results</h1>
 <p> {{query}} </p>
-<div>
-  {% for site in sites%}
-  <p>{{site.name}}</p>
-  {% endfor %}
 </div>
-<div>
-  {% for vessel in vessels%}
-  <p>{{vessel.name}}</p>
-  {% endfor %}
-</div>
-<div>
-  {% comment %} {% for feature in features%}
-  <p>{{feature.name}}</p>
-  {% endfor %} {% endcomment %}
-</div>
-{% comment %} <h1>Map</h1>
-    <div id="map">
-    <script> 
-      var picon = "{% static "vessels/images/redPot2.png" %}";
-      let mbsu = "{{mbsu}}";
-      let thsu = "{{thsu}}";
-      let siteNames = [];
-      let siteLat = [];
-      let siteLng = [];
-      let siteLinks = [];
-      let siteVessels = [];
-      let mapcentre =  [-4.5, 160];
-      {% for site in sites %}
-        siteNames.push("{{site.name}}");
-        siteLat.push({{site.lat}});
-        siteLng.push({{site.lng}});
-        siteLinks.push("{{ site.get_absolute_url }}");
-        siteVessels.push("{{site.vessel_string}}");
-      {% endfor %}
-      getMap(); 
-    </script> 
-  </div>
-  <div class="key"> <p id="targetSite"></p></div>
- <div class="site-form">
+{% if prod_sites or imp_sites %}
+<div id="map">
 
-    <table class = "industrytable" id = "it">
-      <th>Site</th> <th> Region </th> <th> Vessels </th>
-      {% for site in sites%}
-      <tr> <td> <a href="{{ site.get_absolute_url }}">{{site.slug}} </td>  <td> {{site.region}} </td> <td> {{site.vessel_string}} </td></tr>
-      {% endfor %}
-      </table>
-  </div> 
+<script> 
+  var picon = "{% static "vessels/images/redPot2.png" %}";
+  var bicon = "{% static "vessels/images/bluePot2.png" %}";
+  var grcon = "{% static "vessels/images/ltgreyPot.png" %}";
+  let mbsu = "{{mbsu}}";
+  let thsu = "{{thsu}}";
+  let siteNames = [];
+  let siteLat = [];
+  let siteLng = [];
+  let siteLinks = [];
+  let siteVessels = [];
+  let siteColour = [];
+  let mapcentre =  [-4.5, 160];
+  {% for site in prod_sites %}
+    siteNames.push("{{site.name}}");
+    siteLat.push({{site.lat}});
+    siteLng.push({{site.lng}});
+    siteLinks.push("{{ site.get_absolute_url }}");
+    siteVessels.push("{{site.vessel_string}}");
+    siteColour.push(1);
+    mapcentre = [{{site.lat}}, {{site.lng}}];
+  {% endfor %}
+  {% for site in imp_sites %}
+    siteNames.push("{{site.name}}");
+    siteLat.push({{site.lat}});
+    siteLng.push({{site.lng}});
+    siteLinks.push("{{ site.get_absolute_url }}");
+    siteVessels.push("{{site.vessel_string}}");
+    siteColour.push(0);
+  {% endfor %}
+  getMap(); 
+</script> 
+</div>
 
-  <br>
-  {% endcomment %}
+<div class="key"> 
+<img src="{% static "vessels/images/redPot2.png" %}" alt="red pot" height="50"> Production site. <br>
+<br>
+<img src="{% static "vessels/images/bluePot2.png" %}" alt="blue pot" height="50"> Import site.  <br>
+
+<p id="targetSite"></p> </div>
+
+{% else %} <p>No site information available.</p>
+{% endif %}
+
+</div>
+<div class="after-map">
+  <h3>Vessels </h3>
+  <table class = "industrytable" id = "fea">
+    <th>Name </th> <th>Details</th> <th>Morphology</th><th>Rim morphology</th> <th>Decoration Position</th> <th>Decoration</th><th>Use</th>
+    {% for ves in vessels %}
+    <tr> <td rowspan="2"> <a href="{{ ves.get_absolute_url }}">{{ves.name}} </td><td>de1</td> 
+    <td>{% if ves.morph_spout == 2 %} <a href="{% url "vessels:glossary" %}#spo" style="background-color:Gold;color:OrangeRed;padding:4px 5px"> has spout</a> {% endif %}
+      {% if ves.morph_multimouth == 2 %} <a href="{% url "vessels:glossary" %}#mulm" style="background-color:Gold;color:OliveDrab;padding:4px 5px">has multi-mouth</a> {% endif %}
+      {% if ves.morph_neck == 2 %} <a href="{% url "vessels:glossary" %}#neck" style="background-color:Gold;color:Black;padding:4px 5px">has neck</a> {% endif %}
+      {% if ves.morph_collar == 2 %} <a href="{% url "vessels:glossary" %}#coll" style="background-color:Gold;color:FireBrick;padding:4px 5px">has collar</a> {% endif %}
+      {% if ves.morph_carination == 2 %} <a href="{% url "vessels:glossary" %}#car" style="background-color:Gold;color:ForestGreen;padding:4px 5px">has carination</a> {% endif %}
+      {% if ves.morph_handle == 2 %} <a href="{% url "vessels:glossary" %}#han" style="background-color:Gold;color:Grey;padding:4px 5px">has handle</a> {% endif %}
+      {% if ves.morph_feet == 2 %} <a href="{% url "vessels:glossary" %}#feet" style="background-color:Gold;color:DodgerBlue;padding:4px 5px">has feet</a> {% endif %}
+      {% if ves.morph_ringfoot == 2 %} <a href="{% url "vessels:glossary" %}#rfoot" style="background-color:Gold;color:Indigo;padding:4px 5px">has ring foot</a> {% endif %}
+      {% if ves.morph_restricted == 2 %} <a href="{% url "vessels:glossary" %}#res" style="background-color:Indigo;color:Gold;padding:4px 5px">restricted</a> {% endif %}
+      {% if ves.morph_unrestricted == 2 %} <a href="{% url "vessels:glossary" %}#unres" style="background-color:Indigo;color:LightCoral;padding:4px 5px">unrestricted</a> {% endif %}
+      {% if ves.morph_jar == 2 %} <a href="{% url "vessels:glossary" %}#jar" style="background-color:LightBlue;color:OrangeRed;padding:4px 5px">jar</a> {% endif %}
+      {% if ves.morph_bowl == 2 %} <a href="{% url "vessels:glossary" %}#bowl" style="background-color:LightBlue;color:Indigo;padding:4px 5px">bowl</a> {% endif %}
+      {% if ves.morph_dish == 2 %} <a href="{% url "vessels:glossary" %}#dish" style="background-color:LightBlue;color:Black;padding:4px 5px">dish</a> {% endif %}
+      {% if ves.morph_plate == 2 %} <a href="{% url "vessels:glossary" %}#pla" style="background-color:LightBlue;color:FireBrick;padding:4px 5px">plate</a> {% endif %}
+      {% if ves.morph_cup == 2 %} <a href="{% url "vessels:glossary" %}#cup" style="background-color:LightBlue;color:ForestGreen;padding:4px 5px">cup</a> {% endif %}
+      {% if ves.morph_jug == 2 %} <a href="{% url "vessels:glossary" %}#jug" style="background-color:LightBlue;color:Brown;padding:4px 5px">jug</a> {% endif %}
+      {% if ves.morph_forno == 2 %} <a href="{% url "vessels:glossary" %}#for" style="background-color:LightBlue;color:MediumBlue;padding:4px 5px">forno</a> {% endif %}
+      {% if ves.morph_lamp == 2 %} <a href="{% url "vessels:glossary" %}#lamp" style="background-color:LightBlue;color:DarkGreen;padding:4px 5px">lamp</a> {% endif %}
+      {% if ves.morph_nipplebase == 2 %} <a href="{% url "vessels:glossary" %}#nip" style="background-color:Maroon;color:Gold;padding:4px 5px">nipple</a> {% endif %}
+      {% if ves.morph_pointedbase == 2 %} <a href="{% url "vessels:glossary" %}#poibase" style="background-color:Maroon;color:LightCoral;padding:4px 5px">pointed base</a> {% endif %}
+      {% if ves.morph_roundedbase == 2 %} <a href="{% url "vessels:glossary" %}#roubase" style="background-color:Maroon;color:LightBlue;padding:4px 5px">rounded base</a> {% endif %}
+      {% if ves.morph_flatbase == 2 %} <a href="{% url "vessels:glossary" %}#flatbase" style="background-color:Maroon;color:LightGreen;padding:4px 5px">flat base</a> {% endif %}
+    </td><td>rim1</td><td>decp1</td><td>dec1</td><td>u1</td></tr>
+    <tr><td>de1</td> <td>{% if ves.morph_spout == 1 %} <a href="{% url "vessels:glossary" %}#spo" style="background-color:Gold;color:OrangeRed;padding:4px 5px"> has spout*</a> {% endif %}
+      {% if ves.morph_multimouth == 1 %} <a href="{% url "vessels:glossary" %}#mulm" style="background-color:Gold;color:OliveDrab;padding:4px 5px">has multi-mouth*</a> {% endif %}
+      {% if ves.morph_neck == 1 %} <a href="{% url "vessels:glossary" %}#neck" style="background-color:Gold;color:Black;padding:4px 5px">has neck*</a> {% endif %}
+      {% if ves.morph_collar == 1 %} <a href="{% url "vessels:glossary" %}#coll" style="background-color:Gold;color:FireBrick;padding:4px 5px">has collar*</a> {% endif %}
+      {% if ves.morph_carination == 1 %} <a href="{% url "vessels:glossary" %}#car" style="background-color:Gold;color:ForestGreen;padding:4px 5px">has carination*</a> {% endif %}
+      {% if ves.morph_handle == 1 %} <a href="{% url "vessels:glossary" %}#han" style="background-color:Gold;color:Grey;padding:4px 5px">has handle*</a> {% endif %}
+      {% if ves.morph_feet == 1 %} <a href="{% url "vessels:glossary" %}#feet" style="background-color:Gold;color:DodgerBlue;padding:4px 5px">has feet*</a> {% endif %}
+      {% if ves.morph_ringfoot == 1 %} <a href="{% url "vessels:glossary" %}#rfoot" style="background-color:Gold;color:Indigo;padding:4px 5px">has ring foot*</a> {% endif %}
+      {% if ves.morph_restricted == 1 %} <a href="{% url "vessels:glossary" %}#res" style="background-color:Indigo;color:Gold;padding:4px 5px">restricted*</a> {% endif %}
+      {% if ves.morph_unrestricted == 1 %} <a href="{% url "vessels:glossary" %}#unres" style="background-color:Indigo;color:LightCoral;padding:4px 5px">unrestricted*</a> {% endif %}
+      {% if ves.morph_jar == 1 %} <a href="{% url "vessels:glossary" %}#jar" style="background-color:LightBlue;color:OrangeRed;padding:4px 5px">jar*</a> {% endif %}
+      {% if ves.morph_bowl == 1 %} <a href="{% url "vessels:glossary" %}#bowl" style="background-color:LightBlue;color:Indigo;padding:4px 5px">bowl*</a> {% endif %}
+      {% if ves.morph_dish == 1 %} <a href="{% url "vessels:glossary" %}#dish" style="background-color:LightBlue;color:Black;padding:4px 5px">dish*</a> {% endif %}
+      {% if ves.morph_plate == 1 %} <a href="{% url "vessels:glossary" %}#pla" style="background-color:LightBlue;color:FireBrick;padding:4px 5px">plate*</a> {% endif %}
+      {% if ves.morph_cup == 1 %} <a href="{% url "vessels:glossary" %}#cup" style="background-color:LightBlue;color:ForestGreen;padding:4px 5px">cup*</a> {% endif %}
+      {% if ves.morph_jug == 1 %} <a href="{% url "vessels:glossary" %}#jug" style="background-color:LightBlue;color:Brown;padding:4px 5px">jug*</a> {% endif %}
+      {% if ves.morph_forno == 1 %} <a href="{% url "vessels:glossary" %}#for" style="background-color:LightBlue;color:MediumBlue;padding:4px 5px">forno*</a> {% endif %}
+      {% if ves.morph_lamp == 1 %} <a href="{% url "vessels:glossary" %}#lamp" style="background-color:LightBlue;color:DarkGreen;padding:4px 5px">lamp*</a> {% endif %}
+      {% if ves.morph_nipplebase == 1 %} <a href="{% url "vessels:glossary" %}#nip" style="background-color:Maroon;color:Gold;padding:4px 5px">nipple*</a> {% endif %}
+      {% if ves.morph_pointedbase == 1 %} <a href="{% url "vessels:glossary" %}#poibase" style="background-color:Maroon;color:LightCoral;padding:4px 5px">pointed base*</a> {% endif %}
+      {% if ves.morph_roundedbase == 1 %} <a href="{% url "vessels:glossary" %}#roubase" style="background-color:Maroon;color:LightBlue;padding:4px 5px">rounded base*</a> {% endif %}
+      {% if ves.morph_flatbase == 1 %} <a href="{% url "vessels:glossary" %}#flatbase" style="background-color:Maroon;color:LightGreen;padding:4px 5px">flat base*</a> {% endif %}</td><td>rim1</td><td>decp1</td><td>dec1</td><td>u1</td></tr>
+    {% endfor %}
+  </table>
+
+
+
+  {% comment %} <table class = "industrytable" id = "fea">
+    <th colspan="2"><h3> Use </h3></th> 
+    <tr><td><h4>Common</h4></td> <td><h4>Occasional*</h4></td></tr>
+    <tr><td>  {% for tf in typ_features %}
+      {% if tf.type == "U" %} <p> <a href="{% url "vessels:glossary" %}#{{tf.tag}}">{{tf.name}} </a> </p> {% endif %}
+      {% endfor %} </td>
+      <td>{% for cf in com_features %}
+        {% if cf.type == "U" %}<p><a href="{% url "vessels:glossary" %}#{{cf.tag}}">{{cf.name}} </a> </p> {% endif %}
+        {% endfor %}</td></tr>
+  </table>
+
+  <table class = "industrytable" id = "fea">
+    <th colspan="2"><h3> Morphology </h3></th> <th colspan="2"><h3> Rim Morphology </h3></th> 
+    <tr><td><h4>Common</h4></td> <td><h4>Occasional*</h4></td><td><h4>Common</h4></td> <td><h4>Occasional*</h4></td></tr>
+    <tr><td>  {% for tf in typ_features %}
+      {% if tf.type == "M" %} <p> <a href="{% url "vessels:glossary" %}#{{tf.tag}}">{{tf.name}} </a> </p> {% endif %}
+      {% endfor %} </td>
+      <td>{% for cf in com_features %}
+        {% if cf.type == "M" %}<p><a href="{% url "vessels:glossary" %}#{{cf.tag}}">{{cf.name}} </a> </p> {% endif %}
+        {% endfor %}</td>     
+    <td>  {% for tf in typ_features %}
+      {% if tf.type == "R" %} <p> <a href="{% url "vessels:glossary" %}#{{tf.tag}}">{{tf.name}} </a> </p> {% endif %}
+      {% endfor %} </td>
+      <td>{% for cf in com_features %}
+        {% if cf.type == "R" %}<p><a href="{% url "vessels:glossary" %}#{{cf.tag}}">{{cf.name}} </a> </p> {% endif %}
+        {% endfor %}</td></tr>
+  </table>
+  
+  <table class = "industrytable" id = "fea">
+  <th colspan="2"><h3> Decoration </h3></th> <th colspan="2"><h3> Decoration Position </h3></th> 
+  
+    <tr><td><h4>Common</h4></td> <td><h4>Occasional*</h4></td><td><h4>Common</h4></td> <td><h4>Occasional*</h4></td></tr>
+    <tr><td>  {% for tf in typ_features %}
+      {% if tf.type == "D" %} <p> <a href="{% url "vessels:glossary" %}#{{tf.tag}}">{{tf.name}} </a> </p> {% endif %}
+      {% endfor %} </td>
+      <td>{% for cf in com_features %}
+        {% if cf.type == "D" %}<p><a href="{% url "vessels:glossary" %}#{{cf.tag}}">{{cf.name}} </a> </p> {% endif %}
+        {% endfor %}</td>
+
+    <td>  {% for tf in typ_features %}
+      {% if tf.type == "P" %} <p> <a href="{% url "vessels:glossary" %}#{{tf.tag}}">{{tf.name}} </a> </p> {% endif %}
+      {% endfor %} </td>
+      <td>{% for cf in com_features %}
+        {% if cf.type == "P" %}<p><a href="{% url "vessels:glossary" %}#{{cf.tag}}">{{cf.name}} </a> </p> {% endif %}
+        {% endfor %}</td></tr>
+  </table> {% endcomment %}
+<p>* refers to features with only single vessel examples, or present but in less than 10 percent in larger samples.</p>
+</div> 
+</div>
   {% include "vessels/includes/footer.html" %}
 {% endblock %}
