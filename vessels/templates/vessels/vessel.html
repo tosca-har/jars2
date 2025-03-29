@@ -94,48 +94,193 @@
     <table class = "industrytable" id = "fea">
       <th colspan="2"><h3> Use </h3></th> 
       <tr><td><h4>Common</h4></td> <td><h4>Occasional*</h4></td></tr>
-      <tr><td>  {% for tf in typ_features %}
-        {% if tf.type == "U" %} <p> <a href="{% url "vessels:glossary" %}#{{tf.tag}}">{{tf.name}} </a> </p> {% endif %}
-        {% endfor %} </td>
-        <td>{% for cf in com_features %}
-          {% if cf.type == "U" %}<p><a href="{% url "vessels:glossary" %}#{{cf.tag}}">{{cf.name}} </a> </p> {% endif %}
-          {% endfor %}</td></tr>
+       <tr><td>{% if the_vessel.use_cooking == 2 %} <p><a href="{% url "vessels:glossary" %}#cook" >cooking</a> </p> {% endif %}
+        {% if the_vessel.use_boiling == 2 %} <p><a href="{% url "vessels:glossary" %}#boil" >boiling</a> </p> {% endif %}
+        {% if the_vessel.use_baking == 2 %} <p><a href="{% url "vessels:glossary" %}#bake" >baking</a> </p> {% endif %}
+        {% if the_vessel.use_frying == 2 %} <p><a href="{% url "vessels:glossary" %}#fry" >frying</a> </p> {% endif %}
+        {% if the_vessel.use_smoking == 2 %} <p><a href="{% url "vessels:glossary" %}#smoke" >smoking</a> </p> {% endif %}
+  
+        {% if the_vessel.use_serving == 2 %} <p><a href="{% url "vessels:glossary" %}#serve" >serving</a> </p> {% endif %}
+        {% if the_vessel.use_eating == 2 %} <p><a href="{% url "vessels:glossary" %}#eat" >eating</a> </p> {% endif %}
+        {% if the_vessel.use_storage == 2 %}<p> <a href="{% url "vessels:glossary" %}#store" >storage</a></p>  {% endif %}
+        {% if the_vessel.use_transfer == 2 %} <p><a href="{% url "vessels:glossary" %}#tran" >transfer</a> </p> {% endif %}
+  
+        {% if the_vessel.use_burial == 2 %} <p><a href="{% url "vessels:glossary" %}#burial" >burial</a></p>  {% endif %}
+        {% if the_vessel.use_ceremonial == 2 %} <p><a href="{% url "vessels:glossary" %}#ritual" >ceremonial</a> </p> {% endif %}
+        {% if the_vessel.use_lid == 2 %} <p> <a href="{% url "vessels:glossary" %}#lid" >lid</a> </p> {% endif %}   
+        {% if the_vessel.use_hearth == 2 %} <p><a href="{% url "vessels:glossary" %}#hea" >hearth</a></p>  {% endif %}
+        {% if the_vessel.use_light == 2 %} <p><a href="{% url "vessels:glossary" %}#light" >light</a> </p> {% endif %}
+        {% if the_vessel.use_musical_instrument == 2 %} <p><a href="{% url "vessels:glossary" %}#music" >musical instrument</a></p> {% endif %}</td>
+        <td>{% if the_vessel.use_cooking == 1 %} <p><a href="{% url "vessels:glossary" %}#cook" >cooking</a> </p> {% endif %}
+          {% if the_vessel.use_boiling == 1 %} <p><a href="{% url "vessels:glossary" %}#boil" >boiling</a> </p> {% endif %}
+          {% if the_vessel.use_baking == 1 %} <p><a href="{% url "vessels:glossary" %}#bake" >baking</a> </p> {% endif %}
+          {% if the_vessel.use_frying == 1 %} <p><a href="{% url "vessels:glossary" %}#fry" >frying</a> </p> {% endif %}
+          {% if the_vessel.use_smoking == 1 %} <p><a href="{% url "vessels:glossary" %}#smoke" >smoking</a> </p> {% endif %}
+    
+          {% if the_vessel.use_serving == 1 %} <p><a href="{% url "vessels:glossary" %}#serve" >serving</a> </p> {% endif %}
+          {% if the_vessel.use_eating == 1 %} <p><a href="{% url "vessels:glossary" %}#eat" >eating</a> </p> {% endif %}
+          {% if the_vessel.use_storage == 1 %}<p> <a href="{% url "vessels:glossary" %}#store" >storage</a></p>  {% endif %}
+          {% if the_vessel.use_transfer == 1 %} <p><a href="{% url "vessels:glossary" %}#tran" >transfer</a> </p> {% endif %}
+    
+          {% if the_vessel.use_burial == 1 %} <p><a href="{% url "vessels:glossary" %}#burial" >burial</a></p>  {% endif %}
+          {% if the_vessel.use_ceremonial == 1 %} <p><a href="{% url "vessels:glossary" %}#ritual" >ceremonial</a> </p> {% endif %}
+          {% if the_vessel.use_lid == 1 %} <p> <a href="{% url "vessels:glossary" %}#lid" >lid</a> </p> {% endif %}   
+          {% if the_vessel.use_hearth == 1 %} <p><a href="{% url "vessels:glossary" %}#hea" >hearth</a></p>  {% endif %}
+          {% if the_vessel.use_light == 1 %} <p><a href="{% url "vessels:glossary" %}#light" >light</a> </p> {% endif %}
+          {% if the_vessel.use_musical_instrument == 1 %} <p><a href="{% url "vessels:glossary" %}#music" >musical instrument</a></p> {% endif %}</td></tr> 
+
     </table>
   
     <table class = "industrytable" id = "fea">
       <th colspan="2"><h3> Morphology </h3></th> <th colspan="2"><h3> Rim Morphology </h3></th> 
       <tr><td><h4>Common</h4></td> <td><h4>Occasional*</h4></td><td><h4>Common</h4></td> <td><h4>Occasional*</h4></td></tr>
-      <tr><td>  {% for tf in typ_features %}
-        {% if tf.type == "M" %} <p> <a href="{% url "vessels:glossary" %}#{{tf.tag}}">{{tf.name}} </a> </p> {% endif %}
-        {% endfor %} </td>
-        <td>{% for cf in com_features %}
-          {% if cf.type == "M" %}<p><a href="{% url "vessels:glossary" %}#{{cf.tag}}">{{cf.name}} </a> </p> {% endif %}
-          {% endfor %}</td>     
-      <td>  {% for tf in typ_features %}
-        {% if tf.type == "R" %} <p> <a href="{% url "vessels:glossary" %}#{{tf.tag}}">{{tf.name}} </a> </p> {% endif %}
-        {% endfor %} </td>
-        <td>{% for cf in com_features %}
-          {% if cf.type == "R" %}<p><a href="{% url "vessels:glossary" %}#{{cf.tag}}">{{cf.name}} </a> </p> {% endif %}
-          {% endfor %}</td></tr>
+      <tr><td>{% if the_vessel.morph_spout == 2 %} <p><a href="{% url "vessels:glossary" %}#spo" > has spout</a></p> {% endif %}
+        {% if the_vessel.morph_multimouth == 2 %} <p><a href="{% url "vessels:glossary" %}#mulm" >has multi-mouth</a></p> {% endif %}
+        {% if the_vessel.morph_neck == 2 %} <p><a href="{% url "vessels:glossary" %}#neck" >has neck</a></p> {% endif %}
+        {% if the_vessel.morph_collar == 2 %} <p><a href="{% url "vessels:glossary" %}#coll" >has collar</a></p> {% endif %}
+        {% if the_vessel.morph_carination == 2 %} <p><a href="{% url "vessels:glossary" %}#car" >has carination</a> </p>{% endif %}
+        {% if the_vessel.morph_handle == 2 %} <p><a href="{% url "vessels:glossary" %}#han" >has handle</a></p> {% endif %}
+        {% if the_vessel.morph_feet == 2 %} <p><a href="{% url "vessels:glossary" %}#feet" >has feet</a></p> {% endif %}
+        {% if the_vessel.morph_ringfoot == 2 %} <p><a href="{% url "vessels:glossary" %}#rfoot" >has ring foot</a> </p>{% endif %}
+        {% if the_vessel.morph_restricted == 2 %} <p><a href="{% url "vessels:glossary" %}#res" >restricted</a> </p>{% endif %}
+        {% if the_vessel.morph_unrestricted == 2 %} <p><a href="{% url "vessels:glossary" %}#unres" >unrestricted</a> </p>{% endif %}
+        {% if vthe_vessel.morph_jar == 2 %} <p><a href="{% url "vessels:glossary" %}#jar" >jar</a></p> {% endif %}
+        {% if the_vessel.morph_bowl == 2 %} <p><a href="{% url "vessels:glossary" %}#bowl" >bowl</a> </p>{% endif %}
+        {% if the_vessel.morph_dish == 2 %} <p><a href="{% url "vessels:glossary" %}#dish" >dish</a> </p>{% endif %}
+        {% if the_vessel.morph_plate == 2 %} <p> <a href="{% url "vessels:glossary" %}#pla" >plate</a></p> {% endif %}
+        {% if the_vessel.morph_cup == 2 %} <p><a href="{% url "vessels:glossary" %}#cup" >cup</a></p> {% endif %}
+        {% if the_vessel.morph_jug == 2 %} <p> <a href="{% url "vessels:glossary" %}#jug" >jug</a> </p>{% endif %}
+        {% if the_vessel.morph_forno == 2 %} <p> <a href="{% url "vessels:glossary" %}#for" >forno</a> </p>{% endif %}
+        {% if the_vessel.morph_lamp == 2 %} <p> <a href="{% url "vessels:glossary" %}#lamp" >lamp</a> </p>{% endif %}
+        {% if the_vessel.morph_nipplebase == 2 %} <p><a href="{% url "vessels:glossary" %}#nip" >nipple</a></p> {% endif %}
+        {% if the_vessel.morph_pointedbase == 2 %} <p><a href="{% url "vessels:glossary" %}#poibase" >pointed base</a></p> {% endif %}
+        {% if the_vessel.morph_roundedbase == 2 %} <p><a href="{% url "vessels:glossary" %}#roubase" >rounded base</a> </p>{% endif %}
+        {% if the_vessel.morph_flatbase == 2 %} <p><a href="{% url "vessels:glossary" %}#flatbase" >flat base</a></p> {% endif %}
+      </td>
+      <td>{% if the_vessel.morph_spout == 1 %} <p><a href="{% url "vessels:glossary" %}#spo" > has spout</a></p> {% endif %}
+        {% if the_vessel.morph_multimouth == 1 %} <p><a href="{% url "vessels:glossary" %}#mulm" >has multi-mouth</a></p> {% endif %}
+        {% if the_vessel.morph_neck == 1 %} <p><a href="{% url "vessels:glossary" %}#neck" >has neck</a></p> {% endif %}
+        {% if the_vessel.morph_collar == 1 %} <p><a href="{% url "vessels:glossary" %}#coll" >has collar</a></p> {% endif %}
+        {% if the_vessel.morph_carination == 1 %} <p><a href="{% url "vessels:glossary" %}#car" >has carination</a> </p>{% endif %}
+        {% if the_vessel.morph_handle == 1 %} <p><a href="{% url "vessels:glossary" %}#han" >has handle</a></p> {% endif %}
+        {% if the_vessel.morph_feet == 1 %} <p><a href="{% url "vessels:glossary" %}#feet" >has feet</a></p> {% endif %}
+        {% if the_vessel.morph_ringfoot == 1 %} <p><a href="{% url "vessels:glossary" %}#rfoot" >has ring foot</a> </p>{% endif %}
+        {% if the_vessel.morph_restricted == 1 %} <p><a href="{% url "vessels:glossary" %}#res" >restricted</a> </p>{% endif %}
+        {% if the_vessel.morph_unrestricted == 1 %} <p><a href="{% url "vessels:glossary" %}#unres" >unrestricted</a> </p>{% endif %}
+        {% if vthe_vessel.morph_jar == 1 %} <p><a href="{% url "vessels:glossary" %}#jar" >jar</a></p> {% endif %}
+        {% if the_vessel.morph_bowl == 1 %} <p><a href="{% url "vessels:glossary" %}#bowl" >bowl</a> </p>{% endif %}
+        {% if the_vessel.morph_dish == 1 %} <p><a href="{% url "vessels:glossary" %}#dish" >dish</a> </p>{% endif %}
+        {% if the_vessel.morph_plate == 1 %} <p> <a href="{% url "vessels:glossary" %}#pla" >plate</a></p> {% endif %}
+        {% if the_vessel.morph_cup == 1 %} <p><a href="{% url "vessels:glossary" %}#cup" >cup</a></p> {% endif %}
+        {% if the_vessel.morph_jug == 1 %} <p> <a href="{% url "vessels:glossary" %}#jug" >jug</a> </p>{% endif %}
+        {% if the_vessel.morph_forno == 1 %} <p> <a href="{% url "vessels:glossary" %}#for" >forno</a> </p>{% endif %}
+        {% if the_vessel.morph_lamp == 1 %} <p> <a href="{% url "vessels:glossary" %}#lamp" >lamp</a> </p>{% endif %}
+        {% if the_vessel.morph_nipplebase == 1 %} <p><a href="{% url "vessels:glossary" %}#nip" >nipple</a></p> {% endif %}
+        {% if the_vessel.morph_pointedbase == 1 %} <p><a href="{% url "vessels:glossary" %}#poibase" >pointed base</a></p> {% endif %}
+        {% if the_vessel.morph_roundedbase == 1 %} <p><a href="{% url "vessels:glossary" %}#roubase" >rounded base</a> </p>{% endif %}
+        {% if the_vessel.morph_flatbase == 1 %} <p><a href="{% url "vessels:glossary" %}#flatbase" >flat base</a></p> {% endif %}
+      </td>    
+      <td>{% if the_vessel.rim_outcurving == 2 %} <p><a href="{% url "vessels:glossary" %}#out" >outcurving rim</a> </p>{% endif %}  
+        {% if the_vessel.rim_everted == 2 %} <p><a href="{% url "vessels:glossary" %}#ev" >everted rim</a> </p>{% endif %}  
+        {% if the_vessel.rim_direct_out == 2 %} <p><a href="{% url "vessels:glossary" %}#dout" >direct out rim</a> </p>{% endif %}  
+        {% if the_vessel.rim_direct == 2 %} <p><a href="{% url "vessels:glossary" %}#dir" >direct rim</a> </p>{% endif %}  
+        {% if the_vessel.rim_direct_in == 2 %} <p><a href="{% url "vessels:glossary" %}#din" >direct in rim</a> </p>{% endif %}  
+        {% if the_vessel.rim_inverted == 2 %} <p><a href="{% url "vessels:glossary" %}#inv"  >inverted rim</a> </p>{% endif %}  
+        {% if the_vessel.rim_incurving == 2 %} <p> <a href="{% url "vessels:glossary" %}#inc" >incurving rim</a> </p>{% endif %}  
+        {% if the_vessel.rim_parallel == 2 %} <p><a href="{% url "vessels:glossary" %}#para" >parallel rim</a> </p>{% endif %}  
+        {% if the_vessel.rim_abrupt_narrow == 2 %} <p><a href="{% url "vessels:glossary" %}#abrn" >abrupt narrow rim</a> </p>{% endif %}  
+        {% if the_vessel.rim_abrupt_wide == 2 %} <p><a href="{% url "vessels:glossary" %}#abrw" >abrupt wide rim</a> </p>{% endif %}
+        {% if the_vessel.rim_gradually_narrow == 2 %} <p><a href="{% url "vessels:glossary" %}#gradi" >gradually narrow rim</a> </p>{% endif %}  
+        {% if the_vessel.rim_gradually_thickened_exterior == 2 %} <p><a href="{% url "vessels:glossary" %}#gradoe" >gradually thickened exterior rim</a> </p>{% endif %}  
+        {% if the_vessel.rim_gradually_thickened_interior == 2 %} <p><a href="{% url "vessels:glossary" %}#gradoi" >gradually thickened interior rim</a> </p>{% endif %}
+        {% if the_vessel.rim_rounded_both == 2 %} <p><a href="{% url "vessels:glossary" %}#roundb" >rounded both sides rim</a> </p>{% endif %}  
+        {% if the_vessel.rim_thickened_interior == 2 %} <p><a href="{% url "vessels:glossary" %}#roundi"  >rounded thickened interior rim</a> </p>{% endif %}  
+        {% if the_vessel.rim_thickened_exterior == 2 %} <p><a href="{% url "vessels:glossary" %}#roundo" >rounded thickened exterior rim</a> </p>{% endif %}
+      </td>
+      <td>{% if the_vessel.rim_outcurving == 1 %} <p><a href="{% url "vessels:glossary" %}#out" >outcurving rim</a> </p>{% endif %}  
+        {% if the_vessel.rim_everted == 1 %} <p><a href="{% url "vessels:glossary" %}#ev" >everted rim</a> </p>{% endif %}  
+        {% if the_vessel.rim_direct_out == 1 %} <p><a href="{% url "vessels:glossary" %}#dout" >direct out rim</a> </p>{% endif %}  
+        {% if the_vessel.rim_direct == 1 %} <p><a href="{% url "vessels:glossary" %}#dir" >direct rim</a> </p>{% endif %}  
+        {% if the_vessel.rim_direct_in == 1 %} <p><a href="{% url "vessels:glossary" %}#din" >direct in rim</a> </p>{% endif %}  
+        {% if the_vessel.rim_inverted == 1 %} <p><a href="{% url "vessels:glossary" %}#inv"  >inverted rim</a> </p>{% endif %}  
+        {% if the_vessel.rim_incurving == 1 %} <p> <a href="{% url "vessels:glossary" %}#inc" >incurving rim</a> </p>{% endif %}  
+        {% if the_vessel.rim_parallel == 1 %} <p><a href="{% url "vessels:glossary" %}#para" >parallel rim</a> </p>{% endif %}  
+        {% if the_vessel.rim_abrupt_narrow == 1 %} <p><a href="{% url "vessels:glossary" %}#abrn" >abrupt narrow rim</a> </p>{% endif %}  
+        {% if the_vessel.rim_abrupt_wide == 1 %} <p><a href="{% url "vessels:glossary" %}#abrw" >abrupt wide rim</a> </p>{% endif %}
+        {% if the_vessel.rim_gradually_narrow == 1 %} <p><a href="{% url "vessels:glossary" %}#gradi" >gradually narrow rim</a> </p>{% endif %}  
+        {% if the_vessel.rim_gradually_thickened_exterior == 1 %} <p><a href="{% url "vessels:glossary" %}#gradoe" >gradually thickened exterior rim</a> </p>{% endif %}  
+        {% if the_vessel.rim_gradually_thickened_interior == 1 %} <p><a href="{% url "vessels:glossary" %}#gradoi" >gradually thickened interior rim</a> </p>{% endif %}
+        {% if the_vessel.rim_rounded_both == 1 %} <p><a href="{% url "vessels:glossary" %}#roundb" >rounded both sides rim</a> </p>{% endif %}  
+        {% if the_vessel.rim_thickened_interior == 1 %} <p><a href="{% url "vessels:glossary" %}#roundi"  >rounded thickened interior rim</a> </p>{% endif %}  
+        {% if the_vessel.rim_thickened_exterior == 1 %} <p><a href="{% url "vessels:glossary" %}#roundo" >rounded thickened exterior rim</a> </p>{% endif %}
+      </td></tr>
     </table>
     
     <table class = "industrytable" id = "fea">
-    <th colspan="2"><h3> Decoration </h3></th> <th colspan="2"><h3> Decoration Position </h3></th> 
+    <th colspan="2"><h3> Decoration Position</h3></th> <th colspan="2"><h3> Decoration</h3></th> 
     
       <tr><td><h4>Common</h4></td> <td><h4>Occasional*</h4></td><td><h4>Common</h4></td> <td><h4>Occasional*</h4></td></tr>
-      <tr><td>  {% for tf in typ_features %}
-        {% if tf.type == "D" %} <p> <a href="{% url "vessels:glossary" %}#{{tf.tag}}">{{tf.name}} </a> </p> {% endif %}
-        {% endfor %} </td>
-        <td>{% for cf in com_features %}
-          {% if cf.type == "D" %}<p><a href="{% url "vessels:glossary" %}#{{cf.tag}}">{{cf.name}} </a> </p> {% endif %}
-          {% endfor %}</td>
-
-      <td>  {% for tf in typ_features %}
-        {% if tf.type == "P" %} <p> <a href="{% url "vessels:glossary" %}#{{tf.tag}}">{{tf.name}} </a> </p> {% endif %}
-        {% endfor %} </td>
-        <td>{% for cf in com_features %}
-          {% if cf.type == "P" %}<p><a href="{% url "vessels:glossary" %}#{{cf.tag}}">{{cf.name}} </a> </p> {% endif %}
-          {% endfor %}</td></tr>
+      <tr><td> {% if the_vessel.dec_lip == 2 %} <p><a href="{% url "vessels:glossary" %}#declip" >decorated lip</a> </p> {% endif %} 
+        {% if the_vessel.dec_rim == 2 %} <p><a href="{% url "vessels:glossary" %}#decrim" >decorated rim</a> </p> {% endif %}  
+        {% if the_vessel.dec_internal_rim == 2 %} <p><a href="{% url "vessels:glossary" %}#intdecrim" >decorated internal rim</a> </p> {% endif %}  
+        {% if the_vessel.dec_neck == 2 %} <p><a href="{% url "vessels:glossary" %}#decnec" >decorated neck</a> </p> {% endif %}  
+        {% if the_vessel.dec_shoulders == 2 %} <p><a href="{% url "vessels:glossary" %}#decsho" >decorated shoulder</a> </p> {% endif %}  
+        {% if the_vessel.dec_body == 2 %} <p><a href="{% url "vessels:glossary" %}#decbody" >decorated body</a> </p> {% endif %}  
+    </td>
+    <td> {% if the_vessel.dec_lip == 1 %} <p><a href="{% url "vessels:glossary" %}#declip" >decorated lip</a> </p> {% endif %} 
+      {% if the_vessel.dec_rim == 1 %} <p><a href="{% url "vessels:glossary" %}#decrim" >decorated rim</a> </p> {% endif %}  
+      {% if the_vessel.dec_internal_rim == 1 %} <p><a href="{% url "vessels:glossary" %}#intdecrim" >decorated internal rim</a> </p> {% endif %}  
+      {% if the_vessel.dec_neck == 1 %} <p><a href="{% url "vessels:glossary" %}#decnec" >decorated neck</a> </p> {% endif %}  
+      {% if the_vessel.dec_shoulders == 1 %} <p><a href="{% url "vessels:glossary" %}#decsho" >decorated shoulder</a> </p> {% endif %}  
+      {% if the_vessel.dec_body == 1 %} <p><a href="{% url "vessels:glossary" %}#decbody" >decorated body</a> </p> {% endif %}  
+  </td>
+  <td>  {% if the_vessel.dec_plain == 2 %} <p><a href="{% url "vessels:glossary" %}#plain" >plain</a> </p>{% endif %} 
+    {% if the_vessel.dec_exposed_coil == 2 %} <p><a href="{% url "vessels:glossary" %}#expo" >exposed coil</a> </p>{% endif %} 
+    {% if the_vessel.dec_finger_marks == 2 %} <p><a href="{% url "vessels:glossary" %}#fing" >finger marks</a></p> {% endif %} 
+    {% if the_vessel.dec_impressing == 2 %} <p><a href="{% url "vessels:glossary" %}#impr" >impressing</a> </p>{% endif %}   
+    {% if the_vessel.dec_punctation == 2 %} <p><a href="{% url "vessels:glossary" %}#punct" >punctation</a></p> {% endif %}   
+    {% if the_vessel.dec_comb_impression == 2 %} <p><a href="{% url "vessels:glossary" %}#imprcom" >comb impression</a> </p>{% endif %}   
+    {% if the_vessel.dec_dentate == 2 %} <p><a href="{% url "vessels:glossary" %}#dent" >dentate</a> </p>{% endif %}   
+    {% if the_vessel.dec_paddle_impressing == 2 %} <p><a href="{% url "vessels:glossary" %}#padi" >paddle impressing</a></p> {% endif %}   
+    {% if the_vessel.dec_cord_impressing == 2 %} <p><a href="{% url "vessels:glossary" %}#cord" >cord impressing</a> </p>{% endif %}  
+    {% if the_vessel.dec_incising == 2 %} <p><a href="{% url "vessels:glossary" %}#incis" >incising</a> </p>{% endif %}   
+    {% if the_vessel.dec_simple_incising == 2 %} <p><a href="{% url "vessels:glossary" %}#incsin" >simple incising</a> </p>{% endif %}   
+    {% if the_vessel.dec_comb_incising == 2 %} <p><a href="{% url "vessels:glossary" %}#inccom" >comb incising</a> </p>{% endif %}   
+    {% if the_vessel.dec_grooving == 2 %} <p><a href="{% url "vessels:glossary" %}#gro" >grooving</a> </p>{% endif %}   
+    {% if the_vessel.dec_scouring == 2 %} <p><a href="{% url "vessels:glossary" %}#sco" >scouring</a></p> {% endif %}   
+    {% if the_vessel.dec_carving == 2 %} <p><a href="{% url "vessels:glossary" %}#carv" >carving</a></p> {% endif %}   
+    {% if the_vessel.dec_perforating == 2 %} <p><a href="{% url "vessels:glossary" %}#perf" >perforating</a> </p>{% endif %} 
+    {% if the_vessel.dec_applique == 2 %} <p><a href="{% url "vessels:glossary" %}#appl" >applique</a> </p>{% endif %}   
+    {% if the_vessel.dec_nubbins_lugs == 2 %} <p><a href="{% url "vessels:glossary" %}#lug" >nubbins and lugs</a> </p>{% endif %}   
+    {% if the_vessel.dec_bands == 2 %} <p><a href="{% url "vessels:glossary" %}#band" >bands</a> </p>{% endif %}   
+    {% if the_vessel.dec_sculpting == 2 %} <p><a href="{% url "vessels:glossary" %}#sculp" >sculpting</a> </p>{% endif %}  
+    {% if the_vessel.dec_red_slip == 2 %} <p><a href="{% url "vessels:glossary" %}#red" >red slip</a> </p>{% endif %}   
+    {% if the_vessel.dec_glaze == 2 %} <p><a href="{% url "vessels:glossary" %}#glaze" >glaze</a> </p>{% endif %}   
+    {% if the_vessel.dec_painting == 2 %} <p><a href="{% url "vessels:glossary" %}#paint" >painting</a> </p>{% endif %} </td>
+        
+  <td>  {% if the_vessel.dec_plain == 1 %} <p><a href="{% url "vessels:glossary" %}#plain" >plain</a> </p>{% endif %} 
+    {% if the_vessel.dec_exposed_coil == 1 %} <p><a href="{% url "vessels:glossary" %}#expo" >exposed coil</a> </p>{% endif %} 
+    {% if the_vessel.dec_finger_marks == 1 %} <p><a href="{% url "vessels:glossary" %}#fing" >finger marks</a></p> {% endif %} 
+    {% if the_vessel.dec_impressing == 1 %} <p><a href="{% url "vessels:glossary" %}#impr" >impressing</a> </p>{% endif %}   
+    {% if the_vessel.dec_punctation == 1 %} <p><a href="{% url "vessels:glossary" %}#punct" >punctation</a></p> {% endif %}   
+    {% if the_vessel.dec_comb_impression == 1 %} <p><a href="{% url "vessels:glossary" %}#imprcom" >comb impression</a> </p>{% endif %}   
+    {% if the_vessel.dec_dentate == 1 %} <p><a href="{% url "vessels:glossary" %}#dent" >dentate</a> </p>{% endif %}   
+    {% if the_vessel.dec_paddle_impressing == 1 %} <p><a href="{% url "vessels:glossary" %}#padi" >paddle impressing</a></p> {% endif %}   
+    {% if the_vessel.dec_cord_impressing == 1 %} <p><a href="{% url "vessels:glossary" %}#cord" >cord impressing</a> </p>{% endif %}  
+    {% if the_vessel.dec_incising == 1 %} <p><a href="{% url "vessels:glossary" %}#incis" >incising</a> </p>{% endif %}   
+    {% if the_vessel.dec_simple_incising == 1 %} <p><a href="{% url "vessels:glossary" %}#incsin" >simple incising</a> </p>{% endif %}   
+    {% if the_vessel.dec_comb_incising == 1 %} <p><a href="{% url "vessels:glossary" %}#inccom" >comb incising</a> </p>{% endif %}   
+    {% if the_vessel.dec_grooving == 1 %} <p><a href="{% url "vessels:glossary" %}#gro" >grooving</a> </p>{% endif %}   
+    {% if the_vessel.dec_scouring == 1 %} <p><a href="{% url "vessels:glossary" %}#sco" >scouring</a></p> {% endif %}   
+    {% if the_vessel.dec_carving == 1 %} <p><a href="{% url "vessels:glossary" %}#carv" >carving</a></p> {% endif %}   
+    {% if the_vessel.dec_perforating == 1 %} <p><a href="{% url "vessels:glossary" %}#perf" >perforating</a> </p>{% endif %} 
+    {% if the_vessel.dec_applique == 1 %} <p><a href="{% url "vessels:glossary" %}#appl" >applique</a> </p>{% endif %}   
+    {% if the_vessel.dec_nubbins_lugs == 1 %} <p><a href="{% url "vessels:glossary" %}#lug" >nubbins and lugs</a> </p>{% endif %}   
+    {% if the_vessel.dec_bands == 1 %} <p><a href="{% url "vessels:glossary" %}#band" >bands</a> </p>{% endif %}   
+    {% if the_vessel.dec_sculpting == 1 %} <p><a href="{% url "vessels:glossary" %}#sculp" >sculpting</a> </p>{% endif %}  
+    {% if the_vessel.dec_red_slip == 1 %} <p><a href="{% url "vessels:glossary" %}#red" >red slip</a> </p>{% endif %}   
+    {% if the_vessel.dec_glaze == 1 %} <p><a href="{% url "vessels:glossary" %}#glaze" >glaze</a> </p>{% endif %}   
+    {% if the_vessel.dec_painting == 1 %} <p><a href="{% url "vessels:glossary" %}#paint" >painting</a> </p>{% endif %} </td></tr>
     </table>
 <p>* refers to features with only single vessel examples, or present but in less than 10 percent in larger samples.</p>
   </div> 

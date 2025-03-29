@@ -168,7 +168,11 @@ mark {
     vertical-align: top;
     
   } 
-
+  #fea p {
+    margin: 0rem 0rem 0rem 0rem;
+      color: #f1eeee;
+      font-size: 1.5rem;
+  }
   #fea th {
     background-color: #2d2d2d; 
     border: 3px solid #ddd;

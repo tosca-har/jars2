@@ -1,0 +1,160 @@
+{% extends "base.html" %} 
+{% load static %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static "vessels/glossary.css" %}">
+<link rel="stylesheet" href="{% static "vessels/header.css" %}"> 
+<link rel="stylesheet" href="{% static "vessels/leaflet.css" %}">
+<link rel="stylesheet" href="{% static "vessels/map.css" %}">
+<script src="{% static "vessels/leaflet.js"%}"></script>
+<script src="{% static "vessels/map.js" %}"></script>
+{% endblock %}
+
+{% block page_title %} Vessel Details {% endblock %}
+{% block content %} {% include "vessels/includes/header.html" %} 
+<h1>{{ the_vessel.name }}</h1>
+{% if prod_sites or imp_sites %}
+    <div id="map">
+ 
+    <script> 
+      var picon = "{% static "vessels/images/redPot2.png" %}";
+      var bicon = "{% static "vessels/images/bluePot2.png" %}";
+      var grcon = "{% static "vessels/images/ltgreyPot.png" %}";
+      let mbsu = "{{mbsu}}";
+      let thsu = "{{thsu}}";
+      let siteNames = [];
+      let siteLat = [];
+      let siteLng = [];
+      let siteLinks = [];
+      let siteVessels = [];
+      let siteColour = [];
+      let mapcentre =  [-4.5, 160];
+      {% for site in prod_sites %}
+        siteNames.push("{{site.name}}");
+        siteLat.push({{site.lat}});
+        siteLng.push({{site.lng}});
+        siteLinks.push("{{ site.get_absolute_url }}");
+        siteVessels.push("{{site.vessel_string}}");
+        siteColour.push(1);
+        mapcentre = [{{site.lat}}, {{site.lng}}];
+      {% endfor %}
+      {% for site in imp_sites %}
+        siteNames.push("{{site.name}}");
+        siteLat.push({{site.lat}});
+        siteLng.push({{site.lng}});
+        siteLinks.push("{{ site.get_absolute_url }}");
+        siteVessels.push("{{site.vessel_string}}");
+        siteColour.push(0);
+      {% endfor %}
+      getMap(); 
+    </script> 
+  </div>
+
+  <div class="key"> 
+    <img src="{% static "vessels/images/redPot2.png" %}" alt="red pot" height="50"> Production site. <br>
+    <br>
+    <img src="{% static "vessels/images/bluePot2.png" %}" alt="blue pot" height="50"> Import site.  <br>
+
+    <p id="targetSite"></p> </div>
+
+  {% else %} <p>No site information available.</p>
+  {% endif %}
+
+  <div class="after-map">
+    <p> Time Period: {{ the_vessel.time_start }} BP - {{the_vessel.time_end}} BP </p>
+    <p> {{ the_vessel.details }} </p>
+ 
+    <h3>Belongs to Vessel Groups:</h3>
+    {% if vgr %}
+      {% for gr in vgr %}
+        <p> <a href="{{ gr.get_absolute_url }}"> {{gr.name}} </a> </p>
+      {% endfor %}
+    {% else %}
+      <p>No groups recorded.</p>
+    {% endif %} 
+    <h3>The Potters </h3>
+     <p> Language: <a href="https://iso639-3.sil.org/code/{{ the_vessel.language_code }}"> {{ the_vessel.language }} (iso:{{the_vessel.language_code}}) </a>
+       
+    </p>
+    <p> Gender Makers: <a href="{% url "vessels:glossary" %}#gen">{{ the_vessel.gender_make }}</a>  </p>
+    <p> Gender Decorators: <a href="{% url "vessels:glossary" %}#gen">{{ the_vessel.gender_decorate }}</a>   </p>
+
+    <h3>Vessel Creation </h3>
+    <p> Base: <a href="{% url "vessels:glossary" %}#conb">{{ the_vessel.base_technique }} </a>, Rim: <a href="{% url "vessels:glossary" %}#conp">{{ the_vessel.rim_technique }} </a>, Primary: <a href="{% url "vessels:glossary" %}#conp">{{ the_vessel.primary_technique }} </a>, Secondary: <a href="{% url "vessels:glossary" %}#cons">{{ the_vessel.secondary_technique }}</a> </p>
+    <p> Manual tempering: <a href="{% url "vessels:glossary" %}#temp">{{ the_vessel.temper }}</a> </p>
+    <h4>Fabrics: </h4>
+    {% if fabrics %}
+      {% for fab in fabrics %}
+       <p> <a href="https://kudenfabrics.anu.edu.au/{{ fab.name }}"> {{fab.fullname}} </a> </p>
+      {% endfor %}
+    {% else %}
+      <p>No fabrics recorded.</p>
+    {% endif%} 
+
+    <table class = "industrytable" id = "fea">
+      <th colspan="2"><h3> Use </h3></th> 
+      <tr><td><h4>Common</h4></td> <td><h4>Occasional*</h4></td></tr>
+      <tr><td>  {% for tf in typ_features %}
+        {% if tf.type == "U" %} <p> <a href="{% url "vessels:glossary" %}#{{tf.tag}}">{{tf.name}} </a> </p> {% endif %}
+        {% endfor %} </td>
+        <td>{% for cf in com_features %}
+          {% if cf.type == "U" %}<p><a href="{% url "vessels:glossary" %}#{{cf.tag}}">{{cf.name}} </a> </p> {% endif %}
+          {% endfor %}</td></tr>
+    </table>
+  
+    <table class = "industrytable" id = "fea">
+      <th colspan="2"><h3> Morphology </h3></th> <th colspan="2"><h3> Rim Morphology </h3></th> 
+      <tr><td><h4>Common</h4></td> <td><h4>Occasional*</h4></td><td><h4>Common</h4></td> <td><h4>Occasional*</h4></td></tr>
+      <tr><td>  {% for tf in typ_features %}
+        {% if tf.type == "M" %} <p> <a href="{% url "vessels:glossary" %}#{{tf.tag}}">{{tf.name}} </a> </p> {% endif %}
+        {% endfor %} </td>
+        <td>{% for cf in com_features %}
+          {% if cf.type == "M" %}<p><a href="{% url "vessels:glossary" %}#{{cf.tag}}">{{cf.name}} </a> </p> {% endif %}
+          {% endfor %}</td>     
+      <td>  {% for tf in typ_features %}
+        {% if tf.type == "R" %} <p> <a href="{% url "vessels:glossary" %}#{{tf.tag}}">{{tf.name}} </a> </p> {% endif %}
+        {% endfor %} </td>
+        <td>{% for cf in com_features %}
+          {% if cf.type == "R" %}<p><a href="{% url "vessels:glossary" %}#{{cf.tag}}">{{cf.name}} </a> </p> {% endif %}
+          {% endfor %}</td></tr>
+    </table>
+    
+    <table class = "industrytable" id = "fea">
+    <th colspan="2"><h3> Decoration </h3></th> <th colspan="2"><h3> Decoration Position </h3></th> 
+    
+      <tr><td><h4>Common</h4></td> <td><h4>Occasional*</h4></td><td><h4>Common</h4></td> <td><h4>Occasional*</h4></td></tr>
+      <tr><td>  {% for tf in typ_features %}
+        {% if tf.type == "D" %} <p> <a href="{% url "vessels:glossary" %}#{{tf.tag}}">{{tf.name}} </a> </p> {% endif %}
+        {% endfor %} </td>
+        <td>{% for cf in com_features %}
+          {% if cf.type == "D" %}<p><a href="{% url "vessels:glossary" %}#{{cf.tag}}">{{cf.name}} </a> </p> {% endif %}
+          {% endfor %}</td>
+
+      <td>  {% for tf in typ_features %}
+        {% if tf.type == "P" %} <p> <a href="{% url "vessels:glossary" %}#{{tf.tag}}">{{tf.name}} </a> </p> {% endif %}
+        {% endfor %} </td>
+        <td>{% for cf in com_features %}
+          {% if cf.type == "P" %}<p><a href="{% url "vessels:glossary" %}#{{cf.tag}}">{{cf.name}} </a> </p> {% endif %}
+          {% endfor %}</td></tr>
+    </table>
+<p>* refers to features with only single vessel examples, or present but in less than 10 percent in larger samples.</p>
+  </div> 
+  <div >  
+      <h3>Sketches</h3>
+      {% if vessel_images %}
+        {% for image in vessel_images %}
+          <figure><img src="{% static "vessels/images/drawings/"|add:image.imageloc %}" alt={{ image.name }} height= 500> 
+          <figcaption> Sketch based on {{ image.details }}. </figcaption> 
+          </figure>
+        {% endfor %}
+      {% else %}
+        <p>No images available.</p>
+      {% endif%} 
+    <h3>References</h3>
+      {% for ref in v_ref %}
+        <p> <a href="{{ ref.get_absolute_url }}"> {{ref.name}} ({{ ref.author_list }})</a> </p>
+      {% endfor %}
+  </div>
+  {% include "vessels/includes/footer.html" %}
+ 
+{% endblock %}

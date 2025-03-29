@@ -20,13 +20,13 @@ def search(request):
             valStart = form.cleaned_data.get("starttime")
             valEnd = form.cleaned_data.get("endtime")
             if valStart:
-                query = query + "from " + str(valStart) + "BP"
+                query = query + "from " + str(valStart) + " BP"
                 vessels = vessels.filter(time_end__lte=valStart)
             if valEnd == 0:
-                query = query + " to " + str(valEnd) + "BP"
+                query = query + " to " + str(valEnd) + " BP"
                 vessels = vessels.filter(time_start__gte=valEnd)
             elif valEnd:
-                query = query + " to " + str(valEnd) + "BP"
+                query = query + " to " + str(valEnd) + " BP"
                 vessels = vessels.filter(time_start__gte=valEnd)
             valB = form.cleaned_data.get("base_build")
             if valB != 'unknown':
@@ -394,7 +394,7 @@ def search(request):
             val = form.cleaned_data.get("regions_to_include") 
             vessels = vessels.filter(region__in=val)
             query = query + "." 
-            query2 = "Regions searched: " + ', '.join(val) + '.'
+            query2 = " Regions searched: " + ', '.join(val) + '.'
             query = query + query2
             vessels = vessels.distinct()
             sites = Site.objects.all()

@@ -68,9 +68,13 @@
 <div class="after-map">
   <h3>Vessels </h3>
   <table class = "industrytable" id = "fea">
-    <th>Name </th> <th>Details</th> <th>Morphology</th><th>Rim morphology</th> <th>Decoration Position</th> <th>Decoration</th><th>Use</th>
+    <th>Name </th> <th>Base^ Primary</th> <th>Rim^ Secondary</th><th>Maker^ Decorator</th><th>Manual Tempering</th><th>Morphology</th><th>Rim morphology</th> <th>Decoration Position</th> <th>Decoration</th><th>Use</th>
     {% for ves in vessels %}
-    <tr> <td rowspan="2"> <a href="{{ ves.get_absolute_url }}">{{ves.name}} </td><td>de1</td> 
+    <tr> <td rowspan="2"><p> <a href="{{ ves.get_absolute_url }}">{{ves.name}}</a> </p><p>{{ ves.time_start }} BP - {{ves.time_end}} BP </p> </td>
+      <td><a href="{% url "vessels:glossary" %}#conb">{{ ves.base_technique }} </a></td>
+      <td><a href="{% url "vessels:glossary" %}#conp">{{ ves.rim_technique }} </a></td>
+      <td><a href="{% url "vessels:glossary" %}#gen">{{ ves.gender_make }}</a> </td>
+      <td rowspan="2"> <a href="{% url "vessels:glossary" %}#temp">{{ ves.temper }}</a> </td> 
     <td>{% if ves.morph_spout == 2 %} <a href="{% url "vessels:glossary" %}#spo" style="background-color:Pink;color:OrangeRed;padding:4px 5px"> has spout</a> {% endif %}
       {% if ves.morph_multimouth == 2 %} <a href="{% url "vessels:glossary" %}#mulm" style="background-color:Pink;color:OliveDrab;padding:4px 5px">has multi-mouth</a> {% endif %}
       {% if ves.morph_neck == 2 %} <a href="{% url "vessels:glossary" %}#neck" style="background-color:Pink;color:Black;padding:4px 5px">has neck</a> {% endif %}
@@ -155,7 +159,10 @@
       {% if ves.use_hearth == 2 %} <a href="{% url "vessels:glossary" %}#hea" style="background-color:LightBlue;color:FireBrick;padding:4px 5px">hearth</a> {% endif %}
       {% if ves.use_light == 2 %} <a href="{% url "vessels:glossary" %}#light" style="background-color:LightBlue;color:ForestGreen;padding:4px 5px">light</a> {% endif %}
       {% if ves.use_musical_instrument == 2 %} <a href="{% url "vessels:glossary" %}#music" style="background-color:LightBlue;color:Brown;padding:4px 5px">musical instrument</a>{% endif %}</td></tr>
-    <tr><td>de1</td> <td>{% if ves.morph_spout == 1 %} <a href="{% url "vessels:glossary" %}#spo" style="background-color:Pink;color:OrangeRed;padding:4px 5px"> has spout*</a> {% endif %}
+    <tr><td><a href="{% url "vessels:glossary" %}#conp">{{ ves.primary_technique }} </a></td>
+      <td><a href="{% url "vessels:glossary" %}#cons">{{ ves.secondary_technique }}</a></td>
+       <td><a href="{% url "vessels:glossary" %}#gen">{{ ves.gender_decorate }}</a> </td>
+        <td>{% if ves.morph_spout == 1 %} <a href="{% url "vessels:glossary" %}#spo" style="background-color:Pink;color:OrangeRed;padding:4px 5px"> has spout*</a> {% endif %}
       {% if ves.morph_multimouth == 1 %} <a href="{% url "vessels:glossary" %}#mulm" style="background-color:Pink;color:OliveDrab;padding:4px 5px">has multi-mouth*</a> {% endif %}
       {% if ves.morph_neck == 1 %} <a href="{% url "vessels:glossary" %}#neck" style="background-color:Pink;color:Black;padding:4px 5px">has neck*</a> {% endif %}
       {% if ves.morph_collar == 1 %} <a href="{% url "vessels:glossary" %}#coll" style="background-color:Pink;color:FireBrick;padding:4px 5px">has collar*</a> {% endif %}
@@ -242,54 +249,7 @@
     {% endfor %}
   </table>
 
-
-
-  {% comment %} <table class = "industrytable" id = "fea">
-    <th colspan="2"><h3> Use </h3></th> 
-    <tr><td><h4>Common</h4></td> <td><h4>Occasional*</h4></td></tr>
-    <tr><td>  {% for tf in typ_features %}
-      {% if tf.type == "U" %} <p> <a href="{% url "vessels:glossary" %}#{{tf.tag}}">{{tf.name}} </a> </p> {% endif %}
-      {% endfor %} </td>
-      <td>{% for cf in com_features %}
-        {% if cf.type == "U" %}<p><a href="{% url "vessels:glossary" %}#{{cf.tag}}">{{cf.name}} </a> </p> {% endif %}
-        {% endfor %}</td></tr>
-  </table>
-
-  <table class = "industrytable" id = "fea">
-    <th colspan="2"><h3> Morphology </h3></th> <th colspan="2"><h3> Rim Morphology </h3></th> 
-    <tr><td><h4>Common</h4></td> <td><h4>Occasional*</h4></td><td><h4>Common</h4></td> <td><h4>Occasional*</h4></td></tr>
-    <tr><td>  {% for tf in typ_features %}
-      {% if tf.type == "M" %} <p> <a href="{% url "vessels:glossary" %}#{{tf.tag}}">{{tf.name}} </a> </p> {% endif %}
-      {% endfor %} </td>
-      <td>{% for cf in com_features %}
-        {% if cf.type == "M" %}<p><a href="{% url "vessels:glossary" %}#{{cf.tag}}">{{cf.name}} </a> </p> {% endif %}
-        {% endfor %}</td>     
-    <td>  {% for tf in typ_features %}
-      {% if tf.type == "R" %} <p> <a href="{% url "vessels:glossary" %}#{{tf.tag}}">{{tf.name}} </a> </p> {% endif %}
-      {% endfor %} </td>
-      <td>{% for cf in com_features %}
-        {% if cf.type == "R" %}<p><a href="{% url "vessels:glossary" %}#{{cf.tag}}">{{cf.name}} </a> </p> {% endif %}
-        {% endfor %}</td></tr>
-  </table>
-  
-  <table class = "industrytable" id = "fea">
-  <th colspan="2"><h3> Decoration </h3></th> <th colspan="2"><h3> Decoration Position </h3></th> 
-  
-    <tr><td><h4>Common</h4></td> <td><h4>Occasional*</h4></td><td><h4>Common</h4></td> <td><h4>Occasional*</h4></td></tr>
-    <tr><td>  {% for tf in typ_features %}
-      {% if tf.type == "D" %} <p> <a href="{% url "vessels:glossary" %}#{{tf.tag}}">{{tf.name}} </a> </p> {% endif %}
-      {% endfor %} </td>
-      <td>{% for cf in com_features %}
-        {% if cf.type == "D" %}<p><a href="{% url "vessels:glossary" %}#{{cf.tag}}">{{cf.name}} </a> </p> {% endif %}
-        {% endfor %}</td>
-
-    <td>  {% for tf in typ_features %}
-      {% if tf.type == "P" %} <p> <a href="{% url "vessels:glossary" %}#{{tf.tag}}">{{tf.name}} </a> </p> {% endif %}
-      {% endfor %} </td>
-      <td>{% for cf in com_features %}
-        {% if cf.type == "P" %}<p><a href="{% url "vessels:glossary" %}#{{cf.tag}}">{{cf.name}} </a> </p> {% endif %}
-        {% endfor %}</td></tr>
-  </table> {% endcomment %}
+<p>^ top value.</p>
 <p>* refers to features with only single vessel examples, or present but in less than 10 percent in larger samples.</p>
 </div> 
 </div>
