@@ -164,9 +164,8 @@ mark {
   }
   
   #fea td {
-    border: 3px solid #ddd;
-    vertical-align: top;
-    
+    border: 5px solid black;
+    vertical-align: top; 
   } 
   #fea p {
     margin: 0rem 0rem 0rem 0rem;
@@ -175,13 +174,26 @@ mark {
   }
   #fea th {
     background-color: #2d2d2d; 
-    border: 3px solid #ddd;
+    border: 5px solid black;
+    color: #ddd;
     
   } 
   #it {
     width: 95%; 
     
   } 
+
+  #exta {
+    float: right;
+    margin: 0rem 10rem 2rem 2rem;
+    width: 10%;
+    max-width: 50rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.26);
+    padding: 1rem;
+    border-radius: 16px;
+    background-color: #2d2d2d; 
+}
+
   .industrytable tr {
     border-bottom: 2px solid black;
     }
@@ -197,130 +209,224 @@ mark {
     color:whitesmoke;
     border: 1px solid #ddd;
   }
-/*   
-  .industrytable [data-tag="False"] {
-
-    text-align: center;
-    background-color:  #2d2d2d; ;
-    color: white;
+  .industrytable [data-tag="ltblor"] {
+    background-color:LightBlue;
+    color:OrangeRed;
+    padding:4px 5px;
   }
-  .industrytable [data-tag="True"] {
-
-    text-align: center;
-    background-color: #3ab2e9;
-    color: black;
+  .industrytable [data-tag="por"] {
+    background-color:pink;
+    color:OrangeRed;
+    padding:4px 5px;
   }
-  .industrytable [data-tag="S"] {
- 
-    text-align: center;
-    background-color: red;
-    color: rgb(63, 62, 62);
+  .industrytable [data-tag="pod"] {
+    background-color:pink;
+    color:OliveDrab;
+    padding:4px 5px;
   }
-  .industrytable [data-tag="SB"] {
-
-    text-align: center;
-    background-color: pink;
-    color: rgb(63, 62, 62);
+  .industrytable [data-tag="pba"] {
+    background-color:pink;
+    color:Black;
+    padding:4px 5px;
   }
-  .industrytable [data-tag="SRB"] {
-
-    text-align: center;
-    background-color: violet;
-    color: rgb(63, 62, 62);
+  .industrytable [data-tag="pfbr"] {
+    background-color:pink;
+    color:FireBrick;
+    padding:4px 5px;
   }
-  .industrytable [data-tag="PR"] {
-
-    text-align: center;
-    background-color: rgb(239, 124, 9);
-    color: rgb(63, 62, 62);
+  .industrytable [data-tag="pfgr"] {
+    background-color:pink;
+    color:ForestGreen;
+    padding:4px 5px;
   }
-  .industrytable [data-tag="SR"] {
-
-    text-align: center;
-    background-color: rgb(238, 206, 130);
-    color: rgb(63, 62, 62);
+  .industrytable [data-tag="pgre"] {
+    background-color:pink;
+    color:Grey;
+    padding:4px 5px;
   }
-  .industrytable [data-tag="SBU"] {
-
-    text-align: center;
-    background-color: purple;
-    color: rgb(119, 116, 116);
+  .industrytable [data-tag="pdbl"] {
+    background-color:pink;
+    color:DodgerBlue;
+    padding:4px 5px;
   }
-  .industrytable [data-tag="LBU"] {
-
-    text-align: center;
-    background-color: plum;
-    color: rgb(63, 62, 62);
+  .industrytable [data-tag="pind"] {
+    background-color:pink;
+    color:Indigo;
+    padding:4px 5px;
   }
-  .industrytable [data-tag="PA"] {
-
-      text-align: center;
-      background-color: blue;
-      color: rgb(119, 116, 116);
-    }
-    .industrytable [data-tag="PO"] {
-
-      text-align: center;
-      background-color: lightskyblue;
-      color: rgb(63, 62, 62);
-    }
-    .industrytable [data-tag="PC"] {
-
-      text-align: center;
-      background-color: navy;
-      color: rgb(119, 116, 116);
-    }
-    .industrytable [data-tag="RG"] {
-
-      text-align: center;
-      background-color: orange;
-      color: rgb(63, 62, 62);
-    }
-    .industrytable [data-tag="O"] {
-
-      text-align: center;
-      background-color: yellow;
-      color: rgb(63, 62, 62);
-    }
-    .industrytable [data-tag="F"] {
-
-      text-align: center;
-      background-color: red;
-      color: white;
-    }
-    .industrytable [data-tag="M"] {
-
-      text-align: center;
-      background-color:yellow;
-      color:  rgb(63, 62, 62);
-    }
-    .industrytable [data-tag="B"] {
-
-      text-align: center;
-      background-color: plum;
-      color: white;
-    }
-    .industrytable [data-tag="W"] {
-
-      text-align: center;
-      background-color: brown;
-      color: white;
-    }
-    .industrytable [data-tag="N"] {
-
-      text-align: center;
-      background-color: red;
-      color:  white;
-    }
-    .industrytable [data-tag="R"] {
-
-      text-align: center;
-      background-color: orange;
-      color: black;
-    }
-    .industrytable [data-tag="P"] {
-
-      text-align: center;
-      background-color: yellow;
-      color: black;
-    } */
+  .industrytable [data-tag="ltblind"] {
+    background-color:LightBlue;
+    color:Indigo;
+    padding:4px 5px;
+  }
+  .industrytable [data-tag="ltblba"] {
+    background-color:LightBlue;
+    color:Black;
+    padding:4px 5px;
+  }
+  .industrytable [data-tag="ltblfb"] {
+    background-color:LightBlue;
+    color:FireBrick;
+    padding:4px 5px;
+  }
+  .industrytable [data-tag="ltblfgr"] {
+    background-color:LightBlue;
+    color:ForestGreen;
+    padding:4px 5px;
+  }
+  .industrytable [data-tag="ltblbr"] {
+    background-color:LightBlue;
+    color:Brown;
+    padding:4px 5px;
+  }
+  .industrytable [data-tag="ltblmb"] {
+    background-color:LightBlue;
+    color:MediumBlue;
+    padding:4px 5px;
+  }
+  .industrytable [data-tag="ltbldgr"] {
+    background-color:LightBlue;
+    color:DarkGreen;
+    padding:4px 5px;
+  }
+  .industrytable [data-tag="dkblbl"] {
+    background-color:#1310a7;
+    color:#3ab2e9;
+    padding:4px 5px;
+  }
+  .industrytable [data-tag="dkblco"] {
+    background-color:#1310a7;
+    color:LightCoral;
+    padding:4px 5px;
+  }
+  .industrytable [data-tag="dkblltgr"] {
+    background-color:#1310a7;
+    color:LightGreen;
+    padding:4px 5px;
+  }
+  .industrytable [data-tag="dkblltbl"] {
+    background-color:#1310a7;
+    color:LightBlue;
+    padding:4px 5px;
+  }
+  .industrytable [data-tag="dkblgo"] {
+    background-color:#1310a7;
+    color:Gold;
+    padding:4px 5px;
+  }
+  .industrytable [data-tag="dkblg"] {
+    background-color:#1310a7;
+    color:#ddd;
+    padding:4px 5px;
+  }
+  .industrytable [data-tag="ltgbr"] {
+    background-color:#ddd;
+    color:Brown;
+    padding:4px 5px;
+  }
+  .industrytable [data-tag="ltgmb"] {
+    background-color:#ddd;
+    color:MediumBlue;
+    padding:4px 5px;
+  }
+  .industrytable [data-tag="ltgdkg"] {
+    background-color:#ddd;
+    color:DarkGreen;
+    padding:4px 5px;
+  }
+  .industrytable [data-tag="dkggo"] {
+    background-color:#2d2d2d;
+    color:Gold;
+    padding:4px 5px;
+  }
+  .industrytable [data-tag="dkglco"] {
+    background-color:#2d2d2d;
+    color:LightCoral;
+    padding:4px 5px;
+  }
+  .industrytable [data-tag="dkgltbl"] {
+    background-color:#2d2d2d;
+    color:LightBlue;
+    padding:4px 5px;
+  }
+  .industrytable [data-tag="dkgltgr"] {
+    background-color:#2d2d2d;
+    color:LightGreen;
+    padding:4px 5px;
+  }
+  .industrytable [data-tag="dkgltg"] {
+    background-color:#2d2d2d;
+    color:#ddd;
+    padding:4px 5px;
+  }
+  .industrytable [data-tag="False"], [data-tag="men"], [data-tag="coil"], [data-tag="spiral"] {
+    text-align: center;
+    background-color: #2d2d2d;
+    color: #ddd;
+  }
+  .industrytable [data-tag="coil-spiral"] {
+    text-align: center;
+    background-color:  #2d2d2d;
+    color: Gold;
+  }
+  .industrytable [data-tag="coil-ring"] {
+    text-align: center;
+    background-color:  #2d2d2d;
+    color: LightCoral;
+  }
+  .industrytable [data-tag="True"], [data-tag="women"], [data-tag="paddle and anvil"]   {
+    text-align: center;
+    background-color: #ddd;
+    color: #1310a7;
+  }
+  .industrytable [data-tag="hammering"]  {
+    text-align: center;
+    /* background-color: #f1eeee; */
+    background-color: #ddd;
+    color: DarkGreen;
+  }
+  .industrytable [data-tag="both"] {
+    text-align: center;
+    background-color: #1310a7;
+    color: #ddd;
+  }
+  .industrytable [data-tag="beating"]   {
+    text-align: center;
+    background-color: LightBlue;
+    color: #1310a7;
+  }
+  .industrytable [data-tag="scraping"]   {
+    text-align: center;
+    background-color: Pink;
+    color: #1310a7;
+  }
+  .industrytable [data-tag="slab"] {
+    text-align: center;
+    background-color:  #1310a7;
+    color: Gold;
+  }
+  .industrytable [data-tag="slab"] {
+    text-align: center;
+    background-color:  #1310a7;
+    color: Gold;
+  }
+  .industrytable [data-tag="pinching"]   {
+    text-align: center;
+    background-color: LightBlue;
+    color: OrangeRed;
+  }
+  .industrytable [data-tag="moulding"]   {
+    text-align: center;
+    background-color: LightBlue;
+    color: DarkGreen;
+  }
+  .industrytable [data-tag="wheel"]   {
+    text-align: center;
+    background-color: #ddd;
+    color: Black;
+  }
+  .industrytable [data-tag="ball"]   {
+    text-align: center;
+    background-color: LightBlue;
+    color: Indigo;
+  }

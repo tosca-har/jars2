@@ -64,6 +64,8 @@
 {% endif %}
 
   <div class="after-map">
+    
+    <p><a id="exta" href="#expanded">Go to Expanded Table</a></p>
     <h3>Vessels </h3>
     <table class = "industrytable" id = "it">
       <th>Vessel</th> <th>Start (BP)</th> <th>End (BP)</th> <th> Details </th>
@@ -87,70 +89,213 @@
     {% endif%} 
     <h2>Sketches</h2>
     {% if images %}
+    <figure>
       {% for image in images %}
-        <figure><img src="{% static "vessels/images/drawings/"|add:image.imageloc %}" alt={{ image.name }} height= 500> 
-        <figcaption> Sketch based on {{ image.details }}. </figcaption> 
-        </figure>
+        <img src="{% static "vessels/images/drawings/"|add:image.imageloc %}" alt={{ image.name }} height= 500> 
       {% endfor %}
+    </figure>
+    <figcaption>        
+      {% for image in images %}
+       {{ image.details }}; 
+    {% endfor %}. </figcaption> 
     {% else %}
       <p>No images available.</p>
     {% endif%} 
 
 
+    <div class="after-map" id ="expanded">
+      <h3>Vessels-Expanded </h3>
+      <table class = "industrytable" id = "fea">
+        <th>Name </th> <th>Base^ Primary</th> <th>Rim^ Secondary</th><th>Maker^ Decorator</th><th>Manual Tempering</th><th>Morphology</th><th>Rim morphology</th> <th>Decoration Position</th> <th>Decoration</th><th>Use</th>
+        {% for ves in vg_vessels %}
+        <tr> <td rowspan="2"><p> <a href="{{ ves.get_absolute_url }}">{{ves.name}}</a> </p><p>{{ ves.time_start }} BP - {{ves.time_end}} BP </p> </td>
+          <td data-tag="{{ ves.base_technique }}" ><a data-tag="{{ ves.base_technique }}" href="{% url "vessels:glossary" %}#conb">{{ ves.base_technique }} </a></td>
+          <td data-tag="{{ ves.rim_technique }}"><a data-tag="{{ ves.rim_technique }}" href="{% url "vessels:glossary" %}#conp">{{ ves.rim_technique }} </a></td>
+          <td data-tag="{{ ves.gender_make }}"><a  data-tag="{{ ves.gender_make }}"href="{% url "vessels:glossary" %}#gen">{{ ves.gender_make }}</a> </td>
+          <td rowspan="2" data-tag="{{ ves.temper }}"> <a data-tag="{{ ves.temper }}" href="{% url "vessels:glossary" %}#temp"> {% if ves.temper != None %} {{ ves.temper }} {% else %} unknown {% endif %} </a> </td> 
+        <td style = "border-bottom: 0.5px solid black;">{% if ves.morph_spout == 2 %} <a href="{% url "vessels:glossary" %}#spo" data-tag="por"> has spout</a> {% endif %}
+          {% if ves.morph_multimouth == 2 %} <a href="{% url "vessels:glossary" %}#mulm" data-tag="pod">has multi-mouth</a> {% endif %}
+          {% if ves.morph_neck == 2 %} <a href="{% url "vessels:glossary" %}#neck" data-tag="pba">has neck</a> {% endif %}
+          {% if ves.morph_collar == 2 %} <a href="{% url "vessels:glossary" %}#coll" data-tag="pfbr">has collar</a> {% endif %}
+          {% if ves.morph_carination == 2 %} <a href="{% url "vessels:glossary" %}#car" data-tag="pfgr">has carination</a> {% endif %}
+          {% if ves.morph_handle == 2 %} <a href="{% url "vessels:glossary" %}#han" data-tag="pgre">has handle</a> {% endif %}
+          {% if ves.morph_feet == 2 %} <a href="{% url "vessels:glossary" %}#feet" data-tag="pdbl">has feet</a> {% endif %}
+          {% if ves.morph_ringfoot == 2 %} <a href="{% url "vessels:glossary" %}#rfoot" data-tag="pind">has ring foot</a> {% endif %}
+          {% if ves.morph_restricted == 2 %} <a href="{% url "vessels:glossary" %}#res" data-tag="dkblbl">restricted</a> {% endif %}
+          {% if ves.morph_unrestricted == 2 %} <a href="{% url "vessels:glossary" %}#unres" data-tag="dkblco">unrestricted</a> {% endif %}
+          {% if ves.morph_jar == 2 %} <a href="{% url "vessels:glossary" %}#jar" data-tag="ltblor">jar</a> {% endif %}
+          {% if ves.morph_bowl == 2 %} <a href="{% url "vessels:glossary" %}#bowl" data-tag="ltblind">bowl</a> {% endif %}
+          {% if ves.morph_dish == 2 %} <a href="{% url "vessels:glossary" %}#dish" data-tag="ltblba">dish</a> {% endif %}
+          {% if ves.morph_plate == 2 %} <a href="{% url "vessels:glossary" %}#pla" data-tag="ltblfb">plate</a> {% endif %}
+          {% if ves.morph_cup == 2 %} <a href="{% url "vessels:glossary" %}#cup" data-tag="ltblfgr">cup</a> {% endif %}
+          {% if ves.morph_jug == 2 %} <a href="{% url "vessels:glossary" %}#jug" data-tag="ltblbr">jug</a> {% endif %}
+          {% if ves.morph_forno == 2 %} <a href="{% url "vessels:glossary" %}#for" data-tag="ltblmb">forno</a> {% endif %}
+          {% if ves.morph_lamp == 2 %} <a href="{% url "vessels:glossary" %}#lamp" data-tag="ltbldgr">lamp</a> {% endif %}
+          {% if ves.morph_nipplebase == 2 %} <a href="{% url "vessels:glossary" %}#nip" data-tag="dkggo">nipple</a> {% endif %}
+          {% if ves.morph_pointedbase == 2 %} <a href="{% url "vessels:glossary" %}#poibase" data-tag="dkglco">pointed base</a> {% endif %}
+          {% if ves.morph_roundedbase == 2 %} <a href="{% url "vessels:glossary" %}#roubase" data-tag="dkgltbl">rounded base</a> {% endif %}
+          {% if ves.morph_flatbase == 2 %} <a href="{% url "vessels:glossary" %}#flatbase" data-tag="dkgltgr">flat base</a> {% endif %}
+        </td><td style = "border-bottom: 0.5px solid black;">{% if ves.rim_outcurving == 2 %} <a href="{% url "vessels:glossary" %}#out" data-tag="pind">outcurving rim</a> {% endif %}  
+          {% if ves.rim_everted == 2 %} <a href="{% url "vessels:glossary" %}#ev" data-tag="pod">everted rim</a> {% endif %}  
+          {% if ves.rim_direct_out == 2 %} <a href="{% url "vessels:glossary" %}#dout" data-tag="pba">direct out rim</a> {% endif %}  
+          {% if ves.rim_direct == 2 %} <a href="{% url "vessels:glossary" %}#dir" data-tag="pfbr">direct rim</a> {% endif %}  
+          {% if ves.rim_direct_in == 2 %} <a href="{% url "vessels:glossary" %}#din" data-tag="pfgr">direct in rim</a> {% endif %}  
+          {% if ves.rim_inverted == 2 %} <a href="{% url "vessels:glossary" %}#inv"  data-tag="pgre">inverted rim</a> {% endif %}  
+          {% if ves.rim_incurving == 2 %} <a href="{% url "vessels:glossary" %}#inc" data-tag="pdbl">incurving rim</a> {% endif %}  
+          {% if ves.rim_parallel == 2 %} <a href="{% url "vessels:glossary" %}#para" data-tag="dkblbl">parallel rim</a> {% endif %}  
+          {% if ves.rim_abrupt_narrow == 2 %} <a href="{% url "vessels:glossary" %}#abrn" data-tag="ltblor">abrupt narrow rim</a> {% endif %}  
+          {% if ves.rim_abrupt_wide == 2 %} <a href="{% url "vessels:glossary" %}#abrw" data-tag="ltblind">abrupt wide rim</a> {% endif %}
+          {% if ves.rim_gradually_narrow == 2 %} <a href="{% url "vessels:glossary" %}#gradi" data-tag="dkggo">gradually narrow rim</a> {% endif %}  
+          {% if ves.rim_gradually_thickened_exterior == 2 %} <a href="{% url "vessels:glossary" %}#gradoe" data-tag="dkglco">gradually thickened exterior rim</a> {% endif %}  
+          {% if ves.rim_gradually_thickened_interior == 2 %} <a href="{% url "vessels:glossary" %}#gradoi" data-tag="dkgltgr">gradually thickened interior rim</a> {% endif %}
+          {% if ves.rim_rounded_both == 2 %} <a href="{% url "vessels:glossary" %}#roundb" data-tag="ltgbr">rounded both sides rim</a> {% endif %}  
+          {% if ves.rim_thickened_interior == 2 %} <a href="{% url "vessels:glossary" %}#roundi" data-tag="ltgmb" >rounded thickened interior rim</a> {% endif %}  
+          {% if ves.rim_thickened_exterior == 2 %} <a href="{% url "vessels:glossary" %}#roundo" data-tag="ltgdkg">rounded thickened exterior rim</a> {% endif %}
+        </td><td style = "border-bottom: 0.5px solid black;"> {% if ves.dec_lip == 2 %} <a href="{% url "vessels:glossary" %}#declip" data-tag="pind">decorated lip</a> {% endif %} 
+          {% if ves.dec_rim == 2 %} <a href="{% url "vessels:glossary" %}#decrim" data-tag="dkblltgr">decorated rim</a> {% endif %}  
+          {% if ves.dec_internal_rim == 2 %} <a href="{% url "vessels:glossary" %}#intdecrim" data-tag="ltblind">decorated internal rim</a> {% endif %}  
+          {% if ves.dec_neck == 2 %} <a href="{% url "vessels:glossary" %}#decnec" data-tag="pfbr">decorated neck</a> {% endif %}  
+          {% if ves.dec_shoulders == 2 %} <a href="{% url "vessels:glossary" %}#decsho" data-tag="dkggo">decorated shoulder</a> {% endif %}  
+          {% if ves.dec_body == 2 %} <a href="{% url "vessels:glossary" %}#decbody" data-tag="ltgbr">decorated body</a> {% endif %}  
+      </td><td style = "border-bottom: 0.5px solid black;">  {% if ves.dec_plain == 2 %} <a href="{% url "vessels:glossary" %}#plain" data-tag="dkgltg">plain</a> {% endif %} 
+        {% if ves.dec_exposed_coil == 2 %} <a href="{% url "vessels:glossary" %}#expo" data-tag="pind">exposed coil</a> {% endif %} 
+        {% if ves.dec_finger_marks == 2 %} <a href="{% url "vessels:glossary" %}#fing" data-tag="pfbr">finger marks</a> {% endif %} 
+        {% if ves.dec_impressing == 2 %} <a href="{% url "vessels:glossary" %}#impr" data-tag="dkblbl">impressing</a> {% endif %}   
+        {% if ves.dec_punctation == 2 %} <a href="{% url "vessels:glossary" %}#punct" data-tag="dkblco">punctation</a> {% endif %}   
+        {% if ves.dec_comb_impression == 2 %} <a href="{% url "vessels:glossary" %}#imprcom" data-tag="dkblltgr">comb impression</a> {% endif %}   
+        {% if ves.dec_dentate == 2 %} <a href="{% url "vessels:glossary" %}#dent" data-tag="dkblltbl">dentate</a> {% endif %}   
+        {% if ves.dec_paddle_impressing == 2 %} <a href="{% url "vessels:glossary" %}#padi" data-tag="dkblgo">paddle impressing</a> {% endif %}   
+        {% if ves.dec_cord_impressing == 2 %} <a href="{% url "vessels:glossary" %}#cord" data-tag="dkblg">cord impressing</a> {% endif %}  
+        {% if ves.dec_incising == 2 %} <a href="{% url "vessels:glossary" %}#incis" data-tag="ltblor">incising</a> {% endif %}   
+        {% if ves.dec_simple_incising == 2 %} <a href="{% url "vessels:glossary" %}#incsin" data-tag="ltblind">simple incising</a> {% endif %}   
+        {% if ves.dec_comb_incising == 2 %} <a href="{% url "vessels:glossary" %}#inccom" data-tag="ltblba">comb incising</a> {% endif %}   
+        {% if ves.dec_grooving == 2 %} <a href="{% url "vessels:glossary" %}#gro" data-tag="ltblfb">grooving</a> {% endif %}   
+        {% if ves.dec_scouring == 2 %} <a href="{% url "vessels:glossary" %}#sco" data-tag="ltblfgr">scouring</a> {% endif %}   
+        {% if ves.dec_carving == 2 %} <a href="{% url "vessels:glossary" %}#carv" data-tag="ltblbr">carving</a> {% endif %}   
+        {% if ves.dec_perforating == 2 %} <a href="{% url "vessels:glossary" %}#perf" data-tag="ltblmb">perforating</a> {% endif %} 
+        {% if ves.dec_applique == 2 %} <a href="{% url "vessels:glossary" %}#appl" data-tag="dkggo">applique</a> {% endif %}   
+        {% if ves.dec_nubbins_lugs == 2 %} <a href="{% url "vessels:glossary" %}#lug" data-tag="dkglco">nubbins and lugs</a> {% endif %}   
+        {% if ves.dec_bands == 2 %} <a href="{% url "vessels:glossary" %}#band" data-tag="dkgltgr">bands</a> {% endif %}   
+        {% if ves.dec_sculpting == 2 %} <a href="{% url "vessels:glossary" %}#sculp" data-tag="dkgltbl">sculpting</a> {% endif %}  
+        {% if ves.dec_red_slip == 2 %} <a href="{% url "vessels:glossary" %}#red" data-tag="ltgbr">red slip</a> {% endif %}   
+        {% if ves.dec_glaze == 2 %} <a href="{% url "vessels:glossary" %}#glaze" data-tag="ltgmb">glaze</a> {% endif %}   
+        {% if ves.dec_painting == 2 %} <a href="{% url "vessels:glossary" %}#paint" data-tag="ltgdkg">painting</a> {% endif %} </td>
+        <td style = "border-bottom: 0.5px solid black;">{% if ves.use_cooking == 2 %} <a href="{% url "vessels:glossary" %}#cook" data-tag="pind">cooking</a> {% endif %}
+          {% if ves.use_boiling == 2 %} <a href="{% url "vessels:glossary" %}#boil" data-tag="pdbl">boiling</a> {% endif %}
+          {% if ves.use_baking == 2 %} <a href="{% url "vessels:glossary" %}#bake" data-tag="pgre">baking</a> {% endif %}
+          {% if ves.use_frying == 2 %} <a href="{% url "vessels:glossary" %}#fry" data-tag="pfgr">frying</a> {% endif %}
+          {% if ves.use_smoking == 2 %} <a href="{% url "vessels:glossary" %}#smoke" data-tag="pfbr">smoking</a> {% endif %}
+    
+          {% if ves.use_serving == 2 %} <a href="{% url "vessels:glossary" %}#serve" data-tag="dkblbl">serving</a> {% endif %}
+          {% if ves.use_eating == 2 %} <a href="{% url "vessels:glossary" %}#eat" data-tag="dkblco">eating</a> {% endif %}
+          {% if ves.use_storage == 2 %} <a href="{% url "vessels:glossary" %}#store" data-tag="dkblgo">storage</a> {% endif %}
+          {% if ves.use_transfer == 2 %} <a href="{% url "vessels:glossary" %}#tran" data-tag="dkblltbl">transfer</a> {% endif %}
+    
+          {% if ves.use_burial == 2 %} <a href="{% url "vessels:glossary" %}#burial" data-tag="ltblor">burial</a> {% endif %}
+          {% if ves.use_ceremonial == 2 %} <a href="{% url "vessels:glossary" %}#ritual" data-tag="ltblind">ceremonial</a> {% endif %}
+          {% if ves.use_lid == 2 %} <a href="{% url "vessels:glossary" %}#lid" data-tag="ltblba">lid</a> {% endif %}   
+          {% if ves.use_hearth == 2 %} <a href="{% url "vessels:glossary" %}#hea" data-tag="ltblfb">hearth</a> {% endif %}
+          {% if ves.use_light == 2 %} <a href="{% url "vessels:glossary" %}#light" data-tag="ltblfgr">light</a> {% endif %}
+          {% if ves.use_musical_instrument == 2 %} <a href="{% url "vessels:glossary" %}#music" data-tag="ltblbr">musical instrument</a>{% endif %}</td></tr>
+        <tr><td data-tag="{{ ves.primary_technique }}"><a data-tag="{{ ves.primary_technique }}"href="{% url "vessels:glossary" %}#conp">{{ ves.primary_technique }} </a></td>
+          <td data-tag="{{ ves.secondary_technique }}"><a data-tag="{{ ves.secondary_technique }}" href="{% url "vessels:glossary" %}#cons">{{ ves.secondary_technique }}</a></td>
+           <td data-tag="{{ ves.gender_decorate }}"><a data-tag="{{ ves.gender_decorate }}" href="{% url "vessels:glossary" %}#gen">{{ ves.gender_decorate }}</a> </td>
+            <td style = "border-top: 0.5px solid black;">{% if ves.morph_spout == 1 %} <a href="{% url "vessels:glossary" %}#spo" data-tag="por"> has spout*</a> {% endif %}
+          {% if ves.morph_multimouth == 1 %} <a href="{% url "vessels:glossary" %}#mulm" data-tag="pod">has multi-mouth*</a> {% endif %}
+          {% if ves.morph_neck == 1 %} <a href="{% url "vessels:glossary" %}#neck" data-tag="pba">has neck*</a> {% endif %}
+          {% if ves.morph_collar == 1 %} <a href="{% url "vessels:glossary" %}#coll" data-tag="pfbr">has collar*</a> {% endif %}
+          {% if ves.morph_carination == 1 %} <a href="{% url "vessels:glossary" %}#car" data-tag="pfgr">has carination*</a> {% endif %}
+          {% if ves.morph_handle == 1 %} <a href="{% url "vessels:glossary" %}#han" data-tag="pgre">has handle*</a> {% endif %}
+          {% if ves.morph_feet == 1 %} <a href="{% url "vessels:glossary" %}#feet" data-tag="pdbl">has feet*</a> {% endif %}
+          {% if ves.morph_ringfoot == 1 %} <a href="{% url "vessels:glossary" %}#rfoot" data-tag="pind">has ring foot*</a> {% endif %}
+          {% if ves.morph_restricted == 1 %} <a href="{% url "vessels:glossary" %}#res" data-tag="dkblgo">restricted*</a> {% endif %}
+          {% if ves.morph_unrestricted == 1 %} <a href="{% url "vessels:glossary" %}#unres" data-tag="dkblco">unrestricted*</a> {% endif %}
+          {% if ves.morph_jar == 1 %} <a href="{% url "vessels:glossary" %}#jar" data-tag="ltblor">jar*</a> {% endif %}
+          {% if ves.morph_bowl == 1 %} <a href="{% url "vessels:glossary" %}#bowl" data-tag="ltblind">bowl*</a> {% endif %}
+          {% if ves.morph_dish == 1 %} <a href="{% url "vessels:glossary" %}#dish" data-tag="ltblba">dish*</a> {% endif %}
+          {% if ves.morph_plate == 1 %} <a href="{% url "vessels:glossary" %}#pla" data-tag="ltblfb">plate*</a> {% endif %}
+          {% if ves.morph_cup == 1 %} <a href="{% url "vessels:glossary" %}#cup" data-tag="ltblfgr">cup*</a> {% endif %}
+          {% if ves.morph_jug == 1 %} <a href="{% url "vessels:glossary" %}#jug" data-tag="ltblbr">jug*</a> {% endif %}
+          {% if ves.morph_forno == 1 %} <a href="{% url "vessels:glossary" %}#for" data-tag="ltblmb">forno*</a> {% endif %}
+          {% if ves.morph_lamp == 1 %} <a href="{% url "vessels:glossary" %}#lamp" data-tag="ltbldgr">lamp*</a> {% endif %}
+          {% if ves.morph_nipplebase == 1 %} <a href="{% url "vessels:glossary" %}#nip" data-tag="dkggo">nipple*</a> {% endif %}
+          {% if ves.morph_pointedbase == 1 %} <a href="{% url "vessels:glossary" %}#poibase" data-tag="dkglco">pointed base*</a> {% endif %}
+          {% if ves.morph_roundedbase == 1 %} <a href="{% url "vessels:glossary" %}#roubase" data-tag="dkgltbl">rounded base*</a> {% endif %}
+          {% if ves.morph_flatbase == 1 %} <a href="{% url "vessels:glossary" %}#flatbase" data-tag="dkgltgr">flat base*</a> {% endif %}</td>
+          <td style = "border-top: 0.5px solid black;">{% if ves.rim_outcurving == 1 %} <a href="{% url "vessels:glossary" %}#out" data-tag="pind">outcurving rim*</a> {% endif %}  
+            {% if ves.rim_everted == 1 %} <a href="{% url "vessels:glossary" %}#ev" data-tag="pod">everted rim*</a> {% endif %}  
+            {% if ves.rim_direct_out == 1 %} <a href="{% url "vessels:glossary" %}#dout" data-tag="pba">direct out rim*</a> {% endif %}  
+            {% if ves.rim_direct == 1 %} <a href="{% url "vessels:glossary" %}#dir" data-tag="pfbr">direct rim*</a> {% endif %}  
+            {% if ves.rim_direct_in == 1 %} <a href="{% url "vessels:glossary" %}#din" data-tag="pfgr">direct in rim*</a> {% endif %}  
+            {% if ves.rim_inverted == 1 %} <a href="{% url "vessels:glossary" %}#inv"  data-tag="pgre">inverted rim*</a> {% endif %}  
+            {% if ves.rim_incurving == 1 %} <a href="{% url "vessels:glossary" %}#inc" data-tag="pdbl">incurving rim*</a> {% endif %}  
+            {% if ves.rim_parallel == 1 %} <a href="{% url "vessels:glossary" %}#para" data-tag="dkblbl">parallel rim*</a> {% endif %}  
+            {% if ves.rim_abrupt_narrow == 1 %} <a href="{% url "vessels:glossary" %}#abrn" data-tag="ltblor">abrupt narrow rim*</a> {% endif %}  
+            {% if ves.rim_abrupt_wide == 1 %} <a href="{% url "vessels:glossary" %}#abrw" data-tag="ltblind">abrupt wide rim*</a> {% endif %}
+            {% if ves.rim_gradually_narrow == 1 %} <a href="{% url "vessels:glossary" %}#gradi" data-tag="dkggo">gradually narrow rim*</a> {% endif %}  
+            {% if ves.rim_gradually_thickened_exterior == 1 %} <a href="{% url "vessels:glossary" %}#gradoe" data-tag="dkglco">gradually thickened exterior rim*</a> {% endif %}  
+            {% if ves.rim_gradually_thickened_interior == 1 %} <a href="{% url "vessels:glossary" %}#gradoi" data-tag="dkgltgr">gradually thickened interior rim*</a> {% endif %}
+            {% if ves.rim_rounded_both == 1 %} <a href="{% url "vessels:glossary" %}#roundb" data-tag="ltgbr">rounded both sides rim*</a> {% endif %}  
+            {% if ves.rim_thickened_interior == 1 %} <a href="{% url "vessels:glossary" %}#roundi" data-tag="ltgmb" >rounded thickened interior rim*</a> {% endif %}  
+            {% if ves.rim_thickened_exterior == 1 %} <a href="{% url "vessels:glossary" %}#roundo" data-tag="ltgdkg">rounded thickened exterior rim*</a> {% endif %}</td>
+            <td style = "border-top: 0.5px solid black;">{% if ves.dec_lip == 1 %} <a href="{% url "vessels:glossary" %}#declip" data-tag="pind">decorated lip*</a> {% endif %} 
+              {% if ves.dec_rim == 1 %} <a href="{% url "vessels:glossary" %}#decrim" data-tag="dkblltgr">decorated rim*</a> {% endif %}  
+              {% if ves.dec_internal_rim == 1 %} <a href="{% url "vessels:glossary" %}#intdecrim" data-tag="ltblind">decorated internal rim*</a> {% endif %}  
+              {% if ves.dec_neck == 1 %} <a href="{% url "vessels:glossary" %}#decnec" data-tag="pfbr">decorated neck*</a> {% endif %}  
+              {% if ves.dec_shoulders == 1 %} <a href="{% url "vessels:glossary" %}#decsho" data-tag="dkggo">decorated shoulder*</a> {% endif %}  
+              {% if ves.dec_body == 1 %} <a href="{% url "vessels:glossary" %}#decbody" data-tag="ltgbr">decorated body*</a> {% endif %} </td>
+              <td style = "border-top: 0.5px solid black;"> {% if ves.dec_plain == 1 %} <a href="{% url "vessels:glossary" %}#plain" data-tag="dkgltg">plain*</a> {% endif %} 
+                {% if ves.dec_exposed_coil == 1 %} <a href="{% url "vessels:glossary" %}#expo" data-tag="pind">exposed coil*</a> {% endif %} 
+                {% if ves.dec_finger_marks == 1 %} <a href="{% url "vessels:glossary" %}#fing" data-tag="pfbr">finger marks*</a> {% endif %} 
+                {% if ves.dec_impressing == 1 %} <a href="{% url "vessels:glossary" %}#impr" data-tag="dkblbl">impressing*</a> {% endif %}   
+                {% if ves.dec_punctation == 1 %} <a href="{% url "vessels:glossary" %}#punct" data-tag="dkblco">punctation*</a> {% endif %}   
+                {% if ves.dec_comb_impression == 1 %} <a href="{% url "vessels:glossary" %}#imprcom" data-tag="dkblltgr">comb impression*</a> {% endif %}   
+                {% if ves.dec_dentate == 1 %} <a href="{% url "vessels:glossary" %}#dent" data-tag="dkblltbl">dentate*</a> {% endif %}   
+                {% if ves.dec_paddle_impressing == 1 %} <a href="{% url "vessels:glossary" %}#padi" data-tag="dkblgo">paddle impressing*</a> {% endif %}   
+                {% if ves.dec_cord_impressing == 1 %} <a href="{% url "vessels:glossary" %}#cord" data-tag="dkblg">cord impressing*</a> {% endif %}  
+                {% if ves.dec_incising == 1 %} <a href="{% url "vessels:glossary" %}#incis" data-tag="ltblor">incising*</a> {% endif %}   
+                {% if ves.dec_simple_incising == 1 %} <a href="{% url "vessels:glossary" %}#incsin" data-tag="ltblind">simple incising*</a> {% endif %}   
+                {% if ves.dec_comb_incising == 1 %} <a href="{% url "vessels:glossary" %}#inccom" data-tag="ltblba">comb incising*</a> {% endif %}   
+                {% if ves.dec_grooving == 1 %} <a href="{% url "vessels:glossary" %}#gro" data-tag="ltblfb">grooving*</a> {% endif %}   
+                {% if ves.dec_scouring == 1 %} <a href="{% url "vessels:glossary" %}#sco" data-tag="ltblfgr">scouring*</a> {% endif %}   
+                {% if ves.dec_carving == 1 %} <a href="{% url "vessels:glossary" %}#carv" data-tag="ltblbr">carving*</a> {% endif %}   
+                {% if ves.dec_perforating == 1 %} <a href="{% url "vessels:glossary" %}#perf" data-tag="ltblmb">perforating*</a> {% endif %} 
+                {% if ves.dec_applique == 1 %} <a href="{% url "vessels:glossary" %}#appl" data-tag="dkggo">applique*</a> {% endif %}   
+                {% if ves.dec_nubbins_lugs == 1 %} <a href="{% url "vessels:glossary" %}#lug" data-tag="dkglco">nubbins and lugs*</a> {% endif %}   
+                {% if ves.dec_bands == 1 %} <a href="{% url "vessels:glossary" %}#band" data-tag="dkgltgr">bands*</a> {% endif %}   
+                {% if ves.dec_sculpting == 1 %} <a href="{% url "vessels:glossary" %}#sculp" data-tag="dkgltbl">sculpting*</a> {% endif %}  
+                {% if ves.dec_red_slip == 1 %} <a href="{% url "vessels:glossary" %}#red" data-tag="ltgbr">red slip*</a> {% endif %}   
+                {% if ves.dec_glaze == 1 %} <a href="{% url "vessels:glossary" %}#glaze" data-tag="ltgmb">glaze*</a> {% endif %}   
+                {% if ves.dec_painting == 1 %} <a href="{% url "vessels:glossary" %}#paint" data-tag="ltgdkg">painting*</a> {% endif %}</td>
+                <td style = "border-top: 0.5px solid black;">{% if ves.use_cooking == 1 %} <a href="{% url "vessels:glossary" %}#cook" data-tag="pind">cooking*</a> {% endif %}
+                  {% if ves.use_boiling == 1 %} <a href="{% url "vessels:glossary" %}#boil" data-tag="pdbl">boiling*</a> {% endif %}
+                  {% if ves.use_baking == 1 %} <a href="{% url "vessels:glossary" %}#bake" data-tag="pgre">baking*</a> {% endif %}
+                  {% if ves.use_frying == 1 %} <a href="{% url "vessels:glossary" %}#fry" data-tag="pfgr">frying*</a> {% endif %}
+                  {% if ves.use_smoking == 1 %} <a href="{% url "vessels:glossary" %}#smoke" data-tag="pfbr">smoking*</a> {% endif %}
+            
+                  {% if ves.use_serving == 1 %} <a href="{% url "vessels:glossary" %}#serve" data-tag="dkblbl">serving*</a> {% endif %}
+                  {% if ves.use_eating == 1 %} <a href="{% url "vessels:glossary" %}#eat" data-tag="dkblco">eating*</a> {% endif %}
+                  {% if ves.use_storage == 1 %} <a href="{% url "vessels:glossary" %}#store" data-tag="dkblgo">storage*</a> {% endif %}
+                  {% if ves.use_transfer == 1 %} <a href="{% url "vessels:glossary" %}#tran" data-tag="dkblltbl">transfer*</a> {% endif %}
+            
+                  {% if ves.use_burial == 1 %} <a href="{% url "vessels:glossary" %}#burial" data-tag="ltblor">burial*</a> {% endif %}
+                  {% if ves.use_ceremonial == 1 %} <a href="{% url "vessels:glossary" %}#ritual" data-tag="ltblind">ceremonial*</a> {% endif %}
+                  {% if ves.use_lid == 1 %} <a href="{% url "vessels:glossary" %}#lid" data-tag="ltblba">lid*</a> {% endif %}   
+                  {% if ves.use_hearth == 1 %} <a href="{% url "vessels:glossary" %}#hea" data-tag="ltblfb">hearth*</a> {% endif %}
+                  {% if ves.use_light == 1 %} <a href="{% url "vessels:glossary" %}#light" data-tag="ltblfgr">light*</a> {% endif %}
+                  {% if ves.use_musical_instrument == 1 %} <a href="{% url "vessels:glossary" %}#music" data-tag="ltblbr">musical instrument*</a>{% endif %}</td></tr>
+        {% endfor %}
+      </table>
+    
+    <p>^ top value.</p>
+    <p>* refers to features with only single vessel examples, or present but in less than 10 percent in larger samples.</p>
+    </div> 
+    
 
     <h2>References:</h2>
     {% for ref in v_ref %}
       <p> <a href="{{ ref.get_absolute_url }}"> {{ref.name}} ({{ ref.author_list }})</a> </p>
     {% endfor %}
   {% include "vessels/includes/footer.html" %}
-{% comment %} 
-  <div class="after-map">
-  <h2>Features </h2>
-  <table class = "industrytable" id = "it">
-    <th>Feature</th> <th> Value </th>
-    <tr> <td> Region </td> <td> {{industry.region}} </td></tr>
-      <tr> <td> Start time (BP) </td> <td> {{industry.time_start}} </td></tr>
-      <tr> <td> End time (BP) </td> <td> {{industry.time_end}} </td></tr>
-      <tr> <td> Technique </td>  <td data-tag="{{industry.technique}}"> {{industry.technique}} </td></tr>
-      <tr> <td> Language </td> <td> {{industry.language}} </td></tr>
-      <tr> <td> Cooking pot </td> <td> {{industry.word_cooking}} </td></tr>
-      <tr> <td> Other words </td> <td> {{industry.words_other}} </td></tr>
-      <tr> <td> Language code </td> <td> {{industry.language_code}} </td></tr>
-      <tr> <td> Language family </td> <td> {{industry.language_family}} </td></tr>
-      <tr> <td> Language superfamily </td> <td> {{industry.language_superfamily}} </td></tr>
-      <tr> <td> Potters' gender </td> <td data-tag="{{industry.gender}}"> {{industry.gender}} </td></tr>
-      <tr> <td> Added temper </td> <td data-tag="{{industry.temper}}"> {% if industry.temper %} Y {% elif industry.temper == False %} X {% else %} - {% endif %} </td> </tr>
-      <tr> <td> Position of decoration </td> <td data-tag="{{industry.decoration_position}}"> {{industry.decoration_position}}</td></tr>
-      <tr> <td> Decoration: dentate </td> <td data-tag="{{industry.decoration_dentate}}"> {% if industry.decoration_dentate %} Y {% elif industry.decoration_dentate == False %} X {% else %} - {% endif %}</td></tr>
-      <tr> <td> Decoration: incised </td> <td data-tag="{{industry.decoration_incised}}"> {% if industry.decoration_incised %} Y {% elif industry.decoration_incised == False %} X {% else %} - {% endif %}</td></tr>
-      <tr> <td> Decoration: comb incised  </td>  <td data-tag="{{industry.decoration_comb_incised}}"> {% if industry.decoration_comb_incised %} Y {% elif industry.decoration_comb_incised == False %} X {% else %} - {% endif %}</td></tr>
-      <tr> <td> Decoration: applique  </td> <td data-tag="{{industry.decoration_applique}}"> {% if industry.decoration_applique %} Y {% elif industry.decoration_applique == False %} X {% else %} - {% endif %}</td></tr>
-      <tr> <td> Decoration: exposed coil </td> <td data-tag="{{industry.decoration_exposed_coil}}"> {% if industry.decoration_exposed_coil %} Y {% elif industry.decoration_exposed_coil == False %} X {% else %} - {% endif %}</td></tr>
-      <tr> <td> Decoration: punctate  </td> <td data-tag="{{industry.decoration_punctate}}"> {% if industry.decoration_punctate %} Y {% elif industry.decoration_punctate == False %} X {% else %} - {% endif %}</td></tr>
-      <tr> <td> Decoration: paint  </td>  <td data-tag="{{industry.decoration_paint}}"> {% if industry.decoration_paint %} Y {% elif industry.decoration_paint == False %} X {% else %} - {% endif %}</td></tr>
-      <tr> <td> Decoration: finger </td>   <td data-tag="{{industry.decoration_finger}}"> {% if industry.decoration_finger %} Y {% elif industry.decoration_finger == False %} X {% else %} - {% endif %}</td></tr>
-      <tr> <td> Decoration: sculpture </td>  <td data-tag="{{industry.decoration_sculpt}}"> {% if industry.decoration_sculpt %} Y {% elif industry.decoration_sculpt == False %} X {% else %} - {% endif %}</td></tr>
-      <tr> <td> Decoration: paddle </td>  <td data-tag="{{industry.decoration_paddle}}"> {% if industry.decoration_paddle %} Y {% elif industry.decoration_paddle == False %} X {% else %} - {% endif %}</td></tr>
-      <tr> <td> Form: width > height </td>  <td data-tag="{{industry.form_w_more}}"> {% if industry.form_w_more %} Y {% elif industry.form_w_more == False %} X {% else %} - {% endif %}</td></tr>
-      <tr> <td> Form: height > width </td> <td data-tag="{{industry.form_h_more}}"> {% if industry.form_h_more %} Y {% elif industry.form_h_more == False %} X {% else %} - {% endif %}</td></tr>
-      <tr> <td> Form: width = height </td> <td data-tag="{{industry.form_equal}}"> {% if industry.form_equal %} Y {% elif industry.form_equal == False %} X {% else %} - {% endif %}</td></tr>
-      <tr> <td> Use: cooking </td> <td data-tag="{{industry.use_cooking}}"> {% if industry.use_cooking %} Y {% elif industry.use_cooking == False %} X {% else %} - {% endif %}</td></tr>
-      <tr> <td> Use: storage </td> <td data-tag="{{industry.use_storage}}"> {% if industry.use_storage %} Y {% elif industry.use_storage == False %} X {% else %} - {% endif %}</td></tr>  
-      <tr> <td> Use: serving </td> <td data-tag="{{industry.use_serving}}"> {% if industry.use_serving %} Y {% elif industry.use_serving == False %} X {% else %} - {% endif %}</td> </tr>
-      <tr> <td> Use: ceremonial </td> <td data-tag="{{industry.use_ceremonial}}"> {% if industry.use_ceremonial %} Y {% elif industry.use_ceremonial == False %} X {% else %} - {% endif %}</td> </tr>
-
- 
-
-  
-  </table>
-  {% include "pottery/includes/keytable.html" %}
-  <h3 id="des">{{ industry.comments }}</h3>  
-  <br>
- 
-</div> {% endcomment %}
-{% comment %}   <h2>References:</h2>
-  {% for ref in {{industry.refs}} %}
-    <h3> <a href="{% url "report-type" ref.slug %}">{{ ref.fullname }}</a> ({{ ref.author_list }}) </h3>
-  {% endfor %} {% endcomment %}
 
 {% endblock %}

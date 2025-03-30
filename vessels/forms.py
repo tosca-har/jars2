@@ -65,6 +65,15 @@ def region_choices():
         ) 
     return list(set([i for i in regionlist]))
 
+def vessel_choices():
+    vessels = Vessel.objects.all().order_by("name")
+    vessellist =  tuple()
+    for vessel in vessels:
+        vessellist += (
+        (vessel.name, vessel.name),   
+        ) 
+    return vessellist
+
 
 class SearchForm(forms.Form):
     base_build = forms.ChoiceField(choices= techniquesb, required = False)
@@ -160,4 +169,8 @@ class SearchForm(forms.Form):
     endtime = forms.IntegerField(required = False, initial = 0, min_value = 0, max_value = 6000)
     regions_to_include = forms.MultipleChoiceField(choices = region_choices, widget= forms.CheckboxSelectMultiple(attrs={"checked":""}), 
         error_messages= {"required": "Please select at least one region."})
+
+class VesselForm(forms.Form):
+    vessels_to_include = forms.MultipleChoiceField(choices = vessel_choices, widget= forms.CheckboxSelectMultiple(attrs={"class": "siteboxes"}), required =True, error_messages= {"required": "Please select at least one vessel."})
+
 

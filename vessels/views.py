@@ -3,7 +3,7 @@ from django.http import Http404, HttpResponseNotFound, HttpResponseRedirect
 from django.urls import reverse
 from decouple import config
 from .models import Vessel, Vesselgroup, Site, Sitegroup, Report, Image
-from .forms import SearchForm
+from .forms import SearchForm, VesselForm
 
 mbsu = config('MBSU')
 thsu = config('THSU')
@@ -417,10 +417,31 @@ def search(request):
     })
 
 def compare(request):
-    vesselgroups = Vesselgroup.objects.all().order_by("name")
+    if request.method == 'POST':
+        form = VesselForm(request.POST) 
+        vessels = Vessel.objects.all() 
+        query = "  "    
+        if form.is_valid():
+            val = form.cleaned_data.get("vessels_to_include")
+            vessels = vessels.filter(name__in=val)
+            sites = Site.objects.all()
+            if len(vessels) > 0:
+                return render(request, "vessels/search-results.html", {
+                    "vessels": vessels,
+                    "query": query,
+                    "prod_sites": sites.filter(vessel__in = vessels).distinct(),
+                    "imp_sites": sites.filter(import_vessel__in = vessels).distinct() ,
+                    "mbsu": mbsu,
+                    "thsu":thsu
+                })
+            else: return HttpResponseRedirect("no-match")
+        else: return HttpResponseRedirect("no-match")       
+    else:   
+        form = VesselForm()
     return render(request, "vessels/compare.html", {
-        "groups": vesselgroups
+        "form": form
     })
+
 def map(request):
     sites = Site.objects.all().order_by("name")
     return render(request, "vessels/map.html", {
