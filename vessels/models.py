@@ -54,18 +54,6 @@ class Image(models.Model):
     def __str__(self):
         return f"{self.slug} ({self.name})"  
 
-
-class Sitegroup(models.Model):
-    slug = models.SlugField(default="", blank= True, null = False, db_index=True)
-    name = models.CharField(max_length= 100)
-    details = models.TextField(max_length= 1000, null=True, blank=True)
-    
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
-        super().save(*args, **kwargs)
-
-    def __str__(self):
-        return f"{self.slug} ({self.name})"  
     
 class Vesselgroup(models.Model):
     slug = models.SlugField(default="", blank= True, null = False, db_index=True)
@@ -74,7 +62,6 @@ class Vesselgroup(models.Model):
     time_start_ref = models.ForeignKey(Report, on_delete=models.SET_NULL, null=True, related_name="vg_time_start", blank=True)
     time_end = models.IntegerField(null=True, blank =True)
     time_end_ref = models.ForeignKey(Report, on_delete=models.SET_NULL, null=True, related_name="vg_time_end", blank=True)
-    sitegroup = models.ManyToManyField(Sitegroup, related_name="vesselgroups", blank=True)
     details = models.TextField(max_length= 1000, null=True, blank=True)
     refs = models.ManyToManyField(Report, related_name="vesselgroups", blank=True)
     vg_parent = models.ManyToManyField("self", symmetrical=False, blank=True)
@@ -305,7 +292,6 @@ class Site(models.Model):
         UNKNOWN = 'U', 'unknown'
     slug = models.SlugField(default="", blank= True, null = False, db_index=True)
     name = models.CharField(max_length= 100)
-    sitegroup = models.ManyToManyField(Sitegroup, related_name="sites", blank=True)
     details = models.TextField(max_length= 1000, null=True, blank=True)
     region = models.CharField(max_length=20, choices=Region, default=Region.UNKNOWN)
     lat = models.DecimalField(null=True, max_digits=9, decimal_places=6) 
@@ -322,26 +308,26 @@ class Site(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         self.maptag = ' '
-        fabs = self.vessel.all()
-        if fabs:
-            self.maptag = self.maptag + 'local:'
-            for fab in fabs:
-                self.maptag = self.maptag + " " + fab.name + ","
-        ifabs = self.import_vessel.all()
-        if ifabs:
-            self.maptag = self.maptag + ' imports:'
-        for ifab in ifabs:
-            self.maptag = self.maptag + " " + ifab.name + ","
-        gfabs = self.vesselgroup.all()  
-        if gfabs:
-            self.maptag = self.maptag + ' groups:'
-        for gfab in gfabs:
-            self.maptag = self.maptag + " " + gfab.name + ","
-        igfabs = self.import_vesselgroup.all()  
-        if igfabs:
-            self.maptag = self.maptag + ' groups imported:'
-        for igfab in igfabs:
-            self.maptag = self.maptag + " " + igfab.name + ","
+        # fabs = self.vessel.all()
+        # if fabs:
+        #     self.maptag = self.maptag + 'local:'
+        #     for fab in fabs:
+        #         self.maptag = self.maptag + " " + fab.name + ","
+        # ifabs = self.import_vessel.all()
+        # if ifabs:
+        #     self.maptag = self.maptag + ' imports:'
+        # for ifab in ifabs:
+        #     self.maptag = self.maptag + " " + ifab.name + ","
+        # gfabs = self.vesselgroup.all()  
+        # if gfabs:
+        #     self.maptag = self.maptag + ' groups:'
+        # for gfab in gfabs:
+        #     self.maptag = self.maptag + " " + gfab.name + ","
+        # igfabs = self.import_vesselgroup.all()  
+        # if igfabs:
+        #     self.maptag = self.maptag + ' groups imported:'
+        # for igfab in igfabs:
+        #     self.maptag = self.maptag + " " + igfab.name + ","
         super().save(*args, **kwargs)
 
     def __str__(self):

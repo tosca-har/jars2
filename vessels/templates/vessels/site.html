@@ -12,48 +12,10 @@
 
 {% block page_title %} Vessel Details {% endblock %}
 {% block content %} {% include "vessels/includes/header.html" %} 
+<div>
 <h1>{{ site.name }}</h1>
-  
- {% comment %}<h2>Sites: </h2>
-  {% if vg_sg %} 
-    <ul>
-    {% for site in vg_sg%}
-      <li> {{site.name}}</li>
-    {% endfor %}
-    </ul> {% endcomment %}
-
-    {% comment %}  <div id="map"></div>
-    <div> <p id="targetSite"></p><div>
-    <script> 
-      var picon = "{% static "fabrics2/images/redPot2.png" %}";
-      var bicon = "{% static "fabrics2/images/ltgreyPot.png" %}";
-      var ricon = "{% static "fabrics2/images/tanPot.png" %}";
-      let mbsu = "{{mbsu}}";
-      let thsu = "{{thsu}}";
-      let siteNames = [];
-      let siteLat = [];
-      let siteLng = [];
-      let siteLinks = [];
-      let siteFabrics = [];
-      let siteColour = [];
-      let siteview = false;
-      let mapcentre =  [-4.5, 150];
-      {% for site in fabric_sites %}
-        siteNames.push("{{site.name}}");
-        siteLat.push({{site.lat}});
-        siteLng.push({{site.lng}});
-        siteLinks.push("{% url "site-type" site.slug %}");
-        siteFabrics.push("");
-        siteColour.push(1);
-        mapcentre = [{{site.lat}}, {{site.lng}}];
-      {% endfor %}
-      getMap(); 
-    </script> 
-
-  {% else %} <p>No site information available.</p>
-  {% endif %} {% endcomment %}
-
-
+ <p> {{ site.details }} </p>
+</div>
   <div class="after-map">
     <h2>Vessels </h2>
     <table class = "industrytable" id = "it">
@@ -62,71 +24,20 @@
       <tr> <td> <a href="{{ ves.get_absolute_url }}">{{ves.name}} </td> <td> local </td><td> {{ves.time_start}} </td> <td> {{ves.time_end}} </td><td> {{ves.details}} </td></tr>
       {% endfor %}
       {% for ives in ivessels%}
-      <tr> <td> <a href="{{ ives.get_absolute_url }}">{{ives.name}} </td> <td> imported </td><td> {{ives.time_start}} </td> <td> {{ives.gtime_end}} </td><td> {{ives.details}} </td></tr>
+      <tr> <td> <a href="{{ ives.get_absolute_url }}">{{ives.name}} </td> <td> imported </td><td> {{ives.time_start}} </td> <td> {{ives.time_end}} </td><td> {{ives.details}} </td></tr>
       {% endfor %}
       </table>
       <h2>Vessel Groups </h2>
       <table class = "industrytable" id = "it">
         <th>Group</th> <th> Production </th> 
         {% for vesgr in vesselgr%}
-        <tr> <td> <a href="{{ vesgr.get_absolute_url }}">{{vesgr.slug}} </td> <td> local </td></tr>
+        <tr> <td> <a href="{{ vesgr.get_absolute_url }}">{{vesgr.name}} </td> <td> local </td></tr>
         {% endfor %}
         {% for ivesgr in ivesselgr%}
-        <tr> <td> <a href="{{ ivesgr.get_absolute_url }}">{{ivesgr.slug}} </td> <td> imported </td></tr>
+        <tr> <td> <a href="{{ ivesgr.get_absolute_url }}">{{ivesgr.name}} </td> <td> imported </td></tr>
         {% endfor %}
         </table>
   </div>
-
-
-{% comment %} 
-  <div class="after-map">
-  <h2>Features </h2>
-  <table class = "industrytable" id = "it">
-    <th>Feature</th> <th> Value </th>
-    <tr> <td> Region </td> <td> {{industry.region}} </td></tr>
-      <tr> <td> Start time (BP) </td> <td> {{industry.time_start}} </td></tr>
-      <tr> <td> End time (BP) </td> <td> {{industry.time_end}} </td></tr>
-      <tr> <td> Technique </td>  <td data-tag="{{industry.technique}}"> {{industry.technique}} </td></tr>
-      <tr> <td> Language </td> <td> {{industry.language}} </td></tr>
-      <tr> <td> Cooking pot </td> <td> {{industry.word_cooking}} </td></tr>
-      <tr> <td> Other words </td> <td> {{industry.words_other}} </td></tr>
-      <tr> <td> Language code </td> <td> {{industry.language_code}} </td></tr>
-      <tr> <td> Language family </td> <td> {{industry.language_family}} </td></tr>
-      <tr> <td> Language superfamily </td> <td> {{industry.language_superfamily}} </td></tr>
-      <tr> <td> Potters' gender </td> <td data-tag="{{industry.gender}}"> {{industry.gender}} </td></tr>
-      <tr> <td> Added temper </td> <td data-tag="{{industry.temper}}"> {% if industry.temper %} Y {% elif industry.temper == False %} X {% else %} - {% endif %} </td> </tr>
-      <tr> <td> Position of decoration </td> <td data-tag="{{industry.decoration_position}}"> {{industry.decoration_position}}</td></tr>
-      <tr> <td> Decoration: dentate </td> <td data-tag="{{industry.decoration_dentate}}"> {% if industry.decoration_dentate %} Y {% elif industry.decoration_dentate == False %} X {% else %} - {% endif %}</td></tr>
-      <tr> <td> Decoration: incised </td> <td data-tag="{{industry.decoration_incised}}"> {% if industry.decoration_incised %} Y {% elif industry.decoration_incised == False %} X {% else %} - {% endif %}</td></tr>
-      <tr> <td> Decoration: comb incised  </td>  <td data-tag="{{industry.decoration_comb_incised}}"> {% if industry.decoration_comb_incised %} Y {% elif industry.decoration_comb_incised == False %} X {% else %} - {% endif %}</td></tr>
-      <tr> <td> Decoration: applique  </td> <td data-tag="{{industry.decoration_applique}}"> {% if industry.decoration_applique %} Y {% elif industry.decoration_applique == False %} X {% else %} - {% endif %}</td></tr>
-      <tr> <td> Decoration: exposed coil </td> <td data-tag="{{industry.decoration_exposed_coil}}"> {% if industry.decoration_exposed_coil %} Y {% elif industry.decoration_exposed_coil == False %} X {% else %} - {% endif %}</td></tr>
-      <tr> <td> Decoration: punctate  </td> <td data-tag="{{industry.decoration_punctate}}"> {% if industry.decoration_punctate %} Y {% elif industry.decoration_punctate == False %} X {% else %} - {% endif %}</td></tr>
-      <tr> <td> Decoration: paint  </td>  <td data-tag="{{industry.decoration_paint}}"> {% if industry.decoration_paint %} Y {% elif industry.decoration_paint == False %} X {% else %} - {% endif %}</td></tr>
-      <tr> <td> Decoration: finger </td>   <td data-tag="{{industry.decoration_finger}}"> {% if industry.decoration_finger %} Y {% elif industry.decoration_finger == False %} X {% else %} - {% endif %}</td></tr>
-      <tr> <td> Decoration: sculpture </td>  <td data-tag="{{industry.decoration_sculpt}}"> {% if industry.decoration_sculpt %} Y {% elif industry.decoration_sculpt == False %} X {% else %} - {% endif %}</td></tr>
-      <tr> <td> Decoration: paddle </td>  <td data-tag="{{industry.decoration_paddle}}"> {% if industry.decoration_paddle %} Y {% elif industry.decoration_paddle == False %} X {% else %} - {% endif %}</td></tr>
-      <tr> <td> Form: width > height </td>  <td data-tag="{{industry.form_w_more}}"> {% if industry.form_w_more %} Y {% elif industry.form_w_more == False %} X {% else %} - {% endif %}</td></tr>
-      <tr> <td> Form: height > width </td> <td data-tag="{{industry.form_h_more}}"> {% if industry.form_h_more %} Y {% elif industry.form_h_more == False %} X {% else %} - {% endif %}</td></tr>
-      <tr> <td> Form: width = height </td> <td data-tag="{{industry.form_equal}}"> {% if industry.form_equal %} Y {% elif industry.form_equal == False %} X {% else %} - {% endif %}</td></tr>
-      <tr> <td> Use: cooking </td> <td data-tag="{{industry.use_cooking}}"> {% if industry.use_cooking %} Y {% elif industry.use_cooking == False %} X {% else %} - {% endif %}</td></tr>
-      <tr> <td> Use: storage </td> <td data-tag="{{industry.use_storage}}"> {% if industry.use_storage %} Y {% elif industry.use_storage == False %} X {% else %} - {% endif %}</td></tr>  
-      <tr> <td> Use: serving </td> <td data-tag="{{industry.use_serving}}"> {% if industry.use_serving %} Y {% elif industry.use_serving == False %} X {% else %} - {% endif %}</td> </tr>
-      <tr> <td> Use: ceremonial </td> <td data-tag="{{industry.use_ceremonial}}"> {% if industry.use_ceremonial %} Y {% elif industry.use_ceremonial == False %} X {% else %} - {% endif %}</td> </tr>
-
- 
-
-  
-  </table>
-  {% include "pottery/includes/keytable.html" %}
-  <h3 id="des">{{ industry.comments }}</h3>  
-  <br>
- 
-</div> {% endcomment %}
-{% comment %}   <h2>References:</h2>
-  {% for ref in {{industry.refs}} %}
-    <h3> <a href="{% url "report-type" ref.slug %}">{{ ref.fullname }}</a> ({{ ref.author_list }}) </h3>
-  {% endfor %} {% endcomment %}
 
 
   {% include "vessels/includes/footer.html" %}

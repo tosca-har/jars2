@@ -35,7 +35,8 @@
         siteLat.push({{site.lat}});
         siteLng.push({{site.lng}});
         siteLinks.push("{{ site.get_absolute_url }}");
-        siteVessels.push("{{site.maptag}}");
+       {% comment %} siteVessels.push("{{site.maptag}}"); {% endcomment %}
+        siteVessels.push("{{site.vessel_string}}");
         {% if site.maptag %} 
           {% if site.production_site %} siteColour.push(1);
           {% else %} siteColour.push(0);
@@ -57,9 +58,9 @@
  <div class="site-form">
 
     <table class = "industrytable" id = "it">
-      <th>Site</th> <th> Region </th> <th> Vessels </th>
+      <th>Site</th> <th> Region </th> <th> Details </th>
       {% for site in sites%}
-      <tr> <td> <a href="{{ site.get_absolute_url }}">{{site.slug}} </td>  <td> {{site.region}} </td> <td> {{site.maptag}} </td></tr>
+      <tr> <td> <a href="{{ site.get_absolute_url }}">{{site.name}} </td>  <td> {{site.region}} </td> <td> {{site.details}} </td></tr>
       {% endfor %}
       </table>
   </div> 

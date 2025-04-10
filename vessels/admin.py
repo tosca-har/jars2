@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Vessel, Vesselgroup, Site, Sitegroup, Report, Feature, Image, Fabric
+from .models import Vessel, Vesselgroup, Site, Report, Feature, Image, Fabric
 
 class FabricAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
@@ -36,22 +36,14 @@ admin.site.register(Vessel, VesselAdmin)
 
 class SiteAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
-    list_filter = ("sitegroup",)
     list_display = ("name",)
     ordering = ('name',)
     show_facets = admin.ShowFacets.ALWAYS
     
 admin.site.register(Site, SiteAdmin)
 
-class SitegroupAdmin(admin.ModelAdmin):
-    prepopulated_fields = {"slug": ("name",)}
-    ordering = ('name',)
-    
-admin.site.register(Sitegroup, SitegroupAdmin)
-
 class VesselgroupAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
     ordering = ('name',)
-    list_filter = ("sitegroup",)
     
 admin.site.register(Vesselgroup, VesselgroupAdmin)

@@ -13,6 +13,5 @@ urlpatterns = [
     path("vesselgroup_<slug:slug>", views.vesselgr, name="vesselgr"),
     path("report_<slug:slug>", views.report, name="report"),
     path("site_<slug:slug>", views.site, name="site"),
-    path("sitegroup_<slug:slug>", views.sitegr, name="sitegr"),
     
 ]

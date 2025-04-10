@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import Http404, HttpResponseNotFound, HttpResponseRedirect
 from django.urls import reverse
 from decouple import config
-from .models import Vessel, Vesselgroup, Site, Sitegroup, Report, Image
+from .models import Vessel, Vesselgroup, Site, Report, Image
 from .forms import SearchForm, VesselForm
 
 mbsu = config('MBSU')
@@ -466,13 +466,6 @@ def vesselgr(request, slug):
         "thsu":thsu
     })
 
-def sitegr(request, slug):
-    identified_vg = get_object_or_404(Sitegroup, slug=slug)
-    id_sites = identified_vg.sites.all()
-    return render(request, "vessels/sitegr.html", {
-        "groups": identified_vg,
-        "sites": id_sites
-    })
 
 def site(request, slug):
     identified_v = get_object_or_404(Site, slug=slug)
