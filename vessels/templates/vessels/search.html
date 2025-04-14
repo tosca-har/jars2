@@ -92,13 +92,14 @@
       </p>     
       <p>
         {{ form.rim_para }} <a href="{% url "vessels:glossary" %}#para">parallel rim</a> &emsp;  
-        {{ form.rim_abr_nar }} <a href="{% url "vessels:glossary" %}#abrn">abrupt narrow rim</a> &emsp;  
-        {{ form.rim_abr_wide }} <a href="{% url "vessels:glossary" %}#abrw">abrupt wide rim</a> &emsp;
+        {{ form.rim_abr_nar }} <a href="{% url "vessels:glossary" %}#abrn">abrupt narrow rim</a> &emsp; 
+        {{ form.rim_grad_nar }} <a href="{% url "vessels:glossary" %}#gradi">gradually narrow rim</a> &emsp;
       </p>     
       <p>  
-        {{ form.rim_grad_nar }} <a href="{% url "vessels:glossary" %}#gradi">gradually narrow rim</a> &emsp;  
-        {{ form.rim_grad_thick_ex }} <a href="{% url "vessels:glossary" %}#gradoe">gradually thickened exterior rim</a> &emsp;  
-        {{ form.rim_grad_thick_int }} <a href="{% url "vessels:glossary" %}#gradoi">gradually thickened interior rim</a> &emsp;
+ 
+        {{ form.rim_abr_wide }} <a href="{% url "vessels:glossary" %}#abrw">abrupt wide rim</a> &emsp; 
+        {{ form.rim_grad_thick_ex }} <a href="{% url "vessels:glossary" %}#gradoe">thickened exterior rim</a> &emsp;  
+        {{ form.rim_grad_thick_int }} <a href="{% url "vessels:glossary" %}#gradoi">thickened interior rim</a> &emsp;
       </p>     
       <p>  
         {{ form.rim_round_both }} <a href="{% url "vessels:glossary" %}#roundb">rounded both sides rim</a> &emsp;  
