@@ -197,6 +197,7 @@ class Vessel(models.Model):
     morph_jar = models.IntegerField(default="0", validators=[MinValueValidator(0), MaxValueValidator(2)])
     morph_jug = models.IntegerField(default="0", validators=[MinValueValidator(0), MaxValueValidator(2)])
     morph_lamp = models.IntegerField(default="0", validators=[MinValueValidator(0), MaxValueValidator(2)])
+    morph_stand = models.IntegerField(default="0", validators=[MinValueValidator(0), MaxValueValidator(2)])
     morph_multimouth = models.IntegerField(default="0", validators=[MinValueValidator(0), MaxValueValidator(2)])
     morph_nipplebase = models.IntegerField(default="0", validators=[MinValueValidator(0), MaxValueValidator(2)])
     morph_plate = models.IntegerField(default="0", validators=[MinValueValidator(0), MaxValueValidator(2)])

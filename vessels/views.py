@@ -194,6 +194,10 @@ def search(request):
             if valF:
                  vessels = vessels.filter(morph_lamp__gt=0 )
                  query = query + "; lamp"
+            valF = form.cleaned_data.get("stand")
+            if valF:
+                 vessels = vessels.filter(morph_stand__gt=0 )
+                 query = query + "; stand"
             valF = form.cleaned_data.get("nipplebase")
             if valF:
                  vessels = vessels.filter(morph_nipplebase__gt=0 )

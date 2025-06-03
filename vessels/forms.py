@@ -111,6 +111,7 @@ class SearchForm(forms.Form):
     jar = forms.BooleanField(required = False)
     jug = forms.BooleanField(required = False)
     lamp = forms.BooleanField(required = False)
+    stand = forms.BooleanField(required = False)
     multimouth = forms.BooleanField(required = False)
     nipplebase = forms.BooleanField(required = False)
     plate = forms.BooleanField(required = False)

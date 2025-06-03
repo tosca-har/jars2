@@ -289,6 +289,11 @@ mark {
     color:DarkGreen;
     padding:4px 5px;
   }
+  .industrytable [data-tag="ltbldgb"] {
+    background-color:LightBlue;
+    color:Orange;
+    padding:4px 5px;
+  }
   .industrytable [data-tag="dkblbl"] {
     background-color:#1310a7;
     color:#3ab2e9;
