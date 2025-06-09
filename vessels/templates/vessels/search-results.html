@@ -154,10 +154,9 @@
       {% if ves.use_eating == 2 %} <a href="{% url "vessels:glossary" %}#eat" data-tag="dkblco">eating</a> {% endif %}
       {% if ves.use_storage == 2 %} <a href="{% url "vessels:glossary" %}#store" data-tag="dkblgo">storage</a> {% endif %}
       {% if ves.use_transfer == 2 %} <a href="{% url "vessels:glossary" %}#tran" data-tag="dkblltbl">transfer</a> {% endif %}
-
+      {% if ves.use_lid == 2 %} <a href="{% url "vessels:glossary" %}#lid" data-tag="ltblba">lid*</a> {% endif %}  
       {% if ves.use_burial == 2 %} <a href="{% url "vessels:glossary" %}#burial" data-tag="ltblor">burial</a> {% endif %}
-      {% if ves.use_ceremonial == 2 %} <a href="{% url "vessels:glossary" %}#ritual" data-tag="ltblind">ceremonial</a> {% endif %}
-      {% if ves.use_lid == 2 %} <a href="{% url "vessels:glossary" %}#lid" data-tag="ltblba">lid</a> {% endif %}   
+      {% if ves.use_ceremonial == 2 %} <a href="{% url "vessels:glossary" %}#ritual" data-tag="ltblind">ceremonial</a> {% endif %} 
       {% if ves.use_hearth == 2 %} <a href="{% url "vessels:glossary" %}#hea" data-tag="ltblfb">hearth</a> {% endif %}
       {% if ves.use_light == 2 %} <a href="{% url "vessels:glossary" %}#light" data-tag="ltblfgr">light</a> {% endif %}
       {% if ves.use_musical_instrument == 2 %} <a href="{% url "vessels:glossary" %}#music" data-tag="ltblbr">musical instrument</a>{% endif %}</td></tr>
@@ -242,10 +241,10 @@
               {% if ves.use_eating == 1 %} <a href="{% url "vessels:glossary" %}#eat" data-tag="dkblco">eating*</a> {% endif %}
               {% if ves.use_storage == 1 %} <a href="{% url "vessels:glossary" %}#store" data-tag="dkblgo">storage*</a> {% endif %}
               {% if ves.use_transfer == 1 %} <a href="{% url "vessels:glossary" %}#tran" data-tag="dkblltbl">transfer*</a> {% endif %}
-        
+              {% if ves.use_lid == 1 %} <a href="{% url "vessels:glossary" %}#lid" data-tag="ltblba">lid*</a> {% endif %}  
               {% if ves.use_burial == 1 %} <a href="{% url "vessels:glossary" %}#burial" data-tag="ltblor">burial*</a> {% endif %}
               {% if ves.use_ceremonial == 1 %} <a href="{% url "vessels:glossary" %}#ritual" data-tag="ltblind">ceremonial*</a> {% endif %}
-              {% if ves.use_lid == 1 %} <a href="{% url "vessels:glossary" %}#lid" data-tag="ltblba">lid*</a> {% endif %}   
+ 
               {% if ves.use_hearth == 1 %} <a href="{% url "vessels:glossary" %}#hea" data-tag="ltblfb">hearth*</a> {% endif %}
               {% if ves.use_light == 1 %} <a href="{% url "vessels:glossary" %}#light" data-tag="ltblfgr">light*</a> {% endif %}
               {% if ves.use_musical_instrument == 1 %} <a href="{% url "vessels:glossary" %}#music" data-tag="ltblbr">musical instrument*</a>{% endif %}</td></tr>

@@ -104,10 +104,9 @@
         {% if the_vessel.use_eating == 2 %} <p><a href="{% url "vessels:glossary" %}#eat" >eating</a> </p> {% endif %}
         {% if the_vessel.use_storage == 2 %}<p> <a href="{% url "vessels:glossary" %}#store" >storage</a></p>  {% endif %}
         {% if the_vessel.use_transfer == 2 %} <p><a href="{% url "vessels:glossary" %}#tran" >transfer</a> </p> {% endif %}
-  
+        {% if the_vessel.use_lid == 2 %} <p> <a href="{% url "vessels:glossary" %}#lid" >lid</a> </p> {% endif %}  
         {% if the_vessel.use_burial == 2 %} <p><a href="{% url "vessels:glossary" %}#burial" >burial</a></p>  {% endif %}
-        {% if the_vessel.use_ceremonial == 2 %} <p><a href="{% url "vessels:glossary" %}#ritual" >ceremonial</a> </p> {% endif %}
-        {% if the_vessel.use_lid == 2 %} <p> <a href="{% url "vessels:glossary" %}#lid" >lid</a> </p> {% endif %}   
+        {% if the_vessel.use_ceremonial == 2 %} <p><a href="{% url "vessels:glossary" %}#ritual" >ceremonial</a> </p> {% endif %}  
         {% if the_vessel.use_hearth == 2 %} <p><a href="{% url "vessels:glossary" %}#hea" >hearth</a></p>  {% endif %}
         {% if the_vessel.use_light == 2 %} <p><a href="{% url "vessels:glossary" %}#light" >light</a> </p> {% endif %}
         {% if the_vessel.use_musical_instrument == 2 %} <p><a href="{% url "vessels:glossary" %}#music" >musical instrument</a></p> {% endif %}</td>
@@ -121,10 +120,9 @@
           {% if the_vessel.use_eating == 1 %} <p><a href="{% url "vessels:glossary" %}#eat" >eating</a> </p> {% endif %}
           {% if the_vessel.use_storage == 1 %}<p> <a href="{% url "vessels:glossary" %}#store" >storage</a></p>  {% endif %}
           {% if the_vessel.use_transfer == 1 %} <p><a href="{% url "vessels:glossary" %}#tran" >transfer</a> </p> {% endif %}
-    
+          {% if the_vessel.use_lid == 1 %} <p> <a href="{% url "vessels:glossary" %}#lid" >lid</a> </p> {% endif %}  
           {% if the_vessel.use_burial == 1 %} <p><a href="{% url "vessels:glossary" %}#burial" >burial</a></p>  {% endif %}
-          {% if the_vessel.use_ceremonial == 1 %} <p><a href="{% url "vessels:glossary" %}#ritual" >ceremonial</a> </p> {% endif %}
-          {% if the_vessel.use_lid == 1 %} <p> <a href="{% url "vessels:glossary" %}#lid" >lid</a> </p> {% endif %}   
+          {% if the_vessel.use_ceremonial == 1 %} <p><a href="{% url "vessels:glossary" %}#ritual" >ceremonial</a> </p> {% endif %} 
           {% if the_vessel.use_hearth == 1 %} <p><a href="{% url "vessels:glossary" %}#hea" >hearth</a></p>  {% endif %}
           {% if the_vessel.use_light == 1 %} <p><a href="{% url "vessels:glossary" %}#light" >light</a> </p> {% endif %}
           {% if the_vessel.use_musical_instrument == 1 %} <p><a href="{% url "vessels:glossary" %}#music" >musical instrument</a></p> {% endif %}</td></tr> 
